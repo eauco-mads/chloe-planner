@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chloe's Vedic Life Navigation Planner 2026–2027</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap');
+:root {
+  --bg: #fdf7f0;
+  --surface: #fff8f2;
+  --card: #ffffff;
+  --card2: #fdf2e8;
+  --gold: #b8832a;
+  --gold-light: #d4a84a;
+  --gold-bg: #fef9ed;
+  --pink: #c97090;
+  --pink-light: #e8a8bc;
+  --pink-bg: #fef4f7;
+  --green: #5a8e6a;
+  --green-light: #7ab88a;
+  --green-bg: #f2f8f4;
+  --text: #3a2618;
+  --text-dim: #7a6050;
+  --text-light: #b09880;
+  --border: #e8d5c0;
+  --border-light: #f0e4d4;
+  --eclipse-solar: #c45a30;
+  --eclipse-lunar: #9060a8;
+  --retro: #5878b8;
+  --retro-end: #5a8e6a;
+  --major: #b8832a;
+  --nodal: #8a7060;
+  --shadow: rgba(58,38,24,0.06);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Lato', Georgia, sans-serif; min-height: 100vh; font-size: 14px; line-height: 1.6; }
+h1,h2,h3,h4 { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+/* ── HEADER ── */
+header {
+  background: linear-gradient(135deg, #fdf0e8 0%, #fef8f2 60%, #f8f5ee 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px 12px;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+header h1 { font-size: 1.45rem; font-weight: 400; color: var(--gold); letter-spacing: 0.02em; }
+header h1 em { font-style: italic; color: var(--pink); }
+header h1 span { font-size: 0.7rem; color: var(--text-light); display: block; font-family: 'Lato', sans-serif; font-weight: 300; margin-top: 2px; letter-spacing: 0.08em; text-transform: uppercase; }
+.today-btn {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: #fff; border: none; border-radius: 20px;
+  padding: 8px 18px; cursor: pointer; font-size: 0.78rem; font-family: 'Lato', sans-serif;
+  letter-spacing: 0.06em; box-shadow: 0 2px 8px rgba(184,131,42,0.25);
+  transition: all 0.2s;
+}
+.today-btn:hover { box-shadow: 0 3px 12px rgba(184,131,42,0.4); transform: translateY(-1px); }
+
+/* ── MONTH NAV ── */
+.month-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-light);
+  overflow-x: auto; white-space: nowrap; padding: 0 14px;
+}
+.month-nav button {
+  background: none; border: none; color: var(--text-dim); font-family: 'Lato', sans-serif;
+  font-size: 0.76rem; padding: 10px 14px; cursor: pointer; border-bottom: 2px solid transparent;
+  letter-spacing: 0.04em; transition: all 0.2s;
+}
+.month-nav button:hover { color: var(--gold); }
+.month-nav button.active { color: var(--pink); border-bottom-color: var(--pink); font-weight: 400; }
+
+/* ── LAYOUT ── */
+.layout { display: flex; min-height: calc(100vh - 116px); }
+
+/* ── SIDEBAR ── */
+aside {
+  width: 220px; min-width: 220px; background: var(--surface);
+  border-right: 1px solid var(--border-light); padding: 16px 14px;
+  position: sticky; top: 116px; height: calc(100vh - 116px); overflow-y: auto;
+}
+.aside-title { font-family: 'Cormorant Garamond', serif; font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 8px; }
+.chart-table { width: 100%; font-size: 0.7rem; border-collapse: collapse; }
+.chart-table td { padding: 3px 3px; color: var(--text-dim); }
+.chart-table td:first-child { color: var(--text); font-style: italic; width: 52px; font-family: 'Cormorant Garamond', serif; font-size: 0.78rem; }
+hr.div { border: none; border-top: 1px solid var(--border-light); margin: 10px 0; }
+.dasha-card { background: var(--gold-bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px; font-size: 0.7rem; }
+.dasha-label { color: var(--gold); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Lato', sans-serif; }
+.dasha-val { color: var(--text); font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; margin-top: 1px; }
+.dasha-sub { color: var(--text-light); font-size: 0.65rem; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 0.68rem; color: var(--text-dim); margin-bottom: 4px; }
+.ldot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.w-chart-note { font-size: 0.68rem; color: var(--text-dim); line-height: 1.7; }
+.w-label { color: var(--green); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* ── MAIN ── */
+main { flex: 1; padding: 22px 24px; max-width: 880px; overflow-y: auto; }
+
+/* ── TODAY CARD ── */
+.today-card {
+  background: linear-gradient(135deg, var(--pink-bg) 0%, var(--gold-bg) 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 18px 20px; margin-bottom: 22px;
+  box-shadow: 0 2px 12px var(--shadow);
+  display: none;
+}
+.today-card.visible { display: block; }
+.today-card-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+.today-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--pink); }
+.today-date { font-size: 0.72rem; color: var(--text-light); }
+.today-planet-day { font-size: 0.72rem; color: var(--gold); font-style: italic; margin-bottom: 6px; }
+.today-msg { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 10px; }
+.today-tip { background: var(--card); border-radius: 8px; padding: 10px 14px; font-size: 0.78rem; color: var(--text); line-height: 1.6; border-left: 3px solid var(--green); }
+.today-tip strong { color: var(--green); font-family: 'Cormorant Garamond', serif; display: block; font-size: 0.9rem; margin-bottom: 3px; }
+
+/* ── MONTH SECTION ── */
+.month-section { display: none; }
+.month-section.active { display: block; }
+.month-header { margin-bottom: 18px; }
+.month-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--gold); }
+.month-theme { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--pink); font-style: italic; margin-top: 2px; }
+.month-mantra { font-size: 0.75rem; color: var(--text-light); margin-top: 5px; letter-spacing: 0.04em; }
+
+/* ── OVERVIEW CARDS ── */
+.overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.ov-card { background: var(--card); border-radius: 12px; padding: 14px; box-shadow: 0 2px 8px var(--shadow); border-top: 3px solid var(--pink); }
+.ov-card.western { border-top-color: var(--green); }
+.ov-card h4 { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--pink); font-family: 'Lato'; margin-bottom: 7px; }
+.ov-card.western h4 { color: var(--green); }
+.ov-card p { font-size: 0.77rem; color: var(--text-dim); line-height: 1.65; }
+.transit-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.ttag { background: var(--pink-bg); border: 1px solid var(--pink-light); border-radius: 20px; font-size: 0.62rem; padding: 2px 9px; color: var(--pink); }
+.ttag.w { background: var(--green-bg); border-color: var(--green-light); color: var(--green); }
+
+/* ── OPP / CAUT ── */
+.opp-caut { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.opp-box, .caut-box { background: var(--card); border-radius: 10px; padding: 12px; box-shadow: 0 1px 6px var(--shadow); }
+.opp-box { border-left: 3px solid var(--green); }
+.caut-box { border-left: 3px solid var(--gold-light); }
+.opp-box h4 { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); margin-bottom: 7px; font-family: 'Lato'; }
+.caut-box h4 { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 7px; font-family: 'Lato'; }
+.opp-box li, .caut-box li { font-size: 0.75rem; color: var(--text-dim); margin-left: 14px; margin-bottom: 3px; }
+
+/* ── SECTION LABEL ── */
+.section-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-light); margin: 16px 0 8px; font-family: 'Lato'; }
+
+/* ── WEEK CARDS ── */
+.week-card { background: var(--card); border-radius: 10px; padding: 13px 16px; margin-bottom: 7px; border-left: 3px solid var(--border); box-shadow: 0 1px 5px var(--shadow); transition: border-color 0.2s; }
+.week-card:hover { border-left-color: var(--pink-light); }
+.week-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--text); margin-bottom: 4px; }
+.week-card p { font-size: 0.76rem; color: var(--text-dim); line-height: 1.6; }
+
+/* ── CALENDAR GRID ── */
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 6px; }
+.cal-day-name { font-size: 0.62rem; color: var(--text-light); text-align: center; padding: 4px 0; letter-spacing: 0.04em; }
+.cal-day { background: var(--card); border-radius: 8px; min-height: 46px; padding: 5px; text-align: center; font-size: 0.72rem; border: 1px solid var(--border-light); transition: all 0.15s; position: relative; }
+.cal-day.clickable { cursor: pointer; }
+.cal-day.clickable:hover { border-color: var(--pink-light); box-shadow: 0 2px 8px var(--shadow); }
+.cal-day .num { font-size: 0.78rem; color: var(--text); font-family: 'Cormorant Garamond', serif; }
+.cal-day.today-cell { border-color: var(--pink); box-shadow: 0 0 0 2px rgba(201,112,144,0.2); }
+.cal-day.today-cell .num { color: var(--pink); font-weight: 500; }
+.cal-day.empty { background: transparent; border-color: transparent; cursor: default; }
+.cal-day.ev-eclipse-solar { border-color: var(--eclipse-solar); background: #fef4f0; }
+.cal-day.ev-eclipse-lunar { border-color: var(--eclipse-lunar); background: #f8f3fd; }
+.cal-day.ev-retro-start { border-color: var(--retro); background: #f0f3fd; }
+.cal-day.ev-retro-end { border-color: var(--retro-end); background: var(--green-bg); }
+.cal-day.ev-major { border-color: var(--major); background: var(--gold-bg); }
+.cal-day.ev-nodal { border-color: #9a8070; background: #fdf5ee; }
+.edot { width: 5px; height: 5px; border-radius: 50%; margin: 2px auto 0; }
+
+/* ── DAILY MESSAGE AREA ── */
+.daily-msg-section { background: linear-gradient(135deg, var(--pink-bg), var(--gold-bg)); border-radius: 12px; padding: 16px; margin-top: 16px; border: 1px solid var(--border); }
+.daily-msg-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--pink); margin-bottom: 10px; }
+.daily-msg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.dmsg-card { background: var(--card); border-radius: 9px; padding: 11px; box-shadow: 0 1px 5px var(--shadow); }
+.dmsg-day { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 4px; }
+.dmsg-planet { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: var(--gold); margin-bottom: 4px; }
+.dmsg-text { font-size: 0.72rem; color: var(--text-dim); line-height: 1.55; }
+
+/* ── JOURNAL ── */
+.journal-section { background: var(--card); border-radius: 12px; padding: 16px; margin-top: 14px; box-shadow: 0 2px 8px var(--shadow); }
+.journal-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: 6px; }
+.journal-prompt { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--pink); font-style: italic; margin-bottom: 10px; }
+.journal-textarea { width: 100%; min-height: 80px; background: var(--surface); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text); font-family: 'Lato', sans-serif; font-size: 0.78rem; padding: 10px; resize: vertical; line-height: 1.65; }
+.journal-textarea:focus { outline: none; border-color: var(--pink-light); }
+.save-btn { background: linear-gradient(135deg, var(--pink-light), var(--pink)); color: #fff; border: none; border-radius: 20px; padding: 6px 18px; font-size: 0.74rem; cursor: pointer; margin-top: 7px; font-family: 'Lato'; letter-spacing: 0.04em; }
+.save-btn:hover { opacity: 0.9; }
+
+/* ── CHECKLIST ── */
+.checklist-wrap { margin-top: 14px; }
+.check-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 13px; background: var(--card); border-radius: 8px; margin-bottom: 5px; cursor: pointer; box-shadow: 0 1px 4px var(--shadow); transition: background 0.15s; border: 1px solid var(--border-light); }
+.check-item:hover { background: var(--green-bg); }
+.check-item input[type=checkbox] { accent-color: var(--green); width: 15px; height: 15px; margin-top: 2px; cursor: pointer; }
+.check-item label { font-size: 0.78rem; color: var(--text-dim); line-height: 1.5; cursor: pointer; }
+.check-item.done label { text-decoration: line-through; opacity: 0.45; }
+
+/* ── MODAL ── */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(58,38,24,0.35); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(3px); }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; max-width: 480px; width: 92%; max-height: 85vh; overflow-y: auto; position: relative; box-shadow: 0 12px 40px rgba(58,38,24,0.15); }
+.modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--gold); margin-bottom: 3px; }
+.modal-date-str { font-size: 0.72rem; color: var(--text-light); margin-bottom: 12px; }
+.modal-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: var(--text-light); font-size: 1.1rem; cursor: pointer; }
+.modal-close:hover { color: var(--text); }
+.mbadge { display: inline-block; font-size: 0.62rem; padding: 3px 11px; border-radius: 20px; margin-bottom: 10px; letter-spacing: 0.07em; text-transform: uppercase; font-family: 'Lato'; }
+.mbadge-solar { background: #fef0ec; color: var(--eclipse-solar); border: 1px solid var(--eclipse-solar); }
+.mbadge-lunar { background: #f5effe; color: var(--eclipse-lunar); border: 1px solid var(--eclipse-lunar); }
+.mbadge-rx { background: #edf0fd; color: var(--retro); border: 1px solid var(--retro); }
+.mbadge-direct { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
+.mbadge-major { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-light); }
+.mbadge-nodal { background: #fdf0e8; color: #9a7060; border: 1px solid #c8a890; }
+.modal-house { font-size: 0.7rem; color: var(--pink); font-style: italic; margin-bottom: 10px; }
+.modal-guidance { font-size: 0.8rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 14px; }
+.modal-action { background: var(--green-bg); border-radius: 9px; padding: 11px 14px; font-size: 0.78rem; color: var(--text); line-height: 1.6; border-left: 3px solid var(--green); }
+.modal-action strong { color: var(--green); font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; display: block; margin-bottom: 4px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 680px) {
+  aside { display: none; }
+  .overview-grid, .opp-caut, .daily-msg-grid { grid-template-columns: 1fr; }
+  .cal-day { min-height: 36px; }
+  main { padding: 14px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <h1><em>Chloe's</em> Vedic Life Navigation Planner
+        <span>Jyotish · Lahiri Ayanamsha · Whole Sign Houses · July 2026 – July 2027</span>
+      </h1>
+    </div>
+    <button class="today-btn" onclick="jumpToToday()">✦ Today</button>
+  </div>
+</header>
+
+<div class="month-nav" id="monthNav"></div>
+
+<div class="layout">
+  <aside>
+    <div class="aside-title">Vedic Chart</div>
+    <table class="chart-table">
+      <tr><td>Rising</td><td>Libra · Vishakha</td></tr>
+      <tr><td>Sun</td><td>Gemini · 9th</td></tr>
+      <tr><td>Moon</td><td>Taurus · 8th · Mrigashira</td></tr>
+      <tr><td>Mercury</td><td>Cancer · 10th · Pushya</td></tr>
+      <tr><td>Venus</td><td>Leo · 11th · Magha</td></tr>
+      <tr><td>Mars</td><td>Libra · 1st · Swati</td></tr>
+      <tr><td>Jupiter</td><td>Aries · 7th · Ashwini</td></tr>
+      <tr><td>Saturn</td><td>Aries · 7th · Bharani</td></tr>
+      <tr><td>Rahu</td><td>Cancer · 10th · Ashlesha</td></tr>
+      <tr><td>Ketu</td><td>Capricorn · 4th · Shravana</td></tr>
+    </table>
+    <hr class="div">
+    <div class="dasha-card">
+      <div class="dasha-label">Mahadasha</div>
+      <div class="dasha-val">Jupiter</div>
+      <div class="dasha-sub">Oct 2022 – Oct 2038</div>
+      <div class="dasha-label" style="margin-top:8px">Antardasha Now</div>
+      <div class="dasha-val">Jupiter – Saturn</div>
+      <div class="dasha-sub">until June 23, 2027</div>
+      <div class="dasha-label" style="margin-top:8px">Next</div>
+      <div class="dasha-val">Jupiter – Mercury</div>
+      <div class="dasha-sub">June 23, 2027 →</div>
+    </div>
+    <hr class="div">
+    <div class="aside-title">Calendar Key</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--eclipse-solar)"></div>Solar Eclipse</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--eclipse-lunar)"></div>Lunar Eclipse</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--retro)"></div>Mercury Rx Starts</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--retro-end)"></div>Mercury Direct</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--major)"></div>Major Shift</div>
+    <div class="legend-item"><div class="ldot" style="background:#9a8070"></div>Nodal Shift</div>
+    <hr class="div">
+    <div class="aside-title" style="color:var(--green)">Western Chart</div>
+    <div class="w-chart-note">
+      Rising: Scorpio 17°<br>
+      Sun: Cancer 18°<br>
+      Moon: Gemini 20°<br>
+      Mercury: Leo 9°<br>
+      Venus: Leo 29°<br>
+      Mars: Scorpio 2°<br>
+      <span class="w-label">Tropical · Placidus</span>
+    </div>
+  </aside>
+
+  <main id="mainContent">
+    <div class="today-card" id="todayCard"></div>
+    <div id="monthSections"></div>
+  </main>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────────────
+
+const DAILY_TIPS = [
+  { planet: '☽ Mrigashira Moon', tip: 'Your Mrigashira Moon needs a genuine trail to follow. What are you truly curious about today? Follow that thread without demanding it make sense immediately. The Deer finds its way by moving, not by planning.' },
+  { planet: '↑ Vishakha Rising', tip: 'Vishakha — the Archer — is your soul\'s vehicle. Your purpose requires a concrete target. Name today\'s specific goal out loud. Vague intentions scatter; specific ones land.' },
+  { planet: '☿ Mercury in Pushya', tip: 'Mercury in Pushya means your words nourish people. The way you explain, teach, or share something today could genuinely change how someone thinks. Speak with that awareness.' },
+  { planet: '♀ Venus in Leo 11th', tip: 'Venus in Leo in your 11th house: your magnetism draws community. Reach out to one person in your professional network today — not to ask for something, just to connect genuinely.' },
+  { planet: '♂ Mars in Libra 1st', tip: 'Mars in your 1st house means your presence is felt when you enter a room. How are you showing up today? Your energy sets the tone for every interaction.' },
+  { planet: '☊ Rahu in Cancer 10th', tip: 'Rahu in Cancer 10th — your destiny involves emotional leadership. How does your work today serve not just clients, but the community around your work? The smallest nurturing act builds toward your mission.' },
+  { planet: '♃ Jupiter Mahadasha', tip: 'You are 4 years into a 16-year Jupiter cycle. Your life is supposed to be growing right now. If something feels too small, that\'s the signal — not a problem. What needs to expand?' },
+  { planet: '♄ Saturn Antardasha', tip: 'Jupiter says expand. Saturn says prove it. The tension between these two is not punishment — it\'s the forge. What are you building today that your future self will thank you for?' },
+  { planet: '☽ 8th House Moon', tip: 'Your Moon in the 8th house means you process life deeply. Surface conversations eventually exhaust you. Today, seek depth in at least one exchange — real talk over small talk.' },
+  { planet: '☿ Pushya Nakshatra', tip: 'Pushya is called the most auspicious Nakshatra — it nourishes and sustains. Your communication carries that quality. What you explain today can become someone else\'s breakthrough.' },
+  { planet: '♃ Ashwini Jupiter', tip: 'Jupiter in Ashwini (7th house) means the right partnerships arrive like the wind — swift and unexpected. Stay open to collaborations today that feel energetically immediate.' },
+  { planet: '♄ Bharani Saturn', tip: 'Saturn in Bharani — the Bearer — means you were built to carry weight and transform it into something beautiful. Today\'s difficulty is tomorrow\'s credential.' },
+  { planet: '↑ Libra Lagna', tip: 'Your Libra Lagna is ruled by Venus. Beauty, harmony, and diplomacy are not distractions from your path — they ARE your path. Create something beautiful today, even if it\'s just one moment of genuine connection.' },
+  { planet: '☊ Ashlesha Rahu', tip: 'Rahu in Ashlesha — the Serpent — gives you the ability to see what others miss. Trust your read on a situation today even if you can\'t explain why you sense what you sense.' },
+  { planet: '♁ Ketu in 4th', tip: 'Ketu in Capricorn 4th means you arrived in this life already knowing responsibility and self-sufficiency. The lesson this year is not to learn those things — it\'s to soften enough to let people in.' },
+  { planet: '♀ Magha Venus', tip: 'Venus in Magha — the throne — wants your gifts to be recognized and received with dignity. Don\'t minimize what you offer today. You bring something rare.' },
+  { planet: '♂ Swati Mars', tip: 'Mars in Swati (the wind) in your 1st house gives you adaptability and the ability to thrive in change. What transition are you resisting that might actually be your next expansion?' },
+  { planet: '☉ Punarvasu Sun', tip: 'Sun in Punarvasu — renewal, returning home. Your creativity and philosophy regenerate through cycles of exploration and return. What are you returning to today with fresh eyes?' },
+  { planet: '♃ D10 Career Chart', tip: 'Your D10 (career chart) shows you are meant to become an expert within systems, not just work inside them. What would it look like to teach or share what you know, rather than only doing it?' },
+  { planet: '♄ D9 Navamsa', tip: 'Your D9 says your chart gets stronger with age. You are a late-blooming chart. The confidence, groundedness, and relational clarity you want — they\'re coming. You\'re on schedule.' },
+  { planet: '☽ Taurus Moon', tip: 'Taurus is an exalted placement for the Moon. Your emotional intelligence is one of your rarest gifts. When you trust your instincts today, you\'ll be right more often than logic says you should be.' },
+  { planet: '♃ Jupiter in Aries 7th', tip: 'Jupiter in Aries (7th house): the right collaborators arrive with fire and immediacy. Pay attention to who shows up with obvious enthusiasm for what you\'re building — they\'re usually sent.' },
+  { planet: '☊ Cancer 10th House', tip: 'Cancer in the 10th means your career destiny is wrapped in nurturing, belonging, and community. Alaska Espresso Nurse isn\'t just a business — it\'s a community space. Build with that intention.' },
+  { planet: '♀ Leo 11th House', tip: 'Venus in Leo 11th: your income expands through community and networks, not through isolation. Every genuine connection today is literally a financial decision for your future.' },
+  { planet: '↑ Vishakha Theme', tip: '"I must achieve something meaningful." That\'s the Vishakha mantra. Before you start today\'s tasks — does what\'s on your list feel meaningful? If not, what one change would make it so?' },
+  { planet: '☽ Mrigashira Theme', tip: '"What else is possible?" The Deer always asks. But the shadow of Mrigashira is running past the thing you\'ve already found. Today, check: have you already found what you\'re looking for? It might be right here.' },
+  { planet: '♃ Expansion Signal', tip: 'In Jupiter Mahadasha, whenever life feels too small, it creates internal pressure. That pressure is a signal — not that something is wrong, but that something is ready to grow. What\'s feeling too small?' },
+  { planet: '☿ Communication Day', tip: 'One of the clearest signatures in your chart is the ability to make complex things understandable to people. Today, find one way to use that gift — in a conversation, a text, a post, anything.' },
+  { planet: '♄ Foundation Check', tip: 'Saturn in the 6th house rewards consistent daily effort above all else. What\'s your current daily action for Alaska Espresso Nurse or Two Hounds? One consistent small thing, compounded, is what Saturn pays back.' },
+  { planet: '☊ Soul Direction', tip: 'Rahu in Cancer teaches emotional leadership. Community. Belonging. Creating spaces where people feel safe. In whatever you do today — how does it create belonging for someone else?' }
+];
+
+const PLANET_DAYS = {
+  0: { name: 'Moon Day · Sunday', color: 'var(--pink)', msg: 'Sunday is the Moon\'s day — and your Moon in Taurus (8th house) asks for depth and rest. This is the day to integrate what the week revealed, not to push outward. Journal. Slow down. Let the emotional body process. Mrigashira needs quiet in order to know what it\'s found.' },
+  1: { name: 'Sun Day · Monday', color: 'var(--gold)', msg: 'Monday carries solar energy — your Sun in Gemini (9th house) wants to learn and expand today. Set one clear intention for the week that connects to your biggest professional vision. Punarvasu asks: what are you renewing and beginning again?' },
+  2: { name: 'Mars Day · Tuesday', color: 'var(--eclipse-solar)', msg: 'Tuesday is Mars\'s day — and your Mars in Libra (1st house) is your identity in action. What assertion feels aligned today? Mars in Swati (the wind) means you\'re built for graceful movement, not force. Choose one bold, balanced professional move.' },
+  3: { name: 'Mercury Day · Wednesday', color: 'var(--retro)', msg: 'Wednesday is Mercury\'s day — your natal Mercury sits in Pushya (Cancer, 10th house), the most nourishing Nakshatra. Communication today carries extra weight. Write something, teach something, or have one genuinely honest conversation. Your words feed people.' },
+  4: { name: 'Jupiter Day · Thursday', color: 'var(--green)', msg: 'Thursday belongs to Jupiter — your Mahadasha planet. This is your power day. Ask honestly: where is life trying to expand right now, and where am I holding it back? Move toward growth today, even one small degree. Jupiter watches.' },
+  5: { name: 'Venus Day · Friday', color: 'var(--pink)', msg: 'Friday is Venus\'s day — your chart ruler (Libra Rising). Venus in Leo (11th house) means your natural magnetism draws community and income. Reach out to someone in your professional world today. Not to ask — just to genuinely connect. Venus rewards that.' },
+  6: { name: 'Saturn Day · Saturday', color: 'var(--nodal)', msg: 'Saturday is Saturn\'s day — and you\'re in Jupiter-Saturn Antardasha. Saturn in the 6th house is watching your daily habits with great interest. What one consistent action builds the thing you\'re building? Small. Specific. Today. That\'s what Saturn pays back.' }
+};
+
+const MONTHS = [
+  { id:'2026-07', name:'July 2026', theme:'The Career Door Opens', mantra:'"My expertise is worth following."',
+    vedic:{ transits:['Jupiter EXALTED in Cancer — 10th house','Saturn in Pisces — 6th house','Rahu in Aquarius — 5th house','Ketu in Leo — 11th house'], overview:'Jupiter, freshly exalted in Cancer, now sits directly on your natal Rahu and Mercury in the 10th house — a triple activation of your professional destiny. What you\'ve been building privately is about to become publicly visible. Saturn in the 6th rewards disciplined, consistent work. If you\'ve been showing up, this month begins paying you back.' },
+    western:{ note:'Saturn & Neptune Retrograde in 4th house (tropical). Reality check on what truly supports you vs. what you\'re merely tolerating. Not a month for forcing outcomes — a month for noticing what is and isn\'t working.' },
+    journal:'What would I build if I fully believed my expertise was worth following?',
+    opportunities:['Career announcements and visibility pushes','Raising your rates — you\'re likely undercharging','Professional connections arriving through word of mouth','Letting your work be seen without shrinking'],
+    cautions:['Rahu in 5th = scattered creative energy — choose one lane','Avoid major decisions made from frustration','This is not a month to hide what you\'re building'],
+    weeks:[
+      { label:'Week 1 · Jul 1–6', focus:'Set career intentions for the full year. Jupiter\'s exaltation in your 10th house is now fully active. Commit to what you\'re building professionally. Write your most ambitious goal and put it somewhere visible.' },
+      { label:'Week 2 · Jul 7–13', focus:'Visibility push. Reach out to one professional contact you\'ve been meaning to connect with. Let at least one person know what Alaska Espresso Nurse is becoming. The eclipse season in August rewards those who\'ve already been seen.' },
+      { label:'Week 3 · Jul 14–20', focus:'Deep craft refinement. Skill sharpening. Documentation of your expertise. What do you know that needs to be written down, recorded, or taught?' },
+      { label:'Week 4 · Jul 21–31', focus:'Foundation systems. Review finances. Prepare for August\'s eclipse season. What operational structures need strengthening before the eclipse fast-forwards your career?' }
+    ]
+  },
+  { id:'2026-08', name:'August 2026', theme:'The Eclipse Activates the Career House', mantra:'"I am open to what is already in motion."',
+    vedic:{ transits:['Jupiter EXALTED in Cancer — 10th house','Saturn in Pisces — 6th house','Solar Eclipse ~Aug 12 in Cancer — 10th house','Lunar Eclipse ~Aug 28 in Aquarius — 5th house'], overview:'The solar eclipse lands in Cancer — your 10th house — while Jupiter is exalted there. Eclipses are accelerators. This signature can bring sudden visibility, an unexpected career opportunity, or a person who changes your professional trajectory. The lunar eclipse in the 5th may conclude something in a creative or romantic space, making room for what\'s next.' },
+    western:{ note:'Post-retrograde clearing. Stronger instincts return. Desire to simplify increases. This month\'s Western chart invitation: do something purely because it\'s fun. Not productive, not profitable — just genuinely fun.' },
+    journal:'What is already in motion that I have been afraid to acknowledge?',
+    opportunities:['Receiving what arrives without forcing','Professional recognition or an unexpected offer','A person arriving who changes your professional trajectory'],
+    cautions:['Eclipse window Aug 12–28: observe, do not force major decisions','No large financial moves during eclipse window','Eclipse shifts that feel destabilizing are usually aligned with your longer path'],
+    weeks:[
+      { label:'Week 1 · Aug 1–11', focus:'Pre-eclipse preparation. Put your best work forward. Make sure people know what you do and what you\'re offering. The eclipse rewards those who have already planted seeds.' },
+      { label:'Week 2 · Aug 12–18', focus:'SOLAR ECLIPSE AUG 12 — Career house activated. Observe what arrives. Do not force outcomes. Write down every opportunity or idea that surfaces, even the ones that feel impossible right now.' },
+      { label:'Week 3 · Aug 19–27', focus:'Eclipse integration. What shifted? Who appeared? What conversation happened that felt significant? Trust the acceleration even if you can\'t yet see where it leads.' },
+      { label:'Week 4 · Aug 28–31', focus:'LUNAR ECLIPSE AUG 28 — 5th house completion. Something in the creative or romantic space finishes. An ending here creates space. What is completing so something new can begin?' }
+    ]
+  },
+  { id:'2026-09', name:'September 2026', theme:'The Foundation Deepens', mantra:'"Consistency is my most powerful tool."',
+    vedic:{ transits:['Jupiter EXALTED in Cancer — 10th house','Saturn in Pisces — 6th house (strongly placed)','Rahu in Aquarius — 5th house','Post-eclipse integration period'], overview:'The eclipse intensity settles. September is quieter — which is actually a gift. Saturn in the 6th house rewards those who put their heads down and focus on craft. This is not a glamour month. It\'s a mastery month. Whatever gap the August eclipse surfaced — fill it now.' },
+    western:{ note:'Uranus stations in 7th house (tropical). Unexpected shifts in one-on-one relationships or partnerships. Not all surprises are problems — some are upgrades. Stay open to surprising people appearing in your professional or personal world.' },
+    journal:'What does consistency look like for me when no one is watching?',
+    opportunities:['Certifications, training, and skill upgrades','Documentation of your expertise','Refining systems before Q4 push','Building quietly what October will activate publicly'],
+    cautions:['September can feel anticlimactic after August — resist manufacturing urgency','A preparation month, not a launch month'],
+    weeks:[
+      { label:'Week 1 · Sep 1–7', focus:'Process what the eclipse revealed. What opportunity surfaced? What conversation happened? What needs follow-up action now that the eclipse window has passed?' },
+      { label:'Week 2 · Sep 8–14', focus:'Deep craft work. Saturn in the 6th rewards technical excellence. What would make you undeniably good at what you do? Spend this week doing that one thing.' },
+      { label:'Week 3 · Sep 15–21', focus:'Mrigashira Moon check-in — follow your curiosity all the way down. Learn something new. Your emotional intelligence thrives when it has a genuine trail to investigate.' },
+      { label:'Week 4 · Sep 22–30', focus:'October preparation. Write a 3-year vision — not a plan, a vision. Review Alaska Espresso Nurse systems before adding new projects. What\'s the 90-day priority?' }
+    ]
+  },
+  { id:'2026-10', name:'October 2026', theme:'Expertise Becomes Currency', mantra:'"I teach what I know. I charge what I\'m worth."',
+    vedic:{ transits:['Jupiter EXALTED in Cancer — 10th house (peak phase)','Saturn in Pisces — 6th house','Rahu in Aquarius — 5th (final months)','Ketu in Leo — 11th (clearing old networks)'], overview:'October is one of the two strongest career months of the entire year. Jupiter exalted in the 10th is at peak operational power. Your natal Mercury sits in Pushya — "the nourisher" — and when Jupiter activates it this month, your words and teaching carry exceptional professional weight. If there\'s an opportunity to train, mentor, or share your knowledge publicly, this is the month.' },
+    western:{ note:'Mercury Retrograde begins in Scorpio (tropical) mid-October — 1st house for Chloe. Review how you\'re presenting yourself. Old professional contacts may resurface. Strong month for identity reflection and personal mission realignment.' },
+    journal:'Who needs what I know? Who could I help by teaching what I already do?',
+    opportunities:['Teaching and training roles arising naturally','Mentoring a newer technician or colleague','Content demonstrating expertise to a wider audience','Raising rates and asking directly for referrals'],
+    cautions:['Mercury Rx (Western) from ~mid-Oct: no new contracts in final two weeks','Not a starting-from-scratch month — activate what already exists'],
+    weeks:[
+      { label:'Week 1 · Oct 1–7', focus:'Green-light week. Apply, pitch, introduce yourself, take opportunities seriously. Jupiter\'s 10th house peak is active. This is the week to ask for what you want professionally.' },
+      { label:'Week 2 · Oct 8–14', focus:'Teaching and expertise sharing. Who could benefit from what you know? Document your process. Create something that could teach others what you do — even informally.' },
+      { label:'Week 3 · Oct 15–21', focus:'Mercury Rx begins (Western ~mid-Oct). Review identity and professional presentation. Does how you\'re being perceived match who you\'re becoming? Update what needs updating.' },
+      { label:'Week 4 · Oct 22–31', focus:'Consolidate October wins. What professional relationships deepened this month? What opportunities are in progress? Set November intentions before the nodal axis shifts.' }
+    ]
+  },
+  { id:'2026-11', name:'November 2026', theme:'The Axis Shifts — Career Identity Transforms', mantra:'"I release how I thought it would look."',
+    vedic:{ transits:['Jupiter EXALTED in Cancer — 10th house','NODAL SHIFT: Rahu → Capricorn 4th / Ketu → Cancer 10th','Mercury Retrograde ~Nov 9–29 in 1st–2nd houses (sidereal)'], overview:'The most complex month of the calendar year. Two major events coincide: Ketu enters Cancer (your 10th house), conjuncting your natal Rahu and Mercury — a nodal reversal that signals deep career identity evolution. Simultaneously, Mercury Retrograde asks you to review identity and values. This can feel like uncertainty. It is actually liberation.' },
+    western:{ note:'Mercury Rx ends late November. Possible Venus Rx energy — relationship truth month. Clarity arrives about who truly supports you vs. who drains your energy. Invest intentionally in one relationship that genuinely matters.' },
+    journal:'Who am I professionally when no external validation is present? What do I actually want to build?',
+    opportunities:['Spiritual clarity about your career direction','Releasing what no longer aligns (the productive kind of ending)','Deep values review that makes December clearer'],
+    cautions:['NO major career decisions during Mercury Rx (Nov 9–29)','NO major career commitments during nodal shift adjustment period','Observe, reflect, write everything down — act in December'],
+    weeks:[
+      { label:'Week 1 · Nov 1–8', focus:'Nodal axis has shifted. Ketu is now in Cancer (10th house), conjunct your natal Rahu and Mercury. What about your career identity wants to evolve? Not abandon — evolve.' },
+      { label:'Week 2 · Nov 9–15', focus:'Mercury Retrograde begins Nov 9 — 1st and 2nd houses. Review: how are you presenting yourself? What do you truly value and is your financial structure aligned with that?' },
+      { label:'Week 3 · Nov 16–22', focus:'Deep reflection period. Journal more than you act. The clarity arriving in December will be sharper because of November\'s uncertainty. Trust the process.' },
+      { label:'Week 4 · Nov 23–30', focus:'Mercury Rx ends Nov 29. Forward motion returns. What did the retrograde clarify? What one insight is now crystal clear that was foggy a month ago? Carry that into December.' }
+    ]
+  },
+  { id:'2026-12', name:'December 2026', theme:'The Quiet Crystallization', mantra:'"I build the inner foundation as solidly as the outer one."',
+    vedic:{ transits:['Jupiter EXALTED in Cancer — 10th house','Saturn in Pisces — 6th house','Rahu in Capricorn — 4th house','Ketu in Cancer — 10th house (conjunct natal Rahu + Mercury)'], overview:'Jupiter exalted + Ketu in the 10th creates growth through releasing rather than accumulating. Stop performing your career and start owning it. Rahu now in Capricorn (4th house) pulls toward home, roots, and emotional security. December is the month the inner and outer foundation deepen simultaneously.' },
+    western:{ note:'Jupiter stations in 9th house (tropical). Expansion through learning, philosophy, and broader horizons. One of the Western chart\'s strongest months for choosing an area of mastery and committing to it for 2027.' },
+    journal:'What am I holding onto in my career that I could release without losing the thing I love most about it?',
+    opportunities:['Honest assessment of what\'s working and what isn\'t','Deep craft investment — quality over visibility','Long-range planning for 2027 and beyond','Building inner security that makes outer expansion possible'],
+    cautions:['Rahu in 4th: watch spending on home comfort — security comes from roots, not acquisition','A depth month, not a visibility month'],
+    weeks:[
+      { label:'Week 1 · Dec 1–7', focus:'Process the nodal shift of November. What version of Alaska Espresso Nurse is ready to evolve? What does the next, more aligned iteration look like?' },
+      { label:'Week 2 · Dec 8–14', focus:'Go deep rather than wide. The foundation you build this week is what the 2027 expansion stands on. Quality of craft over volume of output.' },
+      { label:'Week 3 · Dec 15–21', focus:'Home and inner security focus (Rahu 4th). What genuinely makes you feel grounded? Build one environment that feels completely like yours.' },
+      { label:'Week 4 · Dec 22–31', focus:'Year-in-review and 2027 vision. What has 2026 built? What does 2027 need to stand on? Write the vision before you write the goals.' }
+    ]
+  },
+  { id:'2027-01', name:'January 2027', theme:'Clarity After the Fog', mantra:'"I build what my future self will thank me for."',
+    vedic:{ transits:['Jupiter EXALTED in Cancer — 10th house','Saturn in Pisces — 6th house','Rahu in Capricorn — 4th house','5 months until Jupiter–Mercury Antardasha begins'], overview:'The reflection of November and December has done its work. January is stabilizing — the nodal axis settled, retrogrades over, genuine quiet arrives after a major astrological season. The question January asks: am I building something that can thrive in Jupiter-Mercury? Five months remain to prepare.' },
+    western:{ note:'Confidence month (Western chart). Act like the person you\'re becoming. Plan a trip, class, certification, or experience. Stop waiting until you feel ready — readiness follows action, not the other way around.' },
+    journal:'If I knew Jupiter-Mercury was about to open a completely new door, what would I do in the next five months to be ready to walk through it?',
+    opportunities:['Strategic planning for the next 6 months','Long-term financial planning (clear-eyed, not big moves)','Systems and structures that can hold growth','Identifying what\'s missing before the acceleration begins'],
+    cautions:['January is for planning and integration, not big external pushes','Resist rushing — the season of acceleration is coming regardless'],
+    weeks:[
+      { label:'Week 1 · Jan 1–7', focus:'Set intentions based on what 2026 taught you — not a fresh-start fantasy. What did the last 6 months of Jupiter\'s 10th house transit tell you to build in 2027?' },
+      { label:'Week 2 · Jan 8–14', focus:'Career map: what needs to be in place by June for Jupiter-Mercury to activate fully? Systems? Training? Reputation? Connections? Write the specific list.' },
+      { label:'Week 3 · Jan 15–21', focus:'Vishakha Rising check-in. Is what you\'re chasing actually meaningful to YOU? Not to the world — to you. That answer matters more than any transit.' },
+      { label:'Week 4 · Jan 22–31', focus:'Financial and operational review. Where is income coming from? Where should it be coming from? This is the last genuinely quiet month before the calendar begins to accelerate.' }
+    ]
+  },
+  { id:'2027-02', name:'February 2027', theme:'Eclipse Season — The Home Reset', mantra:'"My outer world reflects my inner security."',
+    vedic:{ transits:['Jupiter EXALTED in Cancer — 10th house','Saturn in Pisces — 6th house','Solar Eclipse ~Feb 6: Capricorn sidereal — 4th house','Lunar Eclipse ~Feb 20: Leo sidereal — 11th house'], overview:'Second eclipse season of the calendar. The solar eclipse hits your 4th house — home, roots, emotional security. Something about where or how you live is reset. The lunar eclipse in Leo (11th house) concludes something in a social circle or income stream, creating space for the new community Jupiter-Mercury will bring.' },
+    western:{ note:'New Horizons month (Western chart). Travel, education, networking energy. Conferences, workshops, certifications, and business collaborations are highlighted. Say yes to invitations — especially ones involving learning.' },
+    journal:'What would my life look like if my outer world fully reflected my inner sense of security?',
+    opportunities:['Home or living situation changes that long-term support you','Completion of an old community chapter (making space for the new)','New connections arriving who match who you\'re becoming'],
+    cautions:['Eclipse window Feb 6–20: observe before acting on major changes','Home and community shifts may feel sudden — they were ready to shift','Resisting eclipse-driven changes costs more energy than allowing them'],
+    weeks:[
+      { label:'Week 1 · Feb 1–5', focus:'Pre-eclipse grounding. Does your current home environment support who you\'re becoming? What needs to shift about where or how you live?' },
+      { label:'Week 2 · Feb 6–12', focus:'SOLAR ECLIPSE FEB 6 — 4th house reset. Something about home, family, or emotional foundation shifts. The eclipse asks: does this person or place actually feel like home to me?' },
+      { label:'Week 3 · Feb 13–19', focus:'Eclipse integration. What surfaced around home and security? What family dynamic or emotional pattern is being given a reset? Allow the change rather than managing it.' },
+      { label:'Week 4 · Feb 20–28', focus:'LUNAR ECLIPSE FEB 20 — 11th house completion. A social circle or income stream concludes. An ending here is preparation for the new community arriving with Jupiter-Mercury. What community chapter is closing?' }
+    ]
+  },
+  { id:'2027-03', name:'March 2027', theme:'Momentum Builds', mantra:'"What I set aside still has life in it."',
+    vedic:{ transits:['Jupiter EXALTED in Cancer — 10th house (building toward Leo)','Saturn in Pisces — 6th house','Mercury Retrograde ~Mar 15–Apr 7: 5th–6th houses sidereal'], overview:'Mercury Retrograde in the 5th and 6th houses is one of the more productive retrograde placements: it slows operations enough to catch errors, refine systems, and revisit creative projects with fresh eyes. Jupiter continues powerful in Cancer. Three months remain before it changes signs — double down on what\'s working.' },
+    western:{ note:'Jupiter in 8th house territory (Western chart). Transformation themes: trust, intimacy, debt, shared resources, emotional honesty. "What truth am I resisting?" A month for getting honest about finances and having one conversation you\'ve been avoiding.' },
+    journal:'What creative project have I set aside that still has life in it?',
+    opportunities:['Refining systems and processes during Mercury Rx','Revisiting a creative project or side venture that stalled','Career consolidation before April\'s momentum window opens'],
+    cautions:['Mercury Rx Mar 15–Apr 7: no new contracts, no major announcements','Creative review during retrograde — not creative launch'],
+    weeks:[
+      { label:'Week 1 · Mar 1–7', focus:'Double down on what\'s working. What has Jupiter\'s 10th house transit built since July 2026? Take stock and invest further in what\'s proven itself.' },
+      { label:'Week 2 · Mar 8–14', focus:'Pre-retrograde prep. Identify friction in your business before Mercury Rx begins. What workflows, pricing, or client systems need upgrading? Fix them now.' },
+      { label:'Week 3 · Mar 15–21', focus:'MERCURY RX BEGINS MAR 15. Review creative projects (5th). Upgrade operational systems (6th). What passion venture was set aside that deserves a second look?' },
+      { label:'Week 4 · Mar 22–31', focus:'Deep retrograde integration. Old creative energy resurfaces. Notice what it\'s showing you about what you actually want — you don\'t have to act, just observe.' }
+    ]
+  },
+  { id:'2027-04', name:'April 2027', theme:'Return to Full Momentum', mantra:'"I give myself permission to launch."',
+    vedic:{ transits:['Jupiter EXALTED in Cancer — 10th house (moving toward Leo)','Saturn in Pisces — 6th house','Mercury Retrograde ends April 7 — full forward motion returns'], overview:'Mercury Retrograde ends April 7. The brakes release. Jupiter in Cancer is in its final stretch — a last-chance energy emerges. What haven\'t you put into the world yet that you wanted to while Jupiter was in your 10th house? April is the month. Launch. Announce. Ask. Raise the rate.' },
+    western:{ note:'Deep Healing month (Western chart). Release an old identity. Strong emotions and old memories may surface — not as setbacks but as clearings. "What part of me has already changed?" Don\'t force resolution — just let the shift complete.' },
+    journal:'What have I been waiting for permission to launch?',
+    opportunities:['Launches and announcements after April 7','Raising rates and asking directly for referrals','Professional visibility and credibility moves','Post-retrograde relationship clarity'],
+    cautions:['Wait until April 7 (Mercury Rx ends) before signing anything significant','Don\'t leave money on the table by undervaluing yourself this month'],
+    weeks:[
+      { label:'Week 1 · Apr 1–7', focus:'Final retrograde week. Review, finalize, prepare to launch. Mercury Rx ends April 7 — everything refined during March is now ready. Prepare to move.' },
+      { label:'Week 2 · Apr 8–14', focus:'FULL FORWARD MOTION returns April 7. Launch what\'s been waiting. Announce what\'s been ready. Make the ask. Raise the rate. The post-retrograde window is one of the most action-friendly of the year.' },
+      { label:'Week 3 · Apr 15–21', focus:'Visibility push. Jupiter in 10th still running. What\'s one thing this week that increases your professional reputation or reach?' },
+      { label:'Week 4 · Apr 22–30', focus:'Consolidate April momentum. Follow up on everything launched. Jupiter in Cancer closes in late June — every week of April and May counts.' }
+    ]
+  },
+  { id:'2027-05', name:'May 2027', theme:'The Harvest', mantra:'"I recognize what I have built."',
+    vedic:{ transits:['Jupiter in Cancer — 10th house (final full month)','Saturn in Pisces — 6th house','Rahu in Capricorn — 4th house'], overview:'May is the final full month of Jupiter exalted in Cancer. What you planted in July 2026 has been growing for ten months. May is when results become tangible. Jupiter begins to look toward Leo and natural restlessness arrives — something new is almost here. Let that energy fuel rather than scatter.' },
+    western:{ note:'Rebuilding month (Western chart). Build systems that support your future. Refine what\'s already working. Not a month for five new projects — invest deeply in what has already proven itself.' },
+    journal:'What have I learned about myself as a leader this year?',
+    opportunities:['Consolidating professional wins and key relationships','Taking honest stock of what Jupiter\'s 10th house transit built','Documenting your growing reputation and expertise','Preparing systems for the Jupiter-Mercury acceleration'],
+    cautions:['Not a starting-fresh month — a consolidating month','Avoid distraction when the current foundation deserves full attention'],
+    weeks:[
+      { label:'Week 1 · May 1–7', focus:'Harvest inventory. What has changed in your professional life since July 2026? Write the honest list. Small wins compounded are enormous.' },
+      { label:'Week 2 · May 8–14', focus:'Consolidate your strongest professional relationships. Who showed up, referred clients, or supported your growth? Invest in those connections intentionally.' },
+      { label:'Week 3 · May 15–21', focus:'System optimization. What does Alaska Espresso Nurse need to hold the acceleration Jupiter-Mercury will bring? Build it now while Jupiter is still in the 10th.' },
+      { label:'Week 4 · May 22–31', focus:'Rahu in Cancer (natal) reflection. What have you learned about emotional leadership and creating community through your work this year? Journal this — it matters for what comes next.' }
+    ]
+  },
+  { id:'2027-06', name:'June 2027', theme:'The Threshold — Everything Changes', mantra:'"What I built is ready to be shared at scale."',
+    vedic:{ transits:['JUPITER–MERCURY ANTARDASHA BEGINS JUNE 23','Jupiter transitions Cancer → Leo (11th house) ~June 30','Saturn in Pisces — 6th house'], overview:'The most significant month of the entire calendar. Two seismic events within days: June 23, Jupiter-Mercury Antardasha begins — the biggest energy shift of your mid-20s. Late June, Jupiter enters Leo (your 11th house of community and income). The combination: movement, communication, teaching, networking, and income through community. What you\'ve built is ready to be shared at scale.' },
+    western:{ note:'Alignment month (Western chart). Bring your life into agreement with your values. A stronger sense of direction arrives. Watch for people-pleasing — say yes to what is genuinely aligned, not to everything that presents itself.' },
+    journal:'What would I teach if I fully trusted that people needed to hear it?',
+    opportunities:['Teaching programs and content creation','Being known by name in your professional field','New community aligned with who you\'re becoming','Income through networks and reputation (11th house Jupiter)'],
+    cautions:['Don\'t let excitement pull you into overcommitment','Choose the aligned opportunities — not all of them','Ketu still in 10th: stay grounded as expansion opens'],
+    weeks:[
+      { label:'Week 1 · Jun 1–7', focus:'Preparation for the threshold. Use these final weeks to complete what\'s been in progress. What needs finishing before the new chapter opens?' },
+      { label:'Week 2 · Jun 8–14', focus:'New community connections begin arriving. Notice who\'s appearing now that is aligned with who you\'re becoming rather than who you were before this year.' },
+      { label:'Week 3 · Jun 15–22', focus:'The day before: June 22. What are you bringing into this new chapter? What are you intentionally leaving behind? This is worth writing about before tomorrow.' },
+      { label:'Week 4 · Jun 23–30', focus:'JUNE 23: JUPITER–MERCURY ANTARDASHA BEGINS. The arrow releases. JUNE 30: Jupiter enters Leo 11th house. Your first action in Jupiter-Mercury sets the tone — make it a communication, teaching, or connection move.' }
+    ]
+  },
+  { id:'2027-07', name:'July 2027', theme:'The New Chapter Begins', mantra:'"I am ready."',
+    vedic:{ transits:['Jupiter in Leo — 11th house (Jupiter-Mercury Antardasha active)','Saturn entering Aries — 7th house','Rahu in Capricorn — 4th house'], overview:'The new chapter is not coming — it is here. Jupiter-Mercury is radically lighter than Jupiter-Saturn. Movement replaces structure. Expression replaces endurance. Teaching replaces proving. Saturn entering Aries (7th house) clarifies partnerships: who is a real collaborator becomes unmistakably clear. The soul that walked into July 2026 is not the same one walking out.' },
+    western:{ note:'Harvest month (Western chart). Review the entire year. What did I learn? What changed? What stayed? What surprised me? What am I ready for next? This is not an ending — it\'s the opening of the next storyline.' },
+    journal:'What has this year taught me about who I am?',
+    opportunities:['Teaching programs, online courses, recorded content','Being known as the go-to person for your specialty','Partnerships that multiply your reach','New community that matches who you\'re becoming'],
+    cautions:['Saturn in 7th: partnerships that aren\'t real become impossible to ignore — trust that clarity','Don\'t overcommit in the excitement of Jupiter-Mercury opening up'],
+    weeks:[
+      { label:'Week 1 · Jul 1–7', focus:'Jupiter-Mercury fully active. First move of this new chapter: make it a communication move. Write, teach, record, or reach out to someone you\'ve been meaning to connect with.' },
+      { label:'Week 2 · Jul 8–14', focus:'Saturn in Aries (7th house) begins its work. Who are your real collaborators? The right ones become obvious now. The unclear ones also become obvious.' },
+      { label:'Week 3 · Jul 15–21', focus:'Year-in-review week. Twelve months ago you stood at the beginning of Jupiter\'s exaltation in your career house. Document what was built. This becomes the foundation of the next calendar.' },
+      { label:'Week 4 · Jul 22–31', focus:'Looking forward into Jupiter-Mercury. The training year is complete. The expression year begins. Write the first sentence of the next chapter.' }
+    ]
+  }
+];
+
+const KEY_DATES = {
+  '2026-08-12':{ type:'eclipse-solar', title:'Solar Eclipse in Cancer', house:'10th House — Career + Public Identity', guidance:'A solar eclipse in Cancer — your 10th house — while Jupiter is exalted there is one of the rarest career signatures in Jyotish. This eclipse accelerates what is already in motion. Sudden visibility, an unexpected opportunity, or a person who changes your professional trajectory may arrive. You don\'t need to create anything today — receive what comes.', action:'Write down every professional idea or opportunity that surfaces in the next 48 hours, even the ones that feel impossible. Eclipse seeds planted today bloom within 6 months.' },
+  '2026-08-28':{ type:'eclipse-lunar', title:'Lunar Eclipse in Aquarius', house:'5th House — Creativity + Romance + Passion Projects', guidance:'A lunar eclipse completes something in your 5th house of creativity, romance, and passion. Something wraps up here — a creative project, a romantic chapter, or a passion pursuit that has run its course. Lunar eclipses in the 5th bring emotional clarity about what brings genuine joy vs. what you\'ve been doing from habit.', action:'What creative project or romantic chapter is complete? Name it, honor it, and let it close. The space created here is exactly where Jupiter-Mercury will plant new seeds.' },
+  '2026-11-01':{ type:'nodal', title:'Nodal Axis Shifts: Ketu enters Cancer (10th House)', house:'10th House — Career · 4th House — Home + Roots', guidance:'One of the most significant transits for your chart in several years. Ketu (past karma, spiritual release) enters Cancer — your 10th house — conjuncting your natal Rahu and Mercury. This is a nodal reversal. The version of Alaska Espresso Nurse that served you in 2024–2025 is ready to evolve into something more spiritually aligned. Rahu simultaneously moves to Capricorn (4th house) — karmic focus shifts toward home, roots, and inner security.', action:'Journal: What am I holding onto in my career identity that is ready to evolve? Not the career itself — the form it\'s been taking. What does the next, more alive version want to become?' },
+  '2026-11-09':{ type:'retro-start', title:'Mercury Retrograde Begins', house:'1st–2nd Houses (sidereal) — Identity + Values + Finances', guidance:'Mercury Retrograde enters your 1st house (identity, how you present yourself) and 2nd house (values, financial structures). This retrograde asks: Is how I\'m showing up in the world aligned with who I\'m actually becoming? Are my financial structures aligned with what I truly value? No major announcements, no new contracts until November 29.', action:'Review your professional bio, rates, and online presence. Is it still accurate? Does it reflect who you\'ve become in the past year? Update what needs updating — but don\'t launch anything new yet.' },
+  '2026-11-29':{ type:'retro-end', title:'Mercury Retrograde Ends — Forward Motion Returns', house:'Full forward motion', guidance:'Mercury goes direct. The clarity that November\'s retrograde built is now actionable. The insights from the last three weeks — about identity, values, professional presentation, and financial alignment — can now move forward into action. Whatever you realized during the retrograde, you can now DO something about it.', action:'Take one action on the clarity Mercury Rx delivered. One concrete step. Not a plan — an action. The post-retrograde window is sharpest in the first 48 hours.' },
+  '2027-02-06':{ type:'eclipse-solar', title:'Solar Eclipse in Capricorn', house:'4th House — Home + Roots + Emotional Security', guidance:'A solar eclipse in your 4th house resets your relationship to home, roots, family, and emotional security. Something about where you live, how you live, or what "home" means is fast-forwarded. Can manifest as a literal home change, a shift in a family relationship, or a breakthrough in understanding your emotional patterns.', action:'Ask honestly: does my current home environment support the person I\'m becoming? If the answer is no, what\'s the smallest, most aligned step toward what would?' },
+  '2027-02-20':{ type:'eclipse-lunar', title:'Lunar Eclipse in Leo', house:'11th House — Community + Networks + Income', guidance:'A lunar eclipse completes something in your 11th house of community, income, and networks. An old income stream, social circle, or community membership may conclude. This ending is preparation — the space it creates is exactly where Jupiter-Mercury\'s new community will grow. Trust what is completing.', action:'What community chapter, income stream, or social circle is naturally concluding? Name it. Thank it. Release it intentionally rather than waiting for it to fade.' },
+  '2027-03-15':{ type:'retro-start', title:'Mercury Retrograde Begins', house:'5th–6th Houses — Creativity + Daily Work Systems', guidance:'Mercury Retrograde in your 5th and 6th houses is one of the most productive retrograde placements. It slows the daily work rhythm enough to catch errors, revisit creative projects, and upgrade systems before they become problems. A creative project you set aside may return with new energy.', action:'Identify one creative project or business system that needs a revisit. Spend this retrograde giving it the attention it deserves before the acceleration of April begins.' },
+  '2027-04-07':{ type:'retro-end', title:'Mercury Retrograde Ends — All Systems Go', house:'Full forward motion in 5th house', guidance:'Mercury direct in your 5th house. The creative and operational work refined during the retrograde is now ready to move. Post-retrograde launches have more traction than pre-retrograde ones. Jupiter in Cancer is still active. The 10th house still lit. This is a green-light day.', action:'Launch one thing that has been waiting. Not next week — today. The post-retrograde energy is at its sharpest in the first 48 hours after Mercury goes direct.' },
+  '2027-06-23':{ type:'major', title:'Jupiter–Mercury Antardasha Begins', house:'Your Entire Chart — The Chapter Changes', guidance:'The most significant event in this entire calendar. Jupiter-Saturn (Dec 2024–June 2027) asked you to build, prove, endure, and earn. Jupiter-Mercury asks you to move, communicate, teach, network, and express. The wisdom built under Saturn now has a voice. The work done privately finds a public audience. Structure gives way to movement. This period activates: teaching, certifications, content, marketing, business growth, travel, and new connections that open doors.', action:'Your first action in Jupiter-Mercury sets the tone. Make it a communication move: write something, teach something, record something, or reach out to someone you\'ve been meaning to connect with. Today the arrow releases.' },
+  '2027-06-30':{ type:'major', title:'Jupiter Enters Leo — 11th House Opens', house:'11th House — Community + Networks + Income + Audience', guidance:'Jupiter moves from Cancer (your 10th house career focus) to Leo (your 11th house of community, income, and audience). For twelve months, Jupiter built your professional reputation. Now it begins expanding your reach. The 11th house is one of the two primary wealth houses in Jyotish. Jupiter expanding here is a direct signal of income growth through networks, community, and reputation.', action:'Identify one platform, community, or professional network where you\'ve been on the edges but could step more fully into. Jupiter in Leo rewards those who join the community rather than observing from the outside.' }
+};
+
+const CHECKLIST = [
+  { id:'c1', label:'Morning grounding — 5 min breath or body scan (Taurus Moon: nervous system first, always)' },
+  { id:'c2', label:'One career-aligned action — even one email, one post, one conversation' },
+  { id:'c3', label:'Learning or expertise block — something that sharpens what you know (Mercury Pushya)' },
+  { id:'c4', label:'Creative expression — anything that engages Venus Leo 11th house energy' },
+  { id:'c5', label:'Evening reflection — what moved today? What needs processing before tomorrow?' }
+];
+
+// ── STATE + HELPERS ──────────────────────────────────────────────────────────
+const today = new Date();
+const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+const dayOfYear = Math.floor((today - new Date(today.getFullYear(),0,0)) / 86400000);
+
+function tipForDate(dateStr) {
+  const d = new Date(dateStr+'T12:00:00');
+  const doy = Math.floor((d - new Date(d.getFullYear(),0,0)) / 86400000);
+  return DAILY_TIPS[doy % DAILY_TIPS.length];
+}
+
+function planetDayFor(dateStr) {
+  const d = new Date(dateStr+'T12:00:00');
+  return PLANET_DAYS[d.getDay()];
+}
+
+// ── BUILD TODAY CARD ─────────────────────────────────────────────────────────
+function buildTodayCard() {
+  const card = document.getElementById('todayCard');
+  const month = MONTHS.find(m => todayStr.startsWith(m.id));
+  if (!month) return;
+
+  card.classList.add('visible');
+  const pd = planetDayFor(todayStr);
+  const tip = tipForDate(todayStr);
+  const event = KEY_DATES[todayStr];
+
+  const dateFormatted = today.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+
+  card.innerHTML = `
+    <div class="today-card-header">
+      <h3>✦ Today</h3>
+      <span class="today-date">${dateFormatted}</span>
+    </div>
+    <div class="today-planet-day" style="color:${pd.color}">${pd.name}</div>
+    <div class="today-msg">${pd.msg}</div>
+    ${event ? `<div style="background:var(--gold-bg);border-radius:9px;padding:11px 14px;margin-bottom:10px;border-left:3px solid var(--gold);font-size:0.79rem;color:var(--text-dim);line-height:1.65"><strong style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:0.95rem;display:block;margin-bottom:4px">✦ ${event.title}</strong>${event.guidance}</div>` : ''}
+    <div class="today-tip">
+      <strong>${tip.planet}</strong>
+      ${tip.tip}
+    </div>
+  `;
+}
+
+// ── BUILD MONTH NAV ──────────────────────────────────────────────────────────
+function buildNav() {
+  const nav = document.getElementById('monthNav');
+  MONTHS.forEach(m => {
+    const btn = document.createElement('button');
+    btn.textContent = m.name;
+    btn.dataset.id = m.id;
+    btn.onclick = () => showMonth(m.id);
+    nav.appendChild(btn);
+  });
+}
+
+function showMonth(id) {
+  document.querySelectorAll('.month-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.month-nav button').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+  const el = document.getElementById('m-'+id);
+  if (el) el.classList.add('active');
+}
+
+function jumpToToday() {
+  const mo = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}`;
+  const found = MONTHS.find(m => m.id === mo);
+  if (found) {
+    showMonth(found.id);
+    const tc = document.getElementById('todayCell');
+    if (tc) setTimeout(() => tc.scrollIntoView({behavior:'smooth',block:'center'}), 100);
+  }
+}
+
+// ── BUILD ALL MONTHS ─────────────────────────────────────────────────────────
+function buildMonths() {
+  const container = document.getElementById('monthSections');
+  MONTHS.forEach(m => {
+    const div = document.createElement('div');
+    div.className = 'month-section';
+    div.id = 'm-'+m.id;
+    div.innerHTML = buildMonthHTML(m);
+    container.appendChild(div);
+  });
+}
+
+function buildMonthHTML(m) {
+  const [y,mo] = m.id.split('-').map(Number);
+  const vTags = m.vedic.transits.map(t => `<span class="ttag">${t}</span>`).join('');
+  const opps = m.opportunities.map(o=>`<li>${o}</li>`).join('');
+  const cauts = m.cautions.map(c=>`<li>${c}</li>`).join('');
+  const weeks = m.weeks.map(w=>`<div class="week-card"><h4>${w.label}</h4><p>${w.focus}</p></div>`).join('');
+  const cal = buildCal(y,mo);
+  const dayMsgs = buildDayMessages(y,mo);
+  const checks = buildChecklist(m.id);
+  const journalVal = localStorage.getItem('journal-'+m.id)||'';
+
+  return `
+<div class="month-header">
+  <h2>${m.name}</h2>
+  <div class="month-theme">${m.theme}</div>
+  <div class="month-mantra">${m.mantra}</div>
+</div>
+<div class="overview-grid">
+  <div class="ov-card"><h4>Vedic (Jyotish) Overview</h4><p>${m.vedic.overview}</p><div class="transit-tags">${vTags}</div></div>
+  <div class="ov-card western"><h4>Western Astrology Note</h4><p>${m.western.note}</p><div class="transit-tags"><span class="ttag w">Tropical · Scorpio Rising · Placidus</span></div></div>
+</div>
+<div class="opp-caut">
+  <div class="opp-box"><h4>Opportunities This Month</h4><ul>${opps}</ul></div>
+  <div class="caut-box"><h4>Approach With Care</h4><ul>${cauts}</ul></div>
+</div>
+<div class="section-label">Weekly Breakdown</div>
+${weeks}
+<div class="section-label">Calendar — Tap Highlighted Dates for Guidance</div>
+${cal}
+<div class="daily-msg-section">
+  <h4>Daily Energy by Day of Week</h4>
+  <div class="daily-msg-grid">${dayMsgs}</div>
+</div>
+<div class="section-label">Daily Practices</div>
+<div class="checklist-wrap">${checks}</div>
+<div class="journal-section">
+  <h4>Monthly Journal Prompt</h4>
+  <div class="journal-prompt">${m.journal}</div>
+  <textarea class="journal-textarea" id="j-${m.id}" placeholder="Write here… your entries are saved privately in your browser.">${journalVal}</textarea>
+  <button class="save-btn" onclick="saveJournal('${m.id}')">Save Note</button>
+</div>`;
+}
+
+function buildCal(y,mo) {
+  const first = new Date(y,mo-1,1).getDay();
+  const days = new Date(y,mo,0).getDate();
+  const names = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  let h = '<div class="cal-grid">';
+  names.forEach(n => h+=`<div class="cal-day-name">${n}</div>`);
+  for(let i=0;i<first;i++) h+=`<div class="cal-day empty"></div>`;
+  for(let d=1;d<=days;d++){
+    const ds = `${y}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const ev = KEY_DATES[ds];
+    const isToday = ds===todayStr;
+    const todayId = isToday?'id="todayCell"':'';
+    let cls='cal-day';
+    if(isToday) cls+=' today-cell';
+    if(ev) { cls+=' ev-'+ev.type+' clickable'; }
+    const dotColors={'eclipse-solar':'var(--eclipse-solar)','eclipse-lunar':'var(--eclipse-lunar)','retro-start':'var(--retro)','retro-end':'var(--retro-end)','major':'var(--major)','nodal':'#9a8070'};
+    const dot = ev?`<div class="edot" style="background:${dotColors[ev.type]||'#ccc'}"></div>`:'';
+    const click = ev?`onclick="openModal('${ds}')"` :'';
+    h+=`<div class="${cls}" ${todayId} ${click}><div class="num">${d}</div>${dot}</div>`;
+  }
+  h+='</div>';
+  return h;
+}
+
+function buildDayMessages(y,mo){
+  // Show one representative message for each day of the week for this month
+  const days = new Date(y,mo,0).getDate();
+  const shown = {};
+  for(let d=1;d<=days;d++){
+    const ds=`${y}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dow=new Date(ds+'T12:00:00').getDay();
+    if(!shown[dow]) shown[dow]={day:PLANET_DAYS[dow],tip:tipForDate(ds)};
+  }
+  return Object.values(shown).slice(0,6).map(s=>`
+    <div class="dmsg-card">
+      <div class="dmsg-day">${s.day.name}</div>
+      <div class="dmsg-planet" style="color:${s.day.color}">${s.tip.planet}</div>
+      <div class="dmsg-text">${s.tip.tip.substring(0,120)}…</div>
+    </div>`).join('');
+}
+
+function buildChecklist(mid){
+  return CHECKLIST.map(item=>{
+    const key=`ck-${mid}-${item.id}-${todayStr}`;
+    const checked=localStorage.getItem(key)==='1';
+    return `<div class="check-item${checked?' done':''}" id="w-${mid}-${item.id}" onclick="toggleCheck('${mid}','${item.id}')">
+      <input type="checkbox" ${checked?'checked':''} onclick="event.stopPropagation();toggleCheck('${mid}','${item.id}')">
+      <label>${item.label}</label>
+    </div>`;
+  }).join('');
+}
+
+// ── INTERACTIONS ─────────────────────────────────────────────────────────────
+function toggleCheck(mid,iid){
+  const key=`ck-${mid}-${iid}-${todayStr}`;
+  const cur=localStorage.getItem(key)==='1';
+  localStorage.setItem(key,cur?'0':'1');
+  const wrap=document.getElementById(`w-${mid}-${iid}`);
+  if(wrap) wrap.classList.toggle('done',!cur);
+  const cb=wrap?.querySelector('input');
+  if(cb) cb.checked=!cur;
+}
+
+function saveJournal(mid){
+  const ta=document.getElementById('j-'+mid);
+  if(ta){ localStorage.setItem('journal-'+mid,ta.value); const btn=ta.nextElementSibling; if(btn){btn.textContent='Saved ✓';setTimeout(()=>{btn.textContent='Save Note';},1500);} }
+}
+
+function openModal(ds){
+  const ev=KEY_DATES[ds]; if(!ev) return;
+  const d=new Date(ds+'T12:00:00');
+  const fmt=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  const badges={'eclipse-solar':'mbadge-solar','eclipse-lunar':'mbadge-lunar','retro-start':'mbadge-rx','retro-end':'mbadge-direct','major':'mbadge-major','nodal':'mbadge-nodal'};
+  const labels={'eclipse-solar':'☀ Solar Eclipse','eclipse-lunar':'🌕 Lunar Eclipse','retro-start':'☿ Mercury Rx Begins','retro-end':'☿ Mercury Direct','major':'✦ Major Event','nodal':'⟳ Nodal Shift'};
+  document.getElementById('modalContent').innerHTML=`
+    <h3>${ev.title}</h3>
+    <div class="modal-date-str">${fmt}</div>
+    <span class="mbadge ${badges[ev.type]||'mbadge-major'}">${labels[ev.type]||ev.type}</span>
+    <div class="modal-house">${ev.house}</div>
+    <div class="modal-guidance">${ev.guidance}</div>
+    <div class="modal-action"><strong>Today's Action</strong>${ev.action}</div>`;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal(e){
+  if(!e||e.target===document.getElementById('modalOverlay'))
+    document.getElementById('modalOverlay').classList.remove('open');
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+function init(){
+  buildNav();
+  buildMonths();
+  buildTodayCard();
+
+  // Show current month or first
+  const curId=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}`;
+  const found=MONTHS.find(m=>m.id===curId);
+  showMonth(found ? found.id : MONTHS[0].id);
+}
+
+init();
+</script>
+</body>
+</html>
