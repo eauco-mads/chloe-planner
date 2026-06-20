@@ -243,6 +243,35 @@ main { flex: 1; padding: 22px 24px; max-width: 880px; overflow-y: auto; }
 .note-entry-text { font-size: 0.76rem; color: var(--text-dim); line-height: 1.5; white-space: pre-wrap; }
 .note-empty { font-size: 0.78rem; color: var(--text-light); font-style: italic; }
 
+/* ── CLICKABLE TERMS ── */
+.term { color: var(--gold); border-bottom: 1px dashed var(--gold-light); cursor: pointer; display: inline; }
+.term:hover { color: var(--pink); border-bottom-color: var(--pink-light); }
+.term-sidebar { font-size: inherit; color: var(--gold); border-bottom: 1px dashed var(--gold-light); cursor: pointer; }
+.term-sidebar:hover { color: var(--pink); }
+
+/* ── INDEX PAGE ── */
+.index-header { margin-bottom: 22px; }
+.index-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--gold); }
+.index-header p { font-size: 0.82rem; color: var(--text-dim); margin-top: 6px; line-height: 1.65; max-width: 580px; }
+.index-intro { background: linear-gradient(135deg, var(--pink-bg), var(--gold-bg)); border-radius: 12px; padding: 16px; margin-bottom: 22px; border: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim); line-height: 1.7; }
+.index-intro strong { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; }
+.index-cat-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-light); margin: 20px 0 8px; font-family: 'Lato'; border-bottom: 1px solid var(--border-light); padding-bottom: 6px; }
+.index-card { background: var(--card); border-radius: 10px; padding: 14px 16px; margin-bottom: 7px; box-shadow: 0 1px 5px var(--shadow); cursor: pointer; border-left: 3px solid var(--border); transition: border-color 0.2s; }
+.index-card:hover { border-left-color: var(--gold-light); }
+.index-card.open { border-left-color: var(--gold); }
+.index-card-header { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.index-term { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--text); }
+.index-also { font-size: 0.66rem; color: var(--text-light); font-style: italic; flex-shrink: 0; }
+.index-short { font-size: 0.76rem; color: var(--text-dim); margin-top: 4px; line-height: 1.5; }
+.index-expand-arrow { font-size: 0.65rem; color: var(--text-light); margin-top: 4px; }
+.index-card.open .index-expand-arrow::after { content: '▲ less'; }
+.index-expand-arrow::after { content: '▼ more'; }
+.index-body { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-light); }
+.index-card.open .index-body { display: block; }
+.index-def { font-size: 0.78rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 10px; }
+.index-chloe-box { background: var(--pink-bg); border-radius: 8px; padding: 10px 13px; font-size: 0.76rem; color: var(--text-dim); line-height: 1.65; border-left: 3px solid var(--pink-light); }
+.index-chloe-label { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pink); font-family: 'Lato'; margin-bottom: 5px; display: block; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 680px) {
   aside { display: none; }
@@ -258,7 +287,7 @@ main { flex: 1; padding: 22px 24px; max-width: 880px; overflow-y: auto; }
   <div class="header-inner">
     <div>
       <h1><em>Chloe's</em> Vedic Life Navigation Planner
-        <span>Jyotish · Lahiri Ayanamsha · Whole Sign Houses · July 2026 – July 2027</span>
+        <span><span class="term" onclick="openTermModal('jyotish')">Jyotish</span> · <span class="term" onclick="openTermModal('ayanamsha')">Lahiri Ayanamsha</span> · <span class="term" onclick="openTermModal('whole-sign')">Whole Sign Houses</span> · July 2026 – July 2027</span>
       </h1>
     </div>
     <button class="today-btn" onclick="jumpToToday()">✦ Today</button>
@@ -269,25 +298,25 @@ main { flex: 1; padding: 22px 24px; max-width: 880px; overflow-y: auto; }
 
 <div class="layout">
   <aside>
-    <div class="aside-title">Vedic Chart</div>
+    <div class="aside-title" style="cursor:pointer" onclick="openTermModal('jyotish')">Vedic Chart <span style="font-size:0.55rem;color:var(--gold-light)">tap to learn</span></div>
     <table class="chart-table">
-      <tr><td>Rising</td><td>Libra · Vishakha</td></tr>
-      <tr><td>Sun</td><td>Gemini · 9th</td></tr>
-      <tr><td>Moon</td><td>Taurus · 8th · Mrigashira</td></tr>
-      <tr><td>Mercury</td><td>Cancer · 10th · Pushya</td></tr>
-      <tr><td>Venus</td><td>Leo · 11th · Magha</td></tr>
-      <tr><td>Mars</td><td>Libra · 1st · Swati</td></tr>
-      <tr><td>Jupiter</td><td>Aries · 7th · Ashwini</td></tr>
-      <tr><td>Saturn</td><td>Aries · 7th · Bharani</td></tr>
-      <tr><td>Rahu</td><td>Cancer · 10th · Ashlesha</td></tr>
-      <tr><td>Ketu</td><td>Capricorn · 4th · Shravana</td></tr>
+      <tr><td><span class="term-sidebar" onclick="openTermModal('lagna')">Rising</span></td><td>Libra · <span class="term-sidebar" onclick="openTermModal('nakshatra')">Vishakha</span></td></tr>
+      <tr><td>Sun</td><td>Gemini · <span class="term-sidebar" onclick="openTermModal('houses')">9th</span></td></tr>
+      <tr><td>Moon</td><td>Taurus · 8th · <span class="term-sidebar" onclick="openTermModal('nakshatra')">Mrigashira</span></td></tr>
+      <tr><td>Mercury</td><td>Cancer · 10th · <span class="term-sidebar" onclick="openTermModal('nakshatra')">Pushya</span></td></tr>
+      <tr><td>Venus</td><td>Leo · 11th · <span class="term-sidebar" onclick="openTermModal('nakshatra')">Magha</span></td></tr>
+      <tr><td>Mars</td><td>Libra · 1st</td></tr>
+      <tr><td>Jupiter</td><td>Aries · 7th · <span class="term-sidebar" onclick="openTermModal('exalted')">see transit</span></td></tr>
+      <tr><td>Saturn</td><td>Aries · 7th</td></tr>
+      <tr><td><span class="term-sidebar" onclick="openTermModal('rahu')">Rahu</span></td><td>Cancer · 10th · <span class="term-sidebar" onclick="openTermModal('nakshatra')">Ashlesha</span></td></tr>
+      <tr><td><span class="term-sidebar" onclick="openTermModal('ketu')">Ketu</span></td><td>Capricorn · 4th · <span class="term-sidebar" onclick="openTermModal('nakshatra')">Shravana</span></td></tr>
     </table>
     <hr class="div">
     <div class="dasha-card">
-      <div class="dasha-label">Mahadasha</div>
+      <div class="dasha-label" style="cursor:pointer" onclick="openTermModal('mahadasha')">Mahadasha <span style="opacity:0.6">(?)</span></div>
       <div class="dasha-val">Jupiter</div>
       <div class="dasha-sub">Oct 2022 – Oct 2038</div>
-      <div class="dasha-label" style="margin-top:8px">Antardasha Now</div>
+      <div class="dasha-label" style="margin-top:8px;cursor:pointer" onclick="openTermModal('antardasha')">Antardasha Now <span style="opacity:0.6">(?)</span></div>
       <div class="dasha-val">Jupiter – Saturn</div>
       <div class="dasha-sub">until June 23, 2027</div>
       <div class="dasha-label" style="margin-top:8px">Next</div>
@@ -604,6 +633,18 @@ const DAILY_PROMPTS = [
   'What do you need right now that you haven\'t asked for?'
 ];
 
+const DAY_GUIDES = {
+  '2026-07-01':{ title:'The Year Begins', guidance:'This is the first page of the most professionally significant year in your chart. Jupiter freshly exalted in Cancer is now fully settled on your natal Rahu and Mercury in the 10th house — a triple activation of your career destiny. Mercury\'s day (Wednesday) makes today especially powerful for writing, setting intentions, and articulating what you are building. Words written today carry unusual weight.', action:'Write one sentence: what do you intend to have built by July 1, 2027? Don\'t filter it. Write the real version and put it somewhere you\'ll see daily.' },
+  '2026-07-02':{ title:'Your Power Day', guidance:'Thursday is Jupiter\'s day. You are in Jupiter Mahadasha. Jupiter is currently exalted. This alignment — Jupiter day, Jupiter period, Jupiter at maximum strength — is one of the most energetically concentrated moments in your entire year. In Jyotish, such alignments are called "muhurta" — auspicious windows for action. What professional move has been waiting?', action:'Take one action today toward your most ambitious professional goal. Not the safe version — the real one. This is the highest-energy day of your first week.' },
+  '2026-07-03':{ title:'Connection and Magnetism', guidance:'Friday belongs to Venus, and your Rising sign is Libra — ruled by Venus. Fridays are quietly your most magnetizing days of the week. Your Venus in Leo (11th house) means income and community respond most to genuine warmth and real connection — not strategy. Seven days from your birthday, the question worth holding: who in your professional world genuinely sees what you are building?', action:'Reach out to one person in your professional network today — not to ask for anything, just to genuinely connect. Venus in the 11th rewards exactly that.' },
+  '2026-07-04':{ title:'Foundation Check', guidance:'Saturday belongs to Saturn, your current Antardasha planet. Saturn in Pisces (your 6th house) is watching your daily habits with great precision. The 6th house rules daily work, health routines, and service. What is your non-negotiable daily action right now? Not a big vision move — the small consistent thing that compounds. Saturn\'s 6th house placement means he is measuring the quality of your daily practice above all else.', action:'Name one daily habit you will hold for the next 90 days. Write it down. Saturn in the 6th rewards what is consistent above almost everything else.' },
+  '2026-07-05':{ title:'Rest Is Real Work', guidance:'Sunday belongs to the Moon, and your Moon in Taurus (8th house, Mrigashira) is deeply sensitive to stillness and genuine rest. The 8th house Moon means you process life in invisible layers — and those layers need quiet to surface. On a Moon Sunday at the opening of a major astrological year, integration is real work. What did the first five days of July reveal to you, even quietly?', action:'No career action required today. Journal for 10 minutes about what you noticed in yourself this week. Your nervous system is processing more than your mind is tracking.' },
+  '2026-07-06':{ title:'Solar Reset — New Week', guidance:'Monday carries solar energy and your Sun in Gemini (9th house, Punarvasu) thrives on learning, curiosity, and big-picture vision. Punarvasu means "return to light" — the capacity to regenerate and begin again. The first Monday of your astrological year asks: what is your single professional north star for the next seven days? Not a to-do list. One clear priority that everything else orbits.', action:'Name your one professional priority for this week. Write it somewhere visible. Gemini Sun in the 9th activates through clarity of direction, not volume of tasks.' },
+  '2026-07-07':{ title:'Action and Presence', guidance:'Tuesday belongs to Mars, and your Mars in Libra (1st house, Swati) is your identity in motion. Mars in the 1st house means your physical presence and direct initiatives carry unusual power — when you show up, people notice. Swati (the Wind) gives you grace in how you assert yourself: bold without blunt, direct without harsh. This is a day for visible, concrete moves.', action:'Make one direct professional ask today. Reach out to someone you\'ve been circling, apply for something you\'ve been watching, or share something you\'ve been holding back.' },
+  '2026-07-08':{ title:'The Voice Activates', guidance:'Mercury\'s day again — and in Jyotish, Wednesday carries special weight for your chart because your natal Mercury in Pushya (Cancer, 10th house) is one of the strongest placements in your entire chart. Pushya is called "the most auspicious Nakshatra" — it nourishes and sustains. With Jupiter exalted in Cancer and it being Mercury\'s day, something you write or say today could matter far more than you expect.', action:'Say or write the thing you\'ve been almost saying. The pitch, the idea, the offer, the honest thing. Mercury in Pushya on Jupiter\'s exaltation is not a day to hold back.' },
+  '2026-07-09':{ title:'The Eve of 27', guidance:'The day before your 27th birthday. Thursday — Jupiter\'s day, your most aligned day of the week — and tomorrow you turn 27 under the most auspicious birthday sky your chart has ever seen. Jupiter exalted in your 10th house, directly on your natal Rahu and Mercury. Tonight, take 20 minutes to write a letter to the person who opens her eyes tomorrow morning as a 27-year-old. What does she need to hear? What do you want her to know?', action:'Write that letter tonight. What are you bringing into 27 — and what are you consciously leaving at 26? Seal it. Open it on your 28th birthday.' }
+};
+
 const BDAY_COUNTDOWN = {
   7: 'A week from today is your birthday. What are you bringing into your next year — and what are you genuinely ready to leave behind?',
   6: 'Six days until your birthday. What did this last year teach you about yourself that surprised you most?',
@@ -612,6 +653,65 @@ const BDAY_COUNTDOWN = {
   3: 'Three days until your birthday. What are you most proud of that you haven\'t given yourself full credit for?',
   2: 'Two days. What is one thing you want to feel or do in this next year that you\'ve been too afraid to name out loud?',
   1: 'Tomorrow is your birthday. Write a letter to yourself — the Chloe who is about to begin a brand new year. What does she need to hear right now?'
+};
+
+const GLOSSARY = {
+  jyotish:{ term:'Jyotish', also:'Vedic Astrology · "The Science of Light"', cat:'The Foundation',
+    short:'The ancient Indian system of astrology — the primary system used in this planner.',
+    def:'Jyotish (Sanskrit for "science of light") is the Indian tradition of astrology practiced for over 5,000 years. Unlike Western astrology, it uses the sidereal zodiac — calculated from the actual positions of the stars in the sky — rather than the tropical zodiac anchored to the seasons. Jyotish is known for its extraordinary precision in timing life events through the Dasha system, its nuanced understanding of karma, and its approach to the soul\'s journey across lifetimes.',
+    chloe:'Everything in this planner is read through Jyotish. Chloe\'s Libra Rising, Gemini Sun, Taurus Moon, and all house placements are sidereal (Vedic) positions — which is why they differ from the Western chart shown in the sidebar.' },
+  ayanamsha:{ term:'Ayanamsha', also:'Lahiri Ayanamsha · The ~24° Sidereal Offset', cat:'The Foundation',
+    short:'The calculated gap between the Vedic (sidereal) and Western (tropical) zodiacs — currently about 24°.',
+    def:'Ayanamsha is the offset between the tropical zodiac (Western astrology, anchored to the equinoxes) and the sidereal zodiac (Vedic astrology, anchored to the fixed stars). Currently ~23°50\'. Because the Earth slowly wobbles on its axis over thousands of years (called precession), the two zodiacs drift apart at roughly 1° every 72 years. Lahiri Ayanamsha is the government-recognized calculation used in India and the most widely used in Jyotish worldwide. This is why the same planet appears in different signs depending on which system you\'re reading.',
+    chloe:'Chloe\'s Western chart shows Scorpio Rising at 17°44\'. Subtract ~24° and you land in the final degrees of Libra — her Vedic Rising sign. Same sky, two lenses, both revealing something real.' },
+  'whole-sign':{ term:'Whole Sign Houses', also:'House System · Bhavas', cat:'The Foundation',
+    short:'The house system where each whole zodiac sign = exactly one house of life experience.',
+    def:'In Whole Sign Houses (the oldest and most widely used system in Jyotish), whatever sign was rising at the moment of birth becomes the entire 1st house. The next sign becomes the 2nd house, the next the 3rd, and so on around the wheel — 12 signs, 12 houses, clean boundaries. This differs from Western systems like Placidus, which divide houses based on exact degrees. Whole Sign Houses is considered especially effective for timing and karma analysis in Jyotish.',
+    chloe:'Because Chloe\'s Rising sign is Libra, Libra is her entire 1st house. Scorpio is her 2nd, Sagittarius her 3rd... and Cancer becomes her 10th house of career. This is why Jupiter in Cancer this year is a 10th house transit — a direct career activation.' },
+  lagna:{ term:'Lagna', also:'Rising Sign · Ascendant', cat:'Your Chart',
+    short:'The zodiac sign rising on the eastern horizon at the exact moment and place of birth.',
+    def:'The Lagna is the most important single point in a Jyotish chart. It determines the entire house structure, describes the physical body and how you show up in the world, and reveals the planet that rules your chart and therefore your life\'s central theme. The Lagna shifts every ~2 hours, which is why birth time matters so much in astrology. In Jyotish, the planet that rules the Lagna sign is called the chart ruler and its condition (placement, strength, aspects) colors everything.',
+    chloe:'Chloe\'s Lagna is Libra — specifically Vishakha Nakshatra. Her chart ruler is Venus. Libra Rising means she moves through the world with natural diplomacy, aesthetic awareness, and relational intelligence. Vishakha adds a specific quality: she was built to achieve something that genuinely matters.' },
+  nakshatra:{ term:'Nakshatra', also:'Lunar Mansion · One of 27', cat:'Your Chart',
+    short:'The 27 lunar mansions — the most granular and revealing layer of a Vedic chart.',
+    def:'The zodiac in Jyotish is divided into 27 Nakshatras (lunar mansions), each spanning 13°20\'. While the 12 signs describe broad themes, the Nakshatras reveal the specific texture and quality of a planet\'s energy. Each Nakshatra has a ruling planet, a symbol, a presiding deity, and a distinct psychological and karmic signature. The Nakshatra of your Moon is especially significant — it reveals how you process emotion, where your instincts live, and what the Dasha system starts from.',
+    chloe:'Key Nakshatras in Chloe\'s chart: Moon in Mrigashira (the Deer — the eternal seeker), Rising in Vishakha (the Archer — purposeful achievement), Mercury in Pushya (the Nourisher — the most auspicious Nakshatra), Sun in Punarvasu (Renewal — regeneration and return), Rahu in Ashlesha (the Serpent — hidden wisdom and perception).' },
+  rahu:{ term:'Rahu', also:'North Node of the Moon · Soul\'s Future Direction', cat:'Your Chart',
+    short:'The soul\'s hungry, forward-pointing karmic direction. Where Rahu is = where you\'re being pulled.',
+    def:'Rahu is the North Node of the Moon — a mathematical point (not a physical planet) where the Moon\'s orbit crosses the ecliptic. In Jyotish, Rahu represents the soul\'s future direction, obsessive hunger, and the unfamiliar territory the soul is being pulled toward in this lifetime. Rahu amplifies, expands, and creates an insatiable quality in whatever house and sign it occupies. It is foreign, unconventional, and tends to operate through desire and fascination. Rahu and Ketu are always exactly opposite each other in the chart.',
+    chloe:'Chloe\'s Rahu is in Cancer in the 10th house (Ashlesha Nakshatra). Her soul\'s hungry future direction is emotional leadership, career visibility, and public identity. Jupiter sitting directly on natal Rahu this year is what makes July 2026–June 2027 so extraordinary — the planet of expansion is activating her soul\'s deepest direction.' },
+  ketu:{ term:'Ketu', also:'South Node of the Moon · Past Karma', cat:'Your Chart',
+    short:'Past-life mastery, spiritual gifts, and what the soul is learning to release this lifetime.',
+    def:'Ketu is the South Node of the Moon — always 180° opposite Rahu. In Jyotish, Ketu represents past karma, deep spiritual gifts carried in from previous lifetimes, and areas where the soul already has deep experience but needs to learn detachment. Where Ketu is placed, things tend not to work out in conventional ways — not because of failure, but because the soul is being asked to release attachment to those outcomes and move toward Rahu\'s direction instead. Ketu brings wisdom, detachment, and spiritual depth.',
+    chloe:'Chloe\'s Ketu is in Capricorn in the 4th house (Shravana Nakshatra). She arrived in this life already knowing responsibility, self-sufficiency, and structure. The lesson is not to build those qualities — it\'s to soften enough to let emotional security (Rahu in Cancer) become her foundation.' },
+  mahadasha:{ term:'Mahadasha', also:'Major Planetary Period · Life Chapter', cat:'Planetary Periods',
+    short:'Your current major life chapter, ruled by one planet for years or decades.',
+    def:'The Vimshottari Dasha system divides life into major planetary periods called Mahadashas, each ruled by a different planet for a fixed number of years. The total cycle is 120 years: Sun (6), Moon (10), Mars (7), Rahu (18), Jupiter (16), Saturn (19), Mercury (17), Ketu (7), Venus (20). The planet ruling your Mahadasha sets the dominant tone, available opportunities, and primary challenges of that entire life chapter. Your Mahadasha planet is the one you\'re in a relationship with — it colors almost everything.',
+    chloe:'Chloe is in Jupiter Mahadasha (Oct 2022 – Oct 2038) — 16 years of Jupiter\'s energy. Jupiter brings wisdom, expansion, teaching, philosophy, abundance, and higher knowledge. Every door that opens, every teacher that appears, every opportunity that lands during this period carries Jupiter\'s fingerprint.' },
+  antardasha:{ term:'Antardasha', also:'Sub-Period · Bhukti', cat:'Planetary Periods',
+    short:'A sub-chapter within the Mahadasha — a second planet that modifies the tone for 1–3 years.',
+    def:'Within each Mahadasha, there are 9 Antardashas (sub-periods) where each of the 9 planets rules in sequence. The Antardasha planet doesn\'t replace the Mahadasha planet — it modifies and colors it, adding its own quality to the main theme. Think of the Mahadasha as the novel and the Antardasha as the current chapter. Antardashas last anywhere from a few months to a few years depending on the planets involved.',
+    chloe:'Current Antardasha: Jupiter–Saturn (Dec 2024 – June 23, 2027). Jupiter says expand. Saturn says prove it first. The productive tension between them is the forge: building the reputation, expertise, and discipline that Jupiter–Mercury (beginning June 23, 2027) will then release publicly.' },
+  exalted:{ term:'Exalted', also:'Uchcha · Maximum Planetary Strength', cat:'Cycles + Events',
+    short:'A planet in its sign of absolute maximum power — operating at its highest and best expression.',
+    def:'Each of the 9 Jyotish planets has one zodiac sign where it reaches maximum strength, called its exaltation (Uchcha). When a planet is in its exaltation sign — either natally or by transit — it expresses its qualities with the greatest clarity, power, and positive effect. Exaltation signs: Sun in Aries, Moon in Taurus, Mars in Capricorn, Mercury in Virgo, Jupiter in Cancer, Venus in Pisces, Saturn in Libra. The opposite placement (debilitation) is where a planet is weakest.',
+    chloe:'Jupiter is exalted in Cancer — and Cancer is Chloe\'s 10th house of career. Jupiter (her Mahadasha planet) is at its absolute maximum strength, transiting the house of career and public identity, sitting on her natal destiny point (Rahu) and natal Mercury. This combination is exceptionally rare and is the defining astrological event of her mid-20s.' },
+  eclipse:{ term:'Eclipse', also:'Grahan · Solar + Lunar', cat:'Cycles + Events',
+    short:'A powerful reset point — solar eclipses begin things, lunar eclipses complete or conclude.',
+    def:'Eclipses in Jyotish (Grahan) occur when a New Moon (solar eclipse) or Full Moon (lunar eclipse) happens near the nodal axis (near Rahu or Ketu). Solar eclipses seed new beginnings in the house they fall; lunar eclipses complete, release, or conclude something in the house they fall. Eclipses act as accelerators — they fast-forward what is already in motion and can bring sudden, unexpected developments. Eclipse effects are felt 6 weeks before and unfold over 6 months after.',
+    chloe:'Two eclipse seasons in this planner: August 2026 solar eclipse in Cancer (Chloe\'s 10th house career sector — a career fast-forward during Jupiter\'s exaltation) and February 2027 solar eclipse in Capricorn (her 4th house home sector). Both are major turning points.' },
+  retrograde:{ term:'Mercury Retrograde', also:'Vakri · Apparent Backward Motion', cat:'Cycles + Events',
+    short:'Mercury\'s ~3-week apparent backward motion — review, refine, revisit. Not for launching new things.',
+    def:'Planets don\'t move backward — but from Earth\'s perspective they appear to, due to orbital mechanics. When Mercury is retrograde (Vakri in Sanskrit), the planet of communication, contracts, travel, and logic turns inward. In Jyotish, retrograde planets are considered intensified and internalized. Mercury Retrograde is ideal for reviewing, revisiting, refining, and completing — not for launching new projects, signing contracts, or making major announcements. It occurs 3–4 times per year for ~3 weeks each time.',
+    chloe:'Two Mercury Retrogrades in this planner: Nov 9–29, 2026 (1st–2nd houses — identity and values review) and Mar 15–Apr 7, 2027 (5th–6th houses — creative and operational refinement). Both are built into Chloe\'s monthly guidance as review periods rather than launch windows.' },
+  houses:{ term:'Houses', also:'Bhavas · The 12 Life Areas', cat:'Your Chart',
+    short:'The 12 divisions of the birth chart, each ruling a specific domain of human experience.',
+    def:'The 12 houses (Bhavas) represent 12 distinct areas of life. In Whole Sign Houses: 1st = self, body, identity; 2nd = resources, speech, values; 3rd = communication, siblings, courage; 4th = home, roots, emotional foundation; 5th = creativity, romance, intelligence, children; 6th = daily work, health, service, enemies; 7th = partnerships, marriage, one-on-one relationships; 8th = transformation, depth, hidden knowledge, longevity; 9th = philosophy, teachers, higher learning, luck; 10th = career, public reputation, authority; 11th = community, networks, income, gains; 12th = spirituality, isolation, foreign travel, liberation.',
+    chloe:'Most activated houses this year: 10th (Cancer — career, Jupiter exalted), 6th (Pisces — daily work, Saturn), 4th (Capricorn — home, nodal axis), 11th (Leo — community + income, Venus natally + lunar eclipse Feb 2027).' },
+  transit:{ term:'Transit', also:'Gochar · Planetary Movement', cat:'Cycles + Events',
+    short:'The current real-time position of a planet as it moves through the zodiac over your natal chart.',
+    def:'A transit (Gochar) is where a planet is right now in the sky, as opposed to its natal (birth chart) position. When a transiting planet moves over a sensitive natal point — a natal planet, your Rising sign, or an important house cusp — it activates that area of life. Transits are temporary visitors; their effects depend on the planet, which house they\'re in, and what natal points they contact. Jupiter transits one sign per year. Saturn takes ~2.5 years per sign. The Moon transits a new sign every 2.5 days.',
+    chloe:'The defining transit of this entire planner: Jupiter in Cancer (June 2026 – late June 2027), moving directly over Chloe\'s natal Rahu and Mercury in the 10th house. This is the transit that makes this year the most professionally significant in her chart.' }
 };
 
 // ── STATE + HELPERS ──────────────────────────────────────────────────────────
@@ -668,6 +768,11 @@ function buildNav() {
     btn.onclick = () => showMonth(m.id);
     nav.appendChild(btn);
   });
+  const idx = document.createElement('button');
+  idx.textContent = '✦ Astrology Index';
+  idx.dataset.id = 'index';
+  idx.onclick = () => showMonth('index');
+  nav.appendChild(idx);
 }
 
 function showMonth(id) {
@@ -821,6 +926,66 @@ function saveJournal(mid){
   if(ta){ localStorage.setItem('journal-'+mid,ta.value); const btn=ta.nextElementSibling; if(btn){btn.textContent='Saved ✓';setTimeout(()=>{btn.textContent='Save Note';},1500);} }
 }
 
+function openTermModal(key){
+  const g=GLOSSARY[key]; if(!g) return;
+  document.getElementById('modalContent').innerHTML=`
+    <h3>${g.term}</h3>
+    <div class="modal-date-str" style="margin-bottom:12px">${g.also}</div>
+    <div style="background:var(--gold-bg);border-radius:8px;padding:10px 13px;margin-bottom:12px;font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:var(--gold);font-style:italic;line-height:1.5">${g.short}</div>
+    <div class="modal-guidance">${g.def}</div>
+    ${g.chloe?`<div class="index-chloe-box" style="margin-top:4px"><span class="index-chloe-label">In Chloe\'s Chart</span>${g.chloe}</div>`:''}
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function toggleIndexCard(id){
+  const card=document.getElementById('ic-'+id);
+  if(card) card.classList.toggle('open');
+}
+
+function buildIndexHTML(){
+  const cats=['The Foundation','Your Chart','Planetary Periods','Cycles + Events'];
+  let html=`
+    <div class="index-header">
+      <h2>Astrology Index</h2>
+      <p>New to Vedic astrology? Start here. Every term used in this planner is explained below — tap any card to expand it. Each one also shows exactly how it applies to Chloe's specific chart.</p>
+    </div>
+    <div class="index-intro">
+      <strong>How to use this planner if you're new to astrology:</strong><br>
+      When you see a word you don't recognize — Mahadasha, Nakshatra, exalted, transit — find it in this index. Each entry has a plain-English definition and a "In Chloe's Chart" section showing what it actually means for her. You can also tap highlighted gold terms throughout the planner to get instant definitions.
+    </div>`;
+  cats.forEach(cat=>{
+    const terms=Object.entries(GLOSSARY).filter(([,g])=>g.cat===cat);
+    if(!terms.length) return;
+    html+=`<div class="index-cat-label">${cat}</div>`;
+    terms.forEach(([key,g])=>{
+      html+=`
+        <div class="index-card" id="ic-${key}" onclick="toggleIndexCard('${key}')">
+          <div class="index-card-header">
+            <span class="index-term">${g.term}</span>
+            <span class="index-also">${g.also}</span>
+          </div>
+          <div class="index-short">${g.short}</div>
+          <div class="index-expand-arrow"></div>
+          <div class="index-body">
+            <div class="index-def">${g.def}</div>
+            ${g.chloe?`<div class="index-chloe-box"><span class="index-chloe-label">In Chloe\'s Chart</span>${g.chloe}</div>`:''}
+          </div>
+        </div>`;
+    });
+  });
+  return html;
+}
+
+function buildIndex(){
+  const container=document.getElementById('monthSections');
+  const div=document.createElement('div');
+  div.className='month-section';
+  div.id='m-index';
+  div.innerHTML=buildIndexHTML();
+  container.appendChild(div);
+}
+
 function launchConfetti(){
   const canvas=document.createElement('canvas');
   canvas.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999';
@@ -917,11 +1082,20 @@ function openDayModal(ds){
       <div class="modal-action" style="${isBirthday?'border-left:3px solid var(--pink)':''}"><strong style="${isBirthday?'color:var(--pink)':''}">Today's Action</strong>${ev.action}</div>
     </div>`:'';
 
+  const guide=DAY_GUIDES[ds];
+  const guideHtml=guide&&!isBirthday?`
+    <div class="modal-event-block" style="border-left:3px solid var(--gold)">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--gold);margin-bottom:6px">✦ ${guide.title}</div>
+      <div class="modal-guidance">${guide.guidance}</div>
+      <div class="modal-action"><strong>Today's Action</strong>${guide.action}</div>
+    </div>`:'';
+
   const dailySection=isBirthday?'':`
     <div class="modal-tip-block">
       <div class="tip-planet">${tip.planet}</div>
       <div class="tip-text">${tip.tip}</div>
-    </div>`;
+    </div>
+    ${guideHtml}`;
 
   document.getElementById('modalContent').innerHTML=`
     ${birthdayTopHtml}
@@ -972,6 +1146,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 function init(){
   buildNav();
   buildMonths();
+  buildIndex();
   buildTodayCard();
 
   // Show current month or first
