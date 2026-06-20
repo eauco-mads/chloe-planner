@@ -215,6 +215,15 @@ main { flex: 1; padding: 22px 24px; max-width: 880px; overflow-y: auto; }
 .modal-guidance { font-size: 0.8rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 14px; }
 .modal-action { background: var(--green-bg); border-radius: 9px; padding: 11px 14px; font-size: 0.78rem; color: var(--text); line-height: 1.6; border-left: 3px solid var(--green); }
 .modal-action strong { color: var(--green); font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; display: block; margin-bottom: 4px; }
+.modal-tip-block { background: var(--green-bg); border-radius: 9px; padding: 11px 14px; margin: 10px 0; border-left: 3px solid var(--green); }
+.tip-planet { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--green); margin-bottom: 4px; }
+.tip-text { font-size: 0.78rem; color: var(--text-dim); line-height: 1.65; }
+.modal-divider { border: none; border-top: 1px solid var(--border-light); margin: 14px 0; }
+.modal-prompt-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-light); margin: 14px 0 6px; font-family: 'Lato'; }
+.modal-prompt-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--pink); font-style: italic; margin-bottom: 10px; line-height: 1.5; }
+.modal-note-ta { width: 100%; min-height: 90px; background: var(--surface); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text); font-family: 'Lato', sans-serif; font-size: 0.78rem; padding: 10px; resize: vertical; line-height: 1.65; margin-top: 4px; }
+.modal-note-ta:focus { outline: none; border-color: var(--pink-light); }
+.modal-event-block { background: var(--gold-bg); border-radius: 9px; padding: 12px 14px; margin: 12px 0; border-left: 3px solid var(--gold); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 680px) {
@@ -541,6 +550,37 @@ const CHECKLIST = [
   { id:'c5', label:'Evening reflection — what moved today? What needs processing before tomorrow?' }
 ];
 
+const DAILY_PROMPTS = [
+  'What are you genuinely curious about right now — and when did you last follow that thread?',
+  'What would feel like a real win by the end of today? Name it specifically.',
+  'What is your body telling you that your mind is trying to override?',
+  'Who showed up for you recently that you haven\'t thanked or acknowledged?',
+  'What\'s one thing you\'ve been avoiding that would actually be easy to begin?',
+  'What do you want more of in your life right now — and what\'s one step toward it?',
+  'What would your most confident, grounded self do differently today?',
+  'What are you proud of that you haven\'t let yourself fully acknowledge?',
+  'What boundary, if you held it, would make you feel more like yourself?',
+  'What\'s one small beautiful thing from today worth noticing and keeping?',
+  'What truth are you circling around but not quite saying out loud?',
+  'What does your ideal work day look and feel like? How close is today to that?',
+  'What would you do differently if you fully trusted your own judgment?',
+  'What is ready to be released that you\'ve been holding onto out of habit or fear?',
+  'What conversation have you been putting off that would actually feel like relief to have?',
+  'If your Mrigashira Moon could follow any trail right now, where would it lead?',
+  'What does "enough" look and feel like for you — not more, not less. Just enough.',
+  'What professional move have you been waiting for "the right time" to make?',
+  'What has changed about who you are in the last 6 months that you haven\'t named yet?',
+  'What would you build if you knew it wouldn\'t fail?',
+  'Who in your life makes you feel most like yourself? When did you last spend real time with them?',
+  'What about your current situation is actually working that you tend to overlook?',
+  'What would you want someone to know about you that they probably don\'t?',
+  'Where in your life is "good enough" actually a form of self-protection?',
+  'What is one thing you can do today that your future self will thank you for?',
+  'What creative idea has been sitting quietly in the back of your mind, waiting for permission?',
+  'What would you do if you weren\'t trying to be practical about it?',
+  'What do you need right now that you haven\'t asked for?'
+];
+
 // ── STATE + HELPERS ──────────────────────────────────────────────────────────
 const today = new Date();
 const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
@@ -653,7 +693,7 @@ function buildMonthHTML(m) {
 </div>
 <div class="section-label">Weekly Breakdown</div>
 ${weeks}
-<div class="section-label">Calendar — Tap Highlighted Dates for Guidance</div>
+<div class="section-label">Calendar — Tap Any Day for Your Daily Tip, Prompt + Notes</div>
 ${cal}
 <div class="daily-msg-section">
   <h4>Daily Energy by Day of Week</h4>
@@ -681,13 +721,12 @@ function buildCal(y,mo) {
     const ev = KEY_DATES[ds];
     const isToday = ds===todayStr;
     const todayId = isToday?'id="todayCell"':'';
-    let cls='cal-day';
+    let cls='cal-day clickable';
     if(isToday) cls+=' today-cell';
-    if(ev) { cls+=' ev-'+ev.type+' clickable'; }
+    if(ev) cls+=' ev-'+ev.type;
     const dotColors={'eclipse-solar':'var(--eclipse-solar)','eclipse-lunar':'var(--eclipse-lunar)','retro-start':'var(--retro)','retro-end':'var(--retro-end)','major':'var(--major)','nodal':'#9a8070'};
     const dot = ev?`<div class="edot" style="background:${dotColors[ev.type]||'#ccc'}"></div>`:'';
-    const click = ev?`onclick="openModal('${ds}')"` :'';
-    h+=`<div class="${cls}" ${todayId} ${click}><div class="num">${d}</div>${dot}</div>`;
+    h+=`<div class="${cls}" ${todayId} onclick="openDayModal('${ds}')"><div class="num">${d}</div>${dot}</div>`;
   }
   h+='</div>';
   return h;
@@ -737,20 +776,58 @@ function saveJournal(mid){
   if(ta){ localStorage.setItem('journal-'+mid,ta.value); const btn=ta.nextElementSibling; if(btn){btn.textContent='Saved ✓';setTimeout(()=>{btn.textContent='Save Note';},1500);} }
 }
 
-function openModal(ds){
-  const ev=KEY_DATES[ds]; if(!ev) return;
+function getDailyPrompt(dateStr){
+  const d=new Date(dateStr+'T12:00:00');
+  const doy=Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);
+  return DAILY_PROMPTS[doy%DAILY_PROMPTS.length];
+}
+
+function openDayModal(ds){
+  const ev=KEY_DATES[ds];
   const d=new Date(ds+'T12:00:00');
   const fmt=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  const pd=PLANET_DAYS[d.getDay()];
+  const tip=tipForDate(ds);
+  const prompt=getDailyPrompt(ds);
+  const savedNote=localStorage.getItem('daynote-'+ds)||'';
   const badges={'eclipse-solar':'mbadge-solar','eclipse-lunar':'mbadge-lunar','retro-start':'mbadge-rx','retro-end':'mbadge-direct','major':'mbadge-major','nodal':'mbadge-nodal'};
   const labels={'eclipse-solar':'☀ Solar Eclipse','eclipse-lunar':'🌕 Lunar Eclipse','retro-start':'☿ Mercury Rx Begins','retro-end':'☿ Mercury Direct','major':'✦ Major Event','nodal':'⟳ Nodal Shift'};
+
+  const eventHtml=ev?`
+    <div class="modal-event-block">
+      <span class="mbadge ${badges[ev.type]||'mbadge-major'}" style="margin-bottom:8px;display:inline-block">${labels[ev.type]||ev.type}</span>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);margin-bottom:4px">${ev.title}</div>
+      <div class="modal-house">${ev.house}</div>
+      <div class="modal-guidance">${ev.guidance}</div>
+      <div class="modal-action"><strong>Today's Action</strong>${ev.action}</div>
+    </div>`:'';
+
   document.getElementById('modalContent').innerHTML=`
-    <h3>${ev.title}</h3>
-    <div class="modal-date-str">${fmt}</div>
-    <span class="mbadge ${badges[ev.type]||'mbadge-major'}">${labels[ev.type]||ev.type}</span>
-    <div class="modal-house">${ev.house}</div>
-    <div class="modal-guidance">${ev.guidance}</div>
-    <div class="modal-action"><strong>Today's Action</strong>${ev.action}</div>`;
+    <h3>${fmt}</h3>
+    <div class="modal-date-str" style="color:${pd.color};margin-bottom:8px">${pd.name}</div>
+    <div class="modal-guidance">${pd.msg}</div>
+    <div class="modal-tip-block">
+      <div class="tip-planet">${tip.planet}</div>
+      <div class="tip-text">${tip.tip}</div>
+    </div>
+    ${eventHtml}
+    <hr class="modal-divider">
+    <div class="modal-prompt-label">Today's Journal Prompt</div>
+    <div class="modal-prompt-text">${prompt}</div>
+    <div class="modal-prompt-label">My Notes</div>
+    <textarea class="modal-note-ta" id="daynote-ta" placeholder="Write here — saved privately in your browser.">${savedNote}</textarea>
+    <button class="save-btn" onclick="saveDayNote('${ds}')">Save Note</button>
+  `;
   document.getElementById('modalOverlay').classList.add('open');
+}
+
+function saveDayNote(ds){
+  const ta=document.getElementById('daynote-ta');
+  if(ta){
+    localStorage.setItem('daynote-'+ds,ta.value);
+    const btn=ta.nextElementSibling;
+    if(btn){btn.textContent='Saved ✓';setTimeout(()=>{btn.textContent='Save Note';},1500);}
+  }
 }
 
 function closeModal(e){
