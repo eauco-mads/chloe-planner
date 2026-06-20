@@ -684,6 +684,12 @@ function jumpToToday() {
     showMonth(found.id);
     const tc = document.getElementById('todayCell');
     if (tc) setTimeout(() => tc.scrollIntoView({behavior:'smooth',block:'center'}), 100);
+  } else {
+    // Today is outside the planner range — jump to closest month
+    const sorted = MONTHS.map(m => ({ id: m.id, diff: Math.abs(new Date(m.id+'-15') - today) }));
+    sorted.sort((a,b) => a.diff - b.diff);
+    showMonth(sorted[0].id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
 
