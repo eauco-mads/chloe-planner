@@ -224,6 +224,16 @@ main { flex: 1; padding: 22px 24px; max-width: 880px; overflow-y: auto; }
 .modal-note-ta { width: 100%; min-height: 90px; background: var(--surface); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text); font-family: 'Lato', sans-serif; font-size: 0.78rem; padding: 10px; resize: vertical; line-height: 1.65; margin-top: 4px; }
 .modal-note-ta:focus { outline: none; border-color: var(--pink-light); }
 .modal-event-block { background: var(--gold-bg); border-radius: 9px; padding: 12px 14px; margin: 12px 0; border-left: 3px solid var(--gold); }
+.cal-day.ev-birthday { border: 2px solid var(--pink) !important; background: linear-gradient(135deg, var(--pink-bg), var(--gold-bg)) !important; }
+.cal-day.ev-birthday .num { color: var(--pink); font-weight: 600; }
+.mbadge-birthday { background: linear-gradient(135deg, #fef0f5, var(--gold-bg)); color: var(--pink); border: 1px solid var(--pink-light); }
+.birthday-top { text-align: center; padding: 6px 0 16px; }
+.birthday-top .bday-age { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--pink); line-height: 1; display: block; }
+.birthday-top .bday-sub { font-size: 0.68rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.12em; display: block; margin-top: 3px; }
+.countdown-block { background: linear-gradient(135deg, var(--pink-bg), var(--gold-bg)); border-radius: 12px; padding: 16px; margin: 12px 0; border: 1px solid var(--pink-light); text-align: center; }
+.countdown-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--pink); line-height: 1; }
+.countdown-label { font-size: 0.62rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; font-family: 'Lato'; }
+.countdown-prompt { font-family: 'Cormorant Garamond', serif; font-size: 0.98rem; color: var(--text); font-style: italic; line-height: 1.55; margin-top: 10px; }
 .note-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--pink); margin: 2px auto 0; opacity: 0.8; }
 .notes-recap { background: var(--card); border-radius: 12px; padding: 16px; margin-top: 14px; box-shadow: 0 2px 8px var(--shadow); }
 .notes-recap h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--pink); margin-bottom: 10px; }
@@ -292,6 +302,7 @@ main { flex: 1; padding: 22px 24px; max-width: 880px; overflow-y: auto; }
     <div class="legend-item"><div class="ldot" style="background:var(--retro-end)"></div>Mercury Direct</div>
     <div class="legend-item"><div class="ldot" style="background:var(--major)"></div>Major Shift</div>
     <div class="legend-item"><div class="ldot" style="background:#9a8070"></div>Nodal Shift</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--pink)"></div>Birthday ✦</div>
     <hr class="div">
     <div class="aside-title" style="color:var(--green)">Western Chart</div>
     <div class="w-chart-note">
@@ -547,7 +558,11 @@ const KEY_DATES = {
   '2027-03-15':{ type:'retro-start', title:'Mercury Retrograde Begins', house:'5th–6th Houses — Creativity + Daily Work Systems', guidance:'Mercury Retrograde in your 5th and 6th houses is one of the most productive retrograde placements. It slows the daily work rhythm enough to catch errors, revisit creative projects, and upgrade systems before they become problems. A creative project you set aside may return with new energy.', action:'Identify one creative project or business system that needs a revisit. Spend this retrograde giving it the attention it deserves before the acceleration of April begins.' },
   '2027-04-07':{ type:'retro-end', title:'Mercury Retrograde Ends — All Systems Go', house:'Full forward motion in 5th house', guidance:'Mercury direct in your 5th house. The creative and operational work refined during the retrograde is now ready to move. Post-retrograde launches have more traction than pre-retrograde ones. Jupiter in Cancer is still active. The 10th house still lit. This is a green-light day.', action:'Launch one thing that has been waiting. Not next week — today. The post-retrograde energy is at its sharpest in the first 48 hours after Mercury goes direct.' },
   '2027-06-23':{ type:'major', title:'Jupiter–Mercury Antardasha Begins', house:'Your Entire Chart — The Chapter Changes', guidance:'The most significant event in this entire calendar. Jupiter-Saturn (Dec 2024–June 2027) asked you to build, prove, endure, and earn. Jupiter-Mercury asks you to move, communicate, teach, network, and express. The wisdom built under Saturn now has a voice. The work done privately finds a public audience. Structure gives way to movement. This period activates: teaching, certifications, content, marketing, business growth, travel, and new connections that open doors.', action:'Your first action in Jupiter-Mercury sets the tone. Make it a communication move: write something, teach something, record something, or reach out to someone you\'ve been meaning to connect with. Today the arrow releases.' },
-  '2027-06-30':{ type:'major', title:'Jupiter Enters Leo — 11th House Opens', house:'11th House — Community + Networks + Income + Audience', guidance:'Jupiter moves from Cancer (your 10th house career focus) to Leo (your 11th house of community, income, and audience). For twelve months, Jupiter built your professional reputation. Now it begins expanding your reach. The 11th house is one of the two primary wealth houses in Jyotish. Jupiter expanding here is a direct signal of income growth through networks, community, and reputation.', action:'Identify one platform, community, or professional network where you\'ve been on the edges but could step more fully into. Jupiter in Leo rewards those who join the community rather than observing from the outside.' }
+  '2027-06-30':{ type:'major', title:'Jupiter Enters Leo — 11th House Opens', house:'11th House — Community + Networks + Income + Audience', guidance:'Jupiter moves from Cancer (your 10th house career focus) to Leo (your 11th house of community, income, and audience). For twelve months, Jupiter built your professional reputation. Now it begins expanding your reach. The 11th house is one of the two primary wealth houses in Jyotish. Jupiter expanding here is a direct signal of income growth through networks, community, and reputation.', action:'Identify one platform, community, or professional network where you\'ve been on the edges but could step more fully into. Jupiter in Leo rewards those who join the community rather than observing from the outside.' },
+
+  '2026-07-10':{ type:'birthday', title:'Happy 27th Birthday, Chloe ✦', house:'Born July 10, 1999 · Soldotna, Alaska · 6:03 PM', guidance:'You were born on a summer evening at the edge of the last frontier — 6:03 PM, Soldotna, Alaska — and your chart knew exactly what it was doing. Today you turn 27 with Jupiter exalted in Cancer, sitting directly on your natal Rahu and Mercury in your 10th house of career. In Jyotish, this is one of the most auspicious birthday signatures imaginable: the planet of your entire 16-year Mahadasha, at its absolute maximum strength, activating your professional destiny and your soul\'s direction on the exact day of your birth. Your 27th year is not just another year. It is the year the door opens wide. The year your expertise becomes visible. The year what you have been building in private starts to be seen by the people who need it most. You are a Vishakha Rising — the Archer — and your entire life has been building toward a specific target. At 27, under Jupiter\'s exaltation, the target is clear. The arrow is in the air. This is your year, Chloe. Every single thing you\'ve done to get here was right on time.', action:'Write a letter to yourself today — not about what you want to build, but about who you already are right now. Seal it. Open it on your 28th birthday, one week into Jupiter-Mercury Antardasha, and see how much you knew.' },
+
+  '2027-07-10':{ type:'birthday', title:'Happy 28th Birthday, Chloe ✦', house:'Born July 10, 1999 · Soldotna, Alaska · 6:03 PM', guidance:'One year ago today, you turned 27 with Jupiter exalted in your 10th house and the most professionally significant year of your life just beginning. Today you turn 28 — seventeen days into Jupiter-Mercury Antardasha, the chapter your entire chart has been building toward since 2022. Jupiter-Saturn asked you to build, prove, and endure. To earn what you would receive next. You did. Jupiter-Mercury is now asking you to move, communicate, teach, and express. You were born with Mercury in Pushya — the most auspicious Nakshatra, called "the nourisher" — in Cancer in your 10th house of career. Your 28th year is the year your words go public. The year your expertise finds its audience. The year what you know becomes what you teach, and what you teach becomes who you are known as. Open the letter you wrote last year. Read it. Notice how much you already knew — and how far you\'ve already come.', action:'Name one thing you could teach this week that would genuinely help someone who is where you were two years ago. A post, a recording, a conversation — anything. Jupiter-Mercury rewards the first move. Make it today.' }
 };
 
 const CHECKLIST = [
@@ -588,6 +603,16 @@ const DAILY_PROMPTS = [
   'What would you do if you weren\'t trying to be practical about it?',
   'What do you need right now that you haven\'t asked for?'
 ];
+
+const BDAY_COUNTDOWN = {
+  7: 'A week from today is your birthday. What are you bringing into your next year — and what are you genuinely ready to leave behind?',
+  6: 'Six days until your birthday. What did this last year teach you about yourself that surprised you most?',
+  5: 'Five days. Forget your plans — what does your next year feel like in your body when you imagine it?',
+  4: 'Four days. What has changed about how you see yourself this year? What do you know now that you didn\'t before?',
+  3: 'Three days until your birthday. What are you most proud of that you haven\'t given yourself full credit for?',
+  2: 'Two days. What is one thing you want to feel or do in this next year that you\'ve been too afraid to name out loud?',
+  1: 'Tomorrow is your birthday. Write a letter to yourself — the Chloe who is about to begin a brand new year. What does she need to hear right now?'
+};
 
 // ── STATE + HELPERS ──────────────────────────────────────────────────────────
 const today = new Date();
@@ -736,7 +761,7 @@ function buildCal(y,mo) {
     let cls='cal-day clickable';
     if(isToday) cls+=' today-cell';
     if(ev) cls+=' ev-'+ev.type;
-    const dotColors={'eclipse-solar':'var(--eclipse-solar)','eclipse-lunar':'var(--eclipse-lunar)','retro-start':'var(--retro)','retro-end':'var(--retro-end)','major':'var(--major)','nodal':'#9a8070'};
+    const dotColors={'eclipse-solar':'var(--eclipse-solar)','eclipse-lunar':'var(--eclipse-lunar)','retro-start':'var(--retro)','retro-end':'var(--retro-end)','major':'var(--major)','nodal':'#9a8070','birthday':'var(--pink)'};
     const dot = ev?`<div class="edot" style="background:${dotColors[ev.type]||'#ccc'}"></div>`:'';
     const hasNote = localStorage.getItem('daynote-'+ds);
     const noteDot = (!ev && hasNote) ? `<div class="note-dot"></div>` : '';
@@ -759,7 +784,7 @@ function buildDayMessages(y,mo){
     <div class="dmsg-card">
       <div class="dmsg-day">${s.day.name}</div>
       <div class="dmsg-planet" style="color:${s.day.color}">${s.tip.planet}</div>
-      <div class="dmsg-text">${s.tip.tip.substring(0,120)}…</div>
+      <div class="dmsg-text">${s.tip.tip.substring(0,200)}…</div>
     </div>`).join('');
 }
 
@@ -788,6 +813,40 @@ function toggleCheck(mid,iid){
 function saveJournal(mid){
   const ta=document.getElementById('j-'+mid);
   if(ta){ localStorage.setItem('journal-'+mid,ta.value); const btn=ta.nextElementSibling; if(btn){btn.textContent='Saved ✓';setTimeout(()=>{btn.textContent='Save Note';},1500);} }
+}
+
+function launchConfetti(){
+  const canvas=document.createElement('canvas');
+  canvas.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999';
+  document.body.appendChild(canvas);
+  const ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+  const cols=['#c97090','#b8832a','#5a8e6a','#e8a8bc','#d4a84a','#7ab88a','#c45a30','#9060a8','#fef9ed','#f8d7e3'];
+  const pieces=Array.from({length:180},()=>({
+    x:Math.random()*canvas.width, y:-30-Math.random()*canvas.height*0.4,
+    w:Math.random()*13+4, h:Math.random()*8+3,
+    color:cols[Math.floor(Math.random()*cols.length)],
+    rot:Math.random()*Math.PI*2,
+    vx:(Math.random()-0.5)*5, vy:Math.random()*5+2,
+    vr:(Math.random()-0.5)*0.18, alpha:1
+  }));
+  let frame=0;
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    let alive=false;
+    pieces.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
+      if(frame>100) p.alpha=Math.max(0,p.alpha-0.012);
+      ctx.save(); ctx.globalAlpha=p.alpha;
+      ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+      if(p.alpha>0&&p.y<canvas.height+30) alive=true;
+    });
+    frame++;
+    if(alive&&frame<350) requestAnimationFrame(animate); else canvas.remove();
+  }
+  animate();
 }
 
 function buildNotesRecapInner(monthId){
@@ -821,35 +880,61 @@ function openDayModal(ds){
   const tip=tipForDate(ds);
   const prompt=getDailyPrompt(ds);
   const savedNote=localStorage.getItem('daynote-'+ds)||'';
-  const badges={'eclipse-solar':'mbadge-solar','eclipse-lunar':'mbadge-lunar','retro-start':'mbadge-rx','retro-end':'mbadge-direct','major':'mbadge-major','nodal':'mbadge-nodal'};
-  const labels={'eclipse-solar':'☀ Solar Eclipse','eclipse-lunar':'🌕 Lunar Eclipse','retro-start':'☿ Mercury Rx Begins','retro-end':'☿ Mercury Direct','major':'✦ Major Event','nodal':'⟳ Nodal Shift'};
+  const isBirthday=ev&&ev.type==='birthday';
+  const badges={'eclipse-solar':'mbadge-solar','eclipse-lunar':'mbadge-lunar','retro-start':'mbadge-rx','retro-end':'mbadge-direct','major':'mbadge-major','nodal':'mbadge-nodal','birthday':'mbadge-birthday'};
+  const labels={'eclipse-solar':'☀ Solar Eclipse','eclipse-lunar':'🌕 Lunar Eclipse','retro-start':'☿ Mercury Rx Begins','retro-end':'☿ Mercury Direct','major':'✦ Major Event','nodal':'⟳ Nodal Shift','birthday':'✦ Birthday'};
 
-  const eventHtml=ev?`
-    <div class="modal-event-block">
-      <span class="mbadge ${badges[ev.type]||'mbadge-major'}" style="margin-bottom:8px;display:inline-block">${labels[ev.type]||ev.type}</span>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);margin-bottom:4px">${ev.title}</div>
-      <div class="modal-house">${ev.house}</div>
-      <div class="modal-guidance">${ev.guidance}</div>
-      <div class="modal-action"><strong>Today's Action</strong>${ev.action}</div>
+  // Birthday countdown (July 3–9)
+  const mo=d.getMonth(), dy=d.getDate(), yr=d.getFullYear();
+  const daysUntil=(mo===6&&dy>=3&&dy<=9)?(10-dy):null;
+  const countdownHtml=daysUntil?`
+    <div class="countdown-block">
+      <div class="countdown-label">Days Until Your Birthday</div>
+      <div class="countdown-num">${daysUntil}</div>
+      <div class="countdown-prompt">${BDAY_COUNTDOWN[daysUntil]}</div>
     </div>`:'';
 
-  document.getElementById('modalContent').innerHTML=`
-    <h3>${fmt}</h3>
-    <div class="modal-date-str" style="color:${pd.color};margin-bottom:8px">${pd.name}</div>
-    <div class="modal-guidance">${pd.msg}</div>
+  // Birthday special header
+  const age=yr-1999;
+  const birthdayTopHtml=isBirthday?`
+    <div class="birthday-top">
+      <span class="bday-age">${age}</span>
+      <span class="bday-sub">years of being Chloe Newby ✦ July 10, 1999</span>
+    </div>`:'';
+
+  const eventHtml=ev?`
+    <div class="modal-event-block" style="${isBirthday?'border-left:3px solid var(--pink);background:linear-gradient(135deg,var(--pink-bg),var(--gold-bg))':''}">
+      <span class="mbadge ${badges[ev.type]||'mbadge-major'}" style="margin-bottom:8px;display:inline-block">${labels[ev.type]||ev.type}</span>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:${isBirthday?'var(--pink)':'var(--gold)'};margin-bottom:4px">${ev.title}</div>
+      <div class="modal-house">${ev.house}</div>
+      <div class="modal-guidance">${ev.guidance}</div>
+      <div class="modal-action" style="${isBirthday?'border-left:3px solid var(--pink)':''}"><strong style="${isBirthday?'color:var(--pink)':''}">Today's Action</strong>${ev.action}</div>
+    </div>`:'';
+
+  const dailySection=isBirthday?'':`
     <div class="modal-tip-block">
       <div class="tip-planet">${tip.planet}</div>
       <div class="tip-text">${tip.tip}</div>
-    </div>
+    </div>`;
+
+  document.getElementById('modalContent').innerHTML=`
+    ${birthdayTopHtml}
+    <h3 style="${isBirthday?'color:var(--pink);text-align:center;font-size:1.5rem':''}${!isBirthday?'':''}">
+      ${isBirthday?'✦ Happy Birthday ✦':fmt}
+    </h3>
+    ${!isBirthday?`<div class="modal-date-str" style="color:${pd.color};margin-bottom:8px">${pd.name}</div><div class="modal-guidance">${pd.msg}</div>`:'<div class="modal-date-str" style="text-align:center;margin-bottom:12px">'+fmt+'</div>'}
+    ${dailySection}
+    ${countdownHtml}
     ${eventHtml}
     <hr class="modal-divider">
-    <div class="modal-prompt-label">Today's Journal Prompt</div>
-    <div class="modal-prompt-text">${prompt}</div>
+    <div class="modal-prompt-label">${isBirthday?'Birthday Reflection Prompt':'Today\'s Journal Prompt'}</div>
+    <div class="modal-prompt-text">${isBirthday?'What do you want this year to feel like — not look like, feel like? Write it without editing yourself.':prompt}</div>
     <div class="modal-prompt-label">My Notes</div>
     <textarea class="modal-note-ta" id="daynote-ta" placeholder="Write here — saved privately in your browser.">${savedNote}</textarea>
     <button class="save-btn" onclick="saveDayNote('${ds}')">Save Note</button>
   `;
   document.getElementById('modalOverlay').classList.add('open');
+  if(isBirthday) setTimeout(launchConfetti,200);
 }
 
 function saveDayNote(ds){
