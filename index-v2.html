@@ -388,7 +388,7 @@ main { flex: 1; padding: 22px 24px; max-width: 880px; overflow-y: auto; }
 .ch-link-btn:hover { background: var(--ch-rose); color: #fff; }
 
 /* ── MOON PHASES ── */
-.moon-indicator { font-size: 0.7rem; line-height: 1; margin-top: 2px; display: block; }
+.moon-indicator { font-size: 0.65rem; line-height: 1; margin-top: 1px; display: block; opacity: 0.85; }
 .cal-day.moon-new { border-color: #3a2618 !important; }
 .cal-day.moon-full { border-color: var(--gold-light) !important; box-shadow: 0 0 5px rgba(212,168,74,0.25); }
 .ch-moon-card { background: linear-gradient(135deg, #fdf7f0, var(--gold-bg)); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-top: 14px; display: flex; gap: 14px; align-items: flex-start; }
@@ -1092,14 +1092,19 @@ function buildCal(y,mo) {
     const dot = ev?`<div class="edot" style="background:${dotColors[ev.type]||'#ccc'}"></div>`:'';
     const hasNote = localStorage.getItem('daynote-'+ds);
     const noteDot = (!ev && hasNote) ? `<div class="note-dot"></div>` : '';
-    // Moon phase indicators (only on non-event days to avoid clutter)
+    // Moon phase on every day
     const cellDate = new Date(ds+'T12:00:00');
     const moonD = moonDayFor(cellDate);
-    let moonEl = '';
-    if (!ev) {
-      if (moonD < 1.5 || moonD > 28.5) { cls += ' moon-new'; moonEl = '<span class="moon-indicator">🌑</span>'; }
-      else if (moonD > 13.5 && moonD < 16.0) { cls += ' moon-full'; moonEl = '<span class="moon-indicator">🌕</span>'; }
-    }
+    let moonIcon = '';
+    if (moonD < 1.5 || moonD > 28.5)      { cls += ' moon-new';  moonIcon = '🌑'; }
+    else if (moonD < 6.5)                  { moonIcon = '🌒'; }
+    else if (moonD < 8.5)                  { moonIcon = '🌓'; }
+    else if (moonD < 13.5)                 { moonIcon = '🌔'; }
+    else if (moonD < 16.0)                 { cls += ' moon-full'; moonIcon = '🌕'; }
+    else if (moonD < 21.5)                 { moonIcon = '🌖'; }
+    else if (moonD < 23.5)                 { moonIcon = '🌗'; }
+    else                                   { moonIcon = '🌘'; }
+    const moonEl = `<span class="moon-indicator">${moonIcon}</span>`;
     h+=`<div class="${cls}" ${todayId} id="cell-${ds}" onclick="openDayModal('${ds}')"><div class="num">${d}</div>${dot}${noteDot}${moonEl}</div>`;
   }
   h+='</div>';
