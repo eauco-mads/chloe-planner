@@ -1336,15 +1336,61 @@ function openDayModal(ds){
     </div>
     ${guideHtml}`;
 
+  // Moon + cycle + mood for modal
+  const modalDate = new Date(ds+'T12:00:00');
+  const moon = moonInfoFor(modalDate);
+  const MOOD_EMOJIS_M = [{e:'😔',l:'Hard'},{e:'😐',l:'Okay'},{e:'🙂',l:'Good'},{e:'😊',l:'Great'},{e:'🌟',l:'Amazing'}];
+  const savedMoodM = localStorage.getItem('ch-mood-'+ds) || '';
+  const savedSymptomsM = JSON.parse(localStorage.getItem('ch-symptoms-'+ds) || '[]');
+  const SYMPTOMS_M = ['Cramping','Bloating','Fatigue','Headache','Mood swings','Cravings','Tender breasts','Clear energy','Anxious','Calm','Motivated','High energy'];
+
+  // Cycle phase for this specific date
+  let modalCycleHtml = '';
+  const periodStart = localStorage.getItem('ch-period-start');
+  if (periodStart) {
+    const startD = new Date(periodStart + 'T00:00:00');
+    const rawDay = Math.floor((modalDate - startD) / 86400000) + 1;
+    const normDay = rawDay > 0 ? ((rawDay - 1) % 28) + 1 : null;
+    const mPhase = normDay ? getCyclePhase(normDay) : null;
+    if (mPhase) {
+      const mPh = CH_PHASES[mPhase];
+      const mColor = mPhase==='menstrual'?'#8a4060':mPhase==='follicular'?'var(--ch-sage)':mPhase==='ovulatory'?'var(--ch-amber)':'var(--ch-purple)';
+      modalCycleHtml = `<div style="margin:10px 0 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span style="background:${mColor};color:#fff;border-radius:20px;padding:3px 12px;font-size:0.66rem;font-family:'Lato';font-weight:700">Cycle Day ${normDay}</span>
+        <span style="font-size:0.76rem;color:${mColor};font-family:'Cormorant Garamond',serif;font-style:italic">${mPh.name} · ${mPh.season}</span>
+      </div>`;
+    }
+  }
+
+  const moonRow = `<div style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fdf7f0,var(--card));border-radius:10px;padding:10px 12px;margin-top:12px;border:1px solid var(--border-light)">
+    <span style="font-size:1.5rem;flex-shrink:0">${moon.icon}</span>
+    <div>
+      <div style="font-size:0.7rem;font-weight:700;color:var(--gold);font-family:'Lato';letter-spacing:0.04em">${moon.label}</div>
+      <div style="font-size:0.72rem;color:var(--text-dim);line-height:1.55">${moon.desc}</div>
+    </div>
+  </div>${modalCycleHtml}`;
+
+  const moodRow = `<div style="margin-top:14px;background:var(--ch-rose-bg,#fff5f8);border-radius:10px;padding:12px 14px;border:1px solid var(--ch-rose-l,#f0c8d8)">
+    <div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--ch-rose,#b86080);margin-bottom:7px;font-family:'Lato'">How was this day? <span id="modal-mood-label" style="font-style:normal;letter-spacing:0;text-transform:none">${savedMoodM ? '· '+MOOD_EMOJIS_M[parseInt(savedMoodM)-1]?.l : ''}</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
+      ${MOOD_EMOJIS_M.map((m,i)=>`<button class="ch-mood-btn modal-mood-btn${savedMoodM===String(i+1)?' selected':''}" data-mood="${i+1}" onclick="saveModalMood('${ds}',${i+1})" title="${m.l}" style="width:36px;height:36px;font-size:1.15rem">${m.e}</button>`).join('')}
+    </div>
+    <div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--ch-rose,#b86080);margin-bottom:6px;font-family:'Lato'">Symptoms / How you felt</div>
+    <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">${SYMPTOMS_M.map(s=>`<span class="ch-sym-tag modal-sym-tag${savedSymptomsM.includes(s)?' active':''}" onclick="this.classList.toggle('active')">${s}</span>`).join('')}</div>
+    <button id="modal-sym-save" onclick="saveModalSymptoms('${ds}')" style="background:none;border:1px solid var(--ch-rose-l,#f0c8d8);color:var(--ch-rose,#b86080);font-size:0.62rem;padding:3px 10px;border-radius:5px;cursor:pointer;font-family:'Lato'">Save Symptoms</button>
+  </div>`;
+
   document.getElementById('modalContent').innerHTML=`
     ${birthdayTopHtml}
     <h3 style="${isBirthday?'color:var(--pink);text-align:center;font-size:1.5rem':''}${!isBirthday?'':''}">
       ${isBirthday?'✦ Happy Birthday ✦':fmt}
     </h3>
     ${!isBirthday?`<div class="modal-date-str" style="color:${pd.color};margin-bottom:8px">${pd.name}</div><div class="modal-guidance">${pd.msg}</div>`:'<div class="modal-date-str" style="text-align:center;margin-bottom:12px">'+fmt+'</div>'}
+    ${moonRow}
     ${dailySection}
     ${countdownHtml}
     ${eventHtml}
+    ${moodRow}
     <hr class="modal-divider">
     <div class="modal-prompt-label">${isBirthday?'Birthday Reflection Prompt':'Today\'s Journal Prompt'}</div>
     <div class="modal-prompt-text">${isBirthday?'What do you want this year to feel like — not look like, feel like? Write it without editing yourself.':prompt}</div>
@@ -1380,6 +1426,46 @@ function closeModal(e){
 }
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+function saveModalMood(ds, val) {
+  localStorage.setItem('ch-mood-' + ds, val);
+  document.querySelectorAll('.modal-mood-btn').forEach(b => b.classList.toggle('selected', b.dataset.mood === String(val)));
+  const label = document.getElementById('modal-mood-label');
+  const moods = ['Hard','Okay','Good','Great','Amazing'];
+  if (label) label.textContent = '· ' + (moods[val-1] || '');
+  refreshCHReflection();
+}
+
+function saveModalSymptoms(ds) {
+  const active = [...document.querySelectorAll('.modal-sym-tag.active')].map(el => el.textContent);
+  localStorage.setItem('ch-symptoms-' + ds, JSON.stringify(active));
+  const btn = document.getElementById('modal-sym-save');
+  if (btn) { btn.textContent = 'Saved ✓'; setTimeout(() => btn.textContent = 'Save Symptoms', 1400); }
+}
+
+function refreshCHReflection() {
+  const grid = document.querySelector('.ch-reflect-grid');
+  if (!grid) return;
+  const MOOD_EMOJIS = [{e:'😔'},{e:'😐'},{e:'🙂'},{e:'😊'},{e:'🌟'}];
+  const startStr = localStorage.getItem('ch-period-start') || '';
+  grid.innerHTML = Array.from({length: 28}, (_, i) => {
+    const d = new Date(today); d.setDate(d.getDate() - (27 - i));
+    const ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const mood = localStorage.getItem('ch-mood-' + ds);
+    const hasNote = localStorage.getItem('daynote-' + ds) || localStorage.getItem('ch-journal-' + ds);
+    const isToday = ds === todayStr;
+    const moodEmoji = mood ? (MOOD_EMOJIS[parseInt(mood)-1]?.e || '') : '';
+    let rdPhase = 'rd-none';
+    if (startStr) {
+      const s = new Date(startStr + 'T00:00:00');
+      const dday = Math.floor((d - s) / 86400000) + 1;
+      const normalDay = ((dday - 1) % 28) + 1;
+      const pk = getCyclePhase(normalDay);
+      if (pk) rdPhase = 'rd-' + pk[0];
+    }
+    return `<div class="ch-rd ${rdPhase}${isToday?' today-rd':''}" title="${ds}" onclick="openDayModal('${ds}')"><div class="rd-num">${d.getDate()}</div><div class="rd-mood">${moodEmoji || (hasNote ? '·' : '')}</div></div>`;
+  }).join('');
+}
 
 // ── MOON PHASE CALCULATION ────────────────────────────────────────────────────
 // Reference new moon: Jan 6, 2000 18:14 UTC (astronomically confirmed)
@@ -1471,6 +1557,62 @@ const CH_PHASES = {
     checklist: ['Prioritized blood sugar balance (protein with every meal)', 'Said no to something that would drain me', 'Spent time on completion or organization', 'Used a stress-reduction practice (breathwork, walk, bath)', 'Honored my body\'s slower pace without judgment']
   }
 };
+
+// ── HORMONE BLURBS (personalized by phase + day) ─────────────────────────────
+
+function getHormoneBlurb(phaseKey, day) {
+  if (phaseKey === 'menstrual') {
+    if (day <= 2) return {
+      headline: 'Progesterone has just crashed.',
+      body: 'The hormonal drop at the end of last cycle triggered your period. Estrogen and progesterone are both at their absolute lowest right now. Prostaglandins — inflammatory compounds — are elevated, causing uterine contractions. Your pain threshold is genuinely lower, your nervous system is more raw. This is not weakness. This is chemistry asking for gentleness.',
+      support: 'Iron, magnesium, warmth, raspberry leaf tea, and real rest.'
+    };
+    return {
+      headline: 'The renewal is underway.',
+      body: 'You\'re past the most intense days. Estrogen is beginning its slow climb, and FSH (follicle-stimulating hormone) is activating — already preparing your next follicle for the cycle ahead. The worst cramps typically ease around day 3. The introspective, sometimes deeply creative or spiritual clarity that arrives in this phase is real — it\'s a direct function of where your hormones are.',
+      support: 'Mineral-rich foods (nettle tea, dark leafy greens, bone broth), warmth, and only gentle movement.'
+    };
+  }
+  if (phaseKey === 'follicular') {
+    if (day <= 9) return {
+      headline: 'Estrogen is rising — and you can feel it.',
+      body: 'FSH is stimulating follicle growth, and as estrogen climbs, so does your energy, mood, and motivation. Serotonin sensitivity is actually higher in this phase — your brain responds more strongly to mood-lifting inputs. This is why follicular often feels like the fog lifting. Your metabolism is speeding up slightly. Your brain is sharpening. Welcome back.',
+      support: 'Cruciferous vegetables (support estrogen metabolism), flaxseed + pumpkin seeds, fermented foods, quality sleep.'
+    };
+    return {
+      headline: 'You\'re in your sharpest window of the month.',
+      body: 'Estrogen is building toward its peak and testosterone is rising — yes, women produce testosterone, and right now it\'s fueling motivation, confidence, and libido. Your verbal fluency and working memory are at their highest point in the entire cycle. If you have something important to communicate, learn, create, or start — this is the window. Everything is online.',
+      support: 'Higher-intensity movement, protein for muscle recovery, flax + pumpkin seeds, cold water, social connection.'
+    };
+  }
+  if (phaseKey === 'ovulatory') {
+    if (day <= 15) return {
+      headline: 'The LH surge happened. You\'re at your peak.',
+      body: 'Luteinizing hormone (LH) peaked and triggered ovulation. Estrogen just hit its cycle high. Testosterone is at its absolute peak for the entire month. This combination is why ovulation brings magnetism, clarity, and natural confidence — these are not random personality fluctuations. They\'re hormone-driven. You\'re not always this "on." That\'s normal. Receive it while it\'s here.',
+      support: 'Hydration (cervical fluid is at its peak), light foods, rose or hibiscus tea, connection and visibility.'
+    };
+    return {
+      headline: 'You\'re in the transition — Summer moving toward Autumn.',
+      body: 'Ovulation has completed. Progesterone is just beginning to rise as the corpus luteum (remnant of the follicle) starts producing it. The LH surge is fading. You may notice your energy starting to shift inward — slightly less peak, slightly more reflective. This is the bridge between ovulatory and luteal. Honor both.',
+      support: 'Begin adding warming foods (soups, cooked vegetables, healthy fats) to support the luteal shift coming.'
+    };
+  }
+  if (day <= 21) return {
+    headline: 'Progesterone is rising. This is your harvesting season.',
+    body: 'The corpus luteum is producing progesterone, which is now dominant. This hormone has a calming, organizing, grounding effect — early luteal often feels unusually focused and completion-oriented. Your basal body temperature has risen slightly (a progesterone signature). This phase is underrated. Lean into finishing things.',
+    support: 'Magnesium (reduces crash symptoms later), vitex, lemon balm, root vegetables, warming nourishing meals.'
+  };
+  if (day <= 25) return {
+    headline: 'Progesterone is leveling off. PMS territory.',
+    body: 'Both progesterone and estrogen are beginning to decline, and your body is sensing it. This is the PMS zone — not because something is wrong with you, but because the hormonal drop affects serotonin, GABA, and dopamine. Mood sensitivity, cravings, bloating, breast tenderness, and fatigue are physiological signals. The most effective interventions are nutritional: blood sugar stability, magnesium, B6.',
+    support: 'Protein + fat at every meal, magnesium glycinate, reduce alcohol + caffeine if PMS is significant, tulsi or lemon balm.'
+  };
+  return {
+    headline: 'The cycle is preparing to close.',
+    body: 'Estrogen and progesterone are dropping rapidly. The drop in estrogen brings serotonin down with it — which is why carb cravings are strong (your body is trying to boost serotonin). This is not a willpower issue. It\'s chemistry. Your body is preparing to shed the lining it spent weeks building. Rest now is preparation, not laziness. Your period is coming — give it somewhere soft to land.',
+    support: 'Complex carbs (sweet potato, oats) for serotonin, aggressive rest, chamomile tea, castor oil pack if cramps are coming.'
+  };
+}
 
 // ── CYCLE HARMONY FUNCTIONS ───────────────────────────────────────────────────
 
@@ -1642,6 +1784,17 @@ function buildCycleHarmonyHTML() {
           ${nextPeriod ? `<span style="font-size:0.72rem;color:var(--text-light)">Next period est. ~ ${nextPeriod}</span>` : ''}
         </div>
         ${barHTML}
+        ${ph ? (() => {
+          const blurb = getHormoneBlurb(phaseKey, cycleDay);
+          const phColor = chPhaseColor(phaseKey);
+          return `<div style="margin-top:14px;background:#fff;border-radius:10px;padding:13px 14px;border-left:3px solid ${phColor};border:1px solid var(--border-light);border-left:3px solid ${phColor}">
+            <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:${phColor};margin-bottom:4px;font-family:'Lato'">✦ What\'s happening hormonally · Day ${cycleDay}</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);margin-bottom:5px">${blurb.headline}</div>
+            <p style="font-size:0.76rem;color:var(--text-dim);line-height:1.75;margin-bottom:6px">${blurb.body}</p>
+            <div style="font-size:0.68rem;color:${phColor};font-style:italic">Support right now → ${blurb.support}</div>
+          </div>
+          <button onclick="openDayModal(todayStr)" style="margin-top:12px;width:100%;background:linear-gradient(135deg,var(--ch-rose,#b86080),#9e4e6a);color:#fff;border:none;border-radius:8px;padding:10px;font-family:'Lato',sans-serif;font-size:0.78rem;letter-spacing:0.05em;cursor:pointer">✦ Open Today\'s Card — Log Mood &amp; Notes</button>`;
+        })() : ''}
       ` : ''}
       <button class="ch-how-toggle" onclick="document.getElementById('ch-how').classList.toggle('open')">How do I know what day I'm on? ▾</button>
       <div class="ch-how-body" id="ch-how">
