@@ -1432,6 +1432,15 @@ function closeModal(e){
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
+function toggleHD(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const open = el.style.display !== 'none';
+  el.style.display = open ? 'none' : 'block';
+  const arrow = document.querySelector(`.hd-arrow-${id}`);
+  if (arrow) arrow.style.transform = open ? '' : 'rotate(180deg)';
+}
+
 function saveModalMood(ds, val) {
   localStorage.setItem('ch-mood-' + ds, val);
   document.querySelectorAll('.modal-mood-btn').forEach(b => b.classList.toggle('selected', b.dataset.mood === String(val)));
@@ -1907,12 +1916,109 @@ function buildCycleHarmonyHTML() {
       </div>
     </div>
 
-    <!-- HUMAN DESIGN PLACEHOLDER -->
-    <div class="ch-hd-card">
-      <div class="ch-eyebrow">✦ Human Design Layer</div>
-      <h4>Coming Soon · Your HD Profile</h4>
-      <p style="font-size:0.76rem;color:var(--text-dim);line-height:1.7;max-width:400px;margin:0 auto">Once Maddie adds your Human Design type, strategy, authority, and profile — this section will show you how your energy design interacts with your cycle and lunar phases. The third layer in your personal blueprint.</p>
-      <p style="font-size:0.68rem;color:var(--text-light);margin-top:8px">Run your chart free at jovianarchive.com · share with Maddie and she'll build it in ✦</p>
+    <!-- HUMAN DESIGN -->
+    <div class="section-label" style="margin-top:20px">✦ Human Design · The Third Layer</div>
+
+    <div style="background:linear-gradient(135deg,#f4f0fc,#fdf7f0);border:1px solid #d8c8e8;border-radius:14px;padding:18px;margin-bottom:14px">
+      <div class="ch-eyebrow" style="text-align:center;color:#7a5a80;margin-bottom:12px">Your Blueprint · All Three Layers Working Together</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="text-align:center;background:#fff;border-radius:10px;padding:10px 8px;border:1px solid #e0d0f0">
+          <div style="font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:#9a78b0;font-family:'Lato';margin-bottom:3px">Energy Type</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#5a3a70;font-weight:400">Manifestor</div>
+        </div>
+        <div style="text-align:center;background:#fff;border-radius:10px;padding:10px 8px;border:1px solid #e0d0f0">
+          <div style="font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:#9a78b0;font-family:'Lato';margin-bottom:3px">Authority</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#5a3a70">Emotional</div>
+        </div>
+        <div style="text-align:center;background:#fff;border-radius:10px;padding:10px 8px;border:1px solid #e0d0f0">
+          <div style="font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:#9a78b0;font-family:'Lato';margin-bottom:3px">Profile</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:#5a3a70">4/6 · Regal Authority</div>
+        </div>
+        <div style="text-align:center;background:#fff;border-radius:10px;padding:10px 8px;border:1px solid #e0d0f0">
+          <div style="font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:#9a78b0;font-family:'Lato';margin-bottom:3px">Strategy</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#5a3a70">Inform</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:20px;margin-top:10px;font-size:0.7rem;font-family:'Lato'">
+        <span style="color:#5e8c6a">✓ Peace when aligned</span>
+        <span style="color:#b86080">✗ Anger = off-track</span>
+      </div>
+    </div>
+
+    ${[
+      { id:'hd1', icon:'⚡', title:'Manifestor · Your Energy Type', color:'#7a5a80', body:`
+        <p>Only about 9% of people are Manifestors — and you are one. You are <em>not</em> here to wait, respond, or ask permission. You are here to initiate. To create from nothing. To set things in motion that others then carry forward.</p>
+        <p>Your aura is closed and repelling — not because something is wrong with you, but because that's how Manifestors are designed. It can feel like people sense your impact before you even speak. When you're not informing people of what you're about to do, they feel blindsided and push back. That resistance is the source of your Not-Self anger. <strong>Inform — not to ask permission, just to let people know — and watch the resistance dissolve.</strong></p>
+        <div style="margin-top:10px;padding:10px 12px;background:linear-gradient(135deg,#f4f0fc,#fff);border-radius:8px;border-left:3px solid #7a5a80">
+          <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;color:#7a5a80;font-family:'Lato';margin-bottom:6px">✦ Manifestor + Your Cycle</div>
+          <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.7">
+            <strong style="color:#8a4060">Menstrual:</strong> Rest completely. Manifestors who push through their low-energy window burn out harder than any other type. This is not failure — it's intelligent design.<br>
+            <strong style="color:var(--ch-sage)">Follicular:</strong> Plan what you're going to initiate. Build the vision. Draft the inform.<br>
+            <strong style="color:var(--ch-amber)">Ovulatory:</strong> Your prime initiating window. Inform, then act. Your aura is magnetic AND your energy is high — this is your power week.<br>
+            <strong style="color:var(--ch-purple)">Luteal:</strong> Complete what was started. Do not initiate anything new. Finish, close, organize.
+          </div>
+        </div>` },
+      { id:'hd2', icon:'🌊', title:'Emotional Authority · How You Decide', color:'#b86080', body:`
+        <p>Your Solar Plexus center is defined — you are an Emotional Being. You ride a wave: hope, pain, neutral, clarity. The wave is always moving. <strong>You are never meant to decide in the high or the low of the wave. You decide from neutral.</strong></p>
+        <p>For every significant decision — a yes, a no, a new project, a relationship move — your rule is: sleep on it. Sit with it through at least one full emotional wave. What feels like certainty in the heat of excitement is not yet clarity. What feels like dread in the depths of the wave is also not truth. The neutral ground is where your real knowing lives.</p>
+        <div style="margin-top:10px;padding:10px 12px;background:linear-gradient(135deg,#fff5f8,#fff);border-radius:8px;border-left:3px solid #b86080">
+          <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;color:#b86080;font-family:'Lato';margin-bottom:6px">✦ Emotional Authority + Your Cycle = A Double Wave</div>
+          <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.7">
+            You are riding two waves simultaneously — your hormonal cycle and your emotional wave. They layer and compound. When your luteal PMS territory coincides with an emotional wave low, honor it completely — that is the heaviest possible combination, and it is <em>chemistry</em>, not character. When your ovulatory peak meets an emotional wave high, you are literally unstoppable. Track both. Learn the pattern.
+          </div>
+        </div>
+        <p style="margin-top:8px;font-family:'Cormorant Garamond',serif;font-size:0.9rem;font-style:italic;color:#b86080">The core tension of your design: a Manifestor wants to act NOW. Emotional Authority says wait for clarity first. Master this and everything unlocks.</p>` },
+      { id:'hd3', icon:'👑', title:'4/6 Profile · The Regal Authority Figure', color:'#b87840', body:`
+        <p><strong>Line 4 (Opportunist):</strong> Your opportunities arrive through your close network — people you actually know, trust, and have built real relationships with. You are not here to cold-pitch strangers. You are here to go deep with your people, and from that depth, your impact spreads.</p>
+        <p><strong>Line 6 (Role Model):</strong> You live in three phases. From birth to roughly 30, you are "on the roof" — experimenting, taking risks, making mistakes, learning what works. From 30 to ~50, you "come off the roof" — more selective, more observant, consolidating what you've learned. After 50, you become the Role Model others seek out.</p>
+        <div style="margin-top:10px;padding:10px 12px;background:linear-gradient(135deg,#fff8f0,#fff);border-radius:8px;border-left:3px solid #b87840">
+          <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;color:#b87840;font-family:'Lato';margin-bottom:6px">✦ You Right Now · Age 27 · The Transition</div>
+          <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.7">
+            You are at the end of your "on the roof" years. This is not a mistake — it's the design. Everything you've been through, tried, built, and learned was exactly right. As you approach 30, you'll feel a natural pull toward being more selective, more intentional. Less experimenting for its own sake, more bringing your real gifts forward. Jupiter's exaltation in your 10th house right now is the universe agreeing: <em>the role model years are coming. Start stepping into them.</em>
+          </div>
+        </div>` },
+      { id:'hd4', icon:'✦', title:'Incarnation Cross · Your Life Purpose', color:'#5a3a70', body:`
+        <p><strong>Right Angle Cross of Penetration 2 · Gates 53/54 | 51/57</strong></p>
+        <p>"To be at the forefront of building or creating newer, better things." You are here to penetrate — to go deep, through to the core, past the surface. You do not do things halfway.</p>
+        <div style="margin-top:8px;font-size:0.75rem;color:var(--text-dim);line-height:1.7">
+          <strong style="color:#5a3a70">Gate 53 · Beginnings:</strong> You are literally designed to start new cycles. This is your most important gift — momentum that initiates what others then sustain.<br><br>
+          <strong style="color:#5a3a70">Gate 54 · Ambition:</strong> The drive to rise, transform, and uplift. This is not ego — it's a design imperative. You are meant to want more, and to create pathways for others to move up with you.<br><br>
+          <strong style="color:#5a3a70">Gate 51 · The Awakener:</strong> You shock people awake. Not on purpose — it's just the energy of your presence. You pioneer. You go first so others know it's possible.<br><br>
+          <strong style="color:#5a3a70">Gate 57 · Intuition Now:</strong> Survival-level intelligence. Your body knows things before your mind does. Trust the gut hits, especially in quiet moments — your menstrual and waning lunar phases are when Gate 57 speaks most clearly.
+        </div>` },
+      { id:'hd5', icon:'🌿', title:'Living Design · How Your Body Thrives', color:'#5e8c6a', body:`
+        <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.8">
+          <strong style="color:#5e8c6a">Digestion — Buzzing Atmosphere:</strong> You are designed to eat with energy around you. Music, conversation, a busy café, background life. <em>Not</em> silent meals, not eating alone staring at a screen. When you eat in a buzzing environment, your digestion and assimilation is better — this is biology, not preference. Your cycle's luteal and menstrual phases may want quieter energy but still benefit from some ambient aliveness.<br><br>
+          <strong style="color:#5e8c6a">Environment — Dry Kitchens:</strong> You thrive in organized, well-set, clear spaces. Think: fresh air, good ventilation, no clutter, mountain climate over humid coastal. A clear kitchen = a clear mind. When your environment is chaotic or damp or cluttered, your energy and decision-making suffer more than most.<br><br>
+          <strong style="color:#5e8c6a">Strongest Sense — Inner Vision:</strong> Your imagination is not escapism — it's intelligence. If you can clearly see something in your mind's eye, that is real information. You process the world through visualization before anything else. <em>Trust the pictures your mind shows you.</em> This is your Gate 57 intuition meeting your Inner Vision: you literally see what's coming.
+        </div>` }
+    ].map(c => `
+      <div style="background:var(--card);border-radius:12px;overflow:hidden;margin-bottom:8px;border:1px solid var(--border-light)">
+        <button onclick="toggleHD('${c.id}')" style="width:100%;text-align:left;background:none;border:none;padding:13px 15px;cursor:pointer;display:flex;align-items:center;gap:10px;font-family:inherit">
+          <span style="font-size:1.1rem">${c.icon}</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:var(--text);flex:1">${c.title}</span>
+          <span class="hd-arrow-${c.id}" style="font-size:0.7rem;color:${c.color};transition:transform 0.2s">▾</span>
+        </button>
+        <div id="${c.id}" style="display:none;padding:0 15px 14px;font-size:0.75rem;color:var(--text-dim);line-height:1.75;border-top:1px solid var(--border-light)">${c.body}</div>
+      </div>`).join('')}
+
+    <div style="margin-top:12px;background:linear-gradient(135deg,#f4f0fc,var(--ch-rose-bg,#fff5f8));border-radius:12px;padding:14px 16px;border:1px solid #d8c8e8">
+      <div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:#7a5a80;margin-bottom:8px;font-family:'Lato'">✦ Your Gifts · What You're Here to Offer</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${[
+          {g:'53',l:'Momentum Builder'},
+          {g:'2', l:'Vision → Reality'},
+          {g:'3', l:'Innovation'},
+          {g:'4', l:'Logical Mind'},
+          {g:'8', l:'Tastemaker'}
+        ].map(g=>`<span style="background:#fff;border:1px solid #d8c8e8;border-radius:20px;padding:4px 12px;font-size:0.68rem;color:#5a3a70;font-family:'Lato'">Gate ${g.g} · ${g.l}</span>`).join('')}
+      </div>
+      <p style="font-size:0.72rem;color:var(--text-dim);line-height:1.7;margin-top:10px;font-family:'Cormorant Garamond',serif;font-style:italic">Your manifestation is Specific — vague intentions don't land for you. The more precise and detailed your vision, the more powerfully it moves. This is why your Inner Vision gift matters: see it clearly, then inform, then initiate.</p>
+    </div>
+
+    <div style="margin-top:10px;background:linear-gradient(135deg,#f4f0fc,#fdf7f0);border-radius:10px;padding:14px;border:1px solid #d8c8e8;text-align:center">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#5a3a70;line-height:1.65;font-style:italic;margin-bottom:6px">"You were born to build what doesn't exist yet.<br>To penetrate to the core of things.<br>To initiate, inform, and let your impact move through."</p>
+      <p style="font-size:0.7rem;color:var(--text-light)">Manifestor · Emotional Authority · 4/6 · Gate 53 · Right Angle Cross of Penetration<br>Three lenses. One Chloe. ✦</p>
     </div>
 
     <!-- PHASE EDUCATION -->

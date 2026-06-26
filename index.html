@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chloe's Vedic Life Navigation Planner 2026–2027</title>
+<title>Chloe's Vedic Life Navigation Planner 2026–2027 · Cycle Harmony</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap');
 :root {
@@ -311,6 +311,150 @@ main { flex: 1; padding: 22px 24px; max-width: 880px; overflow-y: auto; }
   .cal-day { min-height: 36px; }
   main { padding: 14px; }
 }
+
+/* ── CYCLE HARMONY MODULE ── */
+:root {
+  --ch-rose:    #b86080;
+  --ch-rose-l:  #f0c8d8;
+  --ch-rose-bg: #fff5f8;
+  --ch-sage:    #5e8c6a;
+  --ch-sage-bg: #f2f8f4;
+  --ch-amber:   #b87840;
+  --ch-amber-bg:#fff8f0;
+  --ch-purple:  #7a5a80;
+  --ch-purple-bg:#f8f0fc;
+}
+
+.ch-header { margin-bottom: 24px; }
+.ch-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--ch-rose); }
+.ch-header p { font-size: 0.82rem; color: var(--text-dim); margin-top: 6px; line-height: 1.65; max-width: 560px; }
+
+.ch-eyebrow { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ch-rose); margin-bottom: 4px; font-family: 'Lato'; }
+
+/* Phase Tracker */
+.ch-tracker { background: linear-gradient(135deg, var(--ch-rose-bg), var(--ch-amber-bg)); border: 1px solid var(--ch-rose-l); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+.ch-tracker h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--ch-rose); margin-bottom: 14px; }
+.ch-day-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.ch-day-input { background: #fff; border: 1.5px solid var(--ch-rose-l); border-radius: 8px; padding: 8px 12px; font-family: 'Lato', sans-serif; font-size: 0.9rem; color: var(--text); width: 80px; outline: none; text-align: center; }
+.ch-day-input:focus { border-color: var(--ch-rose); }
+.ch-day-btn { background: var(--ch-rose); color: #fff; border: none; border-radius: 20px; padding: 8px 18px; font-family: 'Lato', sans-serif; font-size: 0.78rem; cursor: pointer; letter-spacing: 0.04em; }
+.ch-day-btn:hover { opacity: 0.88; }
+.ch-phase-display { margin-top: 16px; display: none; }
+.ch-phase-display.visible { display: block; }
+.ch-phase-banner { border-radius: 10px; padding: 14px 18px; font-size: 0.84rem; line-height: 1.7; }
+.ch-phase-banner.menstrual { background: linear-gradient(135deg, #fff0f4, #fef8ee); border-left: 3px solid #8a4060; }
+.ch-phase-banner.follicular { background: linear-gradient(135deg, #f2f9f4, #f8fcf8); border-left: 3px solid var(--ch-sage); }
+.ch-phase-banner.ovulatory { background: linear-gradient(135deg, #fff8f0, #fffaf4); border-left: 3px solid var(--ch-amber); }
+.ch-phase-banner.luteal { background: linear-gradient(135deg, #f8f0fc, #fdf4ff); border-left: 3px solid var(--ch-purple); }
+.ch-phase-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 3px; }
+.ch-phase-season { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.7; margin-bottom: 8px; font-family: 'Lato'; }
+.ch-phase-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.7; }
+
+/* Recs grid */
+.ch-recs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+@media (max-width: 500px) { .ch-recs { grid-template-columns: 1fr; } }
+.ch-rec-card { background: var(--card); border-radius: 10px; padding: 13px; box-shadow: 0 1px 5px var(--shadow); }
+.ch-rec-label { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 7px; font-family: 'Lato'; }
+.ch-rec-item { font-size: 0.75rem; color: var(--text-dim); padding: 3px 0; display: flex; gap: 7px; align-items: center; }
+.ch-rec-item::before { content: '·'; color: var(--ch-rose); flex-shrink: 0; }
+
+/* Phase prompt */
+.ch-prompt-block { background: var(--card); border-radius: 10px; padding: 14px 16px; margin-top: 12px; box-shadow: 0 1px 5px var(--shadow); border-left: 3px solid var(--ch-rose-l); }
+.ch-prompt-text { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--ch-rose); font-style: italic; line-height: 1.55; margin-bottom: 8px; }
+.ch-journal-ta { width: 100%; min-height: 70px; background: var(--surface); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text); font-family: 'Lato', sans-serif; font-size: 0.78rem; padding: 10px; resize: vertical; line-height: 1.65; }
+.ch-journal-ta:focus { outline: none; border-color: var(--ch-rose); }
+
+/* Cycle checklist */
+.ch-checklist { margin-top: 14px; }
+
+/* Phase pills row */
+.ch-phase-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.ch-pill { font-size: 0.65rem; padding: 4px 12px; border-radius: 20px; border: 1px solid; cursor: pointer; letter-spacing: 0.06em; transition: all 0.15s; }
+.ch-pill.menstrual-pill { background: #fce8f0; color: #8a4060; border-color: #e8b0c8; }
+.ch-pill.follicular-pill { background: #e4f2e8; color: var(--ch-sage); border-color: #b0d0b8; }
+.ch-pill.ovulatory-pill { background: #fef0d8; color: var(--ch-amber); border-color: #e0c090; }
+.ch-pill.luteal-pill { background: #f0e4f8; color: var(--ch-purple); border-color: #c8a8d8; }
+.ch-pill:hover { transform: translateY(-1px); }
+
+/* Education cards */
+.ch-edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+@media (max-width: 500px) { .ch-edu-grid { grid-template-columns: 1fr; } }
+.ch-edu-card { background: var(--card); border-radius: 10px; padding: 14px; box-shadow: 0 1px 5px var(--shadow); border-top: 2px solid var(--ch-rose-l); }
+.ch-edu-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.98rem; color: var(--text); margin-bottom: 6px; }
+.ch-edu-card p { font-size: 0.74rem; color: var(--text-dim); line-height: 1.7; }
+.ch-edu-icon { font-size: 1.1rem; margin-bottom: 8px; display: block; }
+
+.ch-link-btn { display: inline-block; margin-top: 20px; background: none; border: 1.5px solid var(--ch-rose); color: var(--ch-rose); border-radius: 20px; padding: 9px 22px; font-size: 0.76rem; font-family: 'Lato', sans-serif; cursor: pointer; letter-spacing: 0.05em; text-decoration: none; transition: all 0.2s; }
+.ch-link-btn:hover { background: var(--ch-rose); color: #fff; }
+
+/* ── MOON PHASES ── */
+.moon-indicator { font-size: 0.65rem; line-height: 1; margin-top: 1px; display: block; opacity: 0.85; }
+.cal-day.moon-new { border-color: #3a2618 !important; }
+.cal-day.moon-full { border-color: var(--gold-light) !important; box-shadow: 0 0 5px rgba(212,168,74,0.25); }
+.ch-moon-card { background: linear-gradient(135deg, #fdf7f0, var(--gold-bg)); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-top: 14px; display: flex; gap: 14px; align-items: flex-start; }
+.ch-moon-icon { font-size: 2.2rem; line-height: 1; flex-shrink: 0; }
+.ch-moon-info h4 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); margin-bottom: 4px; }
+.ch-moon-info p { font-size: 0.76rem; color: var(--text-dim); line-height: 1.7; }
+
+/* ── CYCLE SETUP ── */
+.ch-setup-card { background: linear-gradient(135deg, var(--ch-rose-bg), var(--ch-amber-bg,#fff8f0)); border: 1px solid var(--ch-rose-l); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+.ch-setup-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ch-rose); margin-bottom: 5px; }
+.ch-date-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+.ch-date-input { background: #fff; border: 1.5px solid var(--ch-rose-l); border-radius: 8px; padding: 8px 12px; font-family: 'Lato', sans-serif; font-size: 0.84rem; color: var(--text); outline: none; }
+.ch-date-input:focus { border-color: var(--ch-rose); }
+.ch-day-badge { background: var(--ch-rose); color: #fff; border-radius: 20px; padding: 5px 14px; font-size: 0.78rem; font-family: 'Lato'; font-weight: 700; letter-spacing: 0.04em; }
+.ch-cycle-bar-wrap { margin: 14px 0 4px; }
+.ch-cycle-bar { height: 10px; border-radius: 5px; overflow: visible; background: #f0e4d4; display: flex; position: relative; }
+.ch-bar-m { background: linear-gradient(to right, #8a4060, #b06080); border-radius: 5px 0 0 5px; }
+.ch-bar-f { background: linear-gradient(to right, var(--ch-sage), #7ab890); }
+.ch-bar-o { background: linear-gradient(to right, var(--ch-amber), #d09050); }
+.ch-bar-l { background: linear-gradient(to right, var(--ch-purple), #9a78a8); border-radius: 0 5px 5px 0; }
+.ch-bar-marker { width: 14px; height: 14px; background: var(--text); border: 2px solid white; border-radius: 50%; position: absolute; top: -2px; box-shadow: 0 1px 4px rgba(0,0,0,0.25); transform: translateX(-50%); transition: left 0.4s ease; }
+.ch-bar-labels { display: flex; justify-content: space-between; font-size: 0.58rem; color: var(--text-light); margin-top: 4px; font-family: 'Lato'; letter-spacing: 0.05em; text-transform: uppercase; }
+.ch-how-toggle { background: none; border: none; font-size: 0.72rem; color: var(--ch-rose); cursor: pointer; padding: 6px 0; font-family: 'Lato'; letter-spacing: 0.04em; text-decoration: underline; display: block; margin-top: 8px; }
+.ch-how-body { display: none; background: #fff; border-radius: 8px; padding: 13px 14px; margin-top: 8px; font-size: 0.77rem; color: var(--text-dim); line-height: 1.75; }
+.ch-how-body.open { display: block; }
+.ch-how-body strong { color: var(--ch-rose); }
+
+/* ── MOOD TRACKER ── */
+.ch-checkin-card { background: var(--card); border-radius: 12px; padding: 16px; margin-top: 14px; box-shadow: 0 1px 6px var(--shadow); }
+.ch-checkin-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--ch-rose); margin-bottom: 12px; }
+.ch-mood-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+.ch-mood-btn { background: none; border: 2px solid var(--border-light); border-radius: 50%; width: 40px; height: 40px; font-size: 1.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.ch-mood-btn:hover { border-color: var(--ch-rose); transform: scale(1.12); }
+.ch-mood-btn.selected { border-color: var(--ch-rose); background: var(--ch-rose-bg); transform: scale(1.18); box-shadow: 0 0 0 3px rgba(184,96,128,0.15); }
+.ch-mood-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 6px; font-family: 'Lato'; }
+.ch-symptom-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.ch-sym-tag { font-size: 0.65rem; padding: 4px 11px; border-radius: 20px; border: 1.5px solid var(--border-light); cursor: pointer; color: var(--text-dim); transition: all 0.15s; }
+.ch-sym-tag.active { border-color: var(--ch-rose); background: var(--ch-rose-bg); color: var(--ch-rose); }
+
+/* ── REFLECTION ── */
+.ch-reflection-card { background: var(--card); border-radius: 12px; padding: 16px; margin-top: 14px; box-shadow: 0 1px 6px var(--shadow); }
+.ch-reflection-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--text); margin-bottom: 10px; }
+.ch-reflect-grid { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 10px; }
+.ch-rd { width: 34px; height: 34px; border-radius: 7px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.56rem; cursor: pointer; border: 1px solid transparent; transition: all 0.12s; position: relative; }
+.ch-rd:hover { border-color: var(--ch-rose); }
+.ch-rd.today-rd { border: 2px solid var(--ch-rose) !important; }
+.ch-rd .rd-num { color: var(--text-light); font-size: 0.55rem; }
+.ch-rd .rd-mood { font-size: 0.9rem; line-height: 1; }
+.ch-rd.rd-m { background: #fce8f0; }
+.ch-rd.rd-f { background: #e4f2e8; }
+.ch-rd.rd-o { background: #fef0d8; }
+.ch-rd.rd-l { background: #f0e4f8; }
+.ch-rd.rd-none { background: var(--bg); }
+
+/* ── HD PLACEHOLDER ── */
+.ch-hd-card { background: linear-gradient(135deg, #fdf7f0, #f8f4fe); border: 1px solid var(--border-light); border-radius: 12px; padding: 16px; margin-top: 14px; text-align: center; }
+.ch-hd-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--text-dim); margin-bottom: 8px; }
+
+/* ── AI PROMPTS IN PLANNER ── */
+.ch-ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+@media (max-width: 500px) { .ch-ai-grid { grid-template-columns: 1fr; } }
+.ch-ai-card { background: var(--bg); border-radius: 10px; padding: 13px 14px; border: 1px solid var(--border-light); }
+.ch-ai-card h5 { font-size: 0.72rem; font-weight: 700; color: var(--text); margin-bottom: 5px; letter-spacing: 0.02em; }
+.ch-ai-prompt { font-size: 0.72rem; color: var(--text-dim); line-height: 1.65; font-style: italic; border-left: 2px solid var(--ch-rose-l); padding-left: 9px; margin-top: 6px; }
+.ch-copy-btn { background: none; border: 1px solid var(--border-light); color: var(--text-light); font-size: 0.62rem; padding: 3px 9px; border-radius: 5px; cursor: pointer; margin-top: 6px; font-family: 'Lato'; }
+.ch-copy-btn:hover { border-color: var(--ch-rose); color: var(--ch-rose); }
 </style>
 </head>
 <body>
@@ -789,7 +933,6 @@ function planetDayFor(dateStr) {
 // ── BUILD TODAY CARD ─────────────────────────────────────────────────────────
 function buildTodayCard() {
   const card = document.getElementById('todayCard');
-  card.classList.add('visible');
   const pd = planetDayFor(todayStr);
   const tip = tipForDate(todayStr);
   const event = KEY_DATES[todayStr];
@@ -827,6 +970,12 @@ function buildNav() {
   idx.dataset.id = 'index';
   idx.onclick = () => showMonth('index');
   nav.appendChild(idx);
+  const ch = document.createElement('button');
+  ch.textContent = '🌸 Cycle Harmony';
+  ch.dataset.id = 'cycle';
+  ch.style.cssText = 'color:var(--ch-rose,#b86080)';
+  ch.onclick = () => showMonth('cycle');
+  nav.appendChild(ch);
 }
 
 function showMonth(id) {
@@ -834,6 +983,10 @@ function showMonth(id) {
   document.querySelectorAll('.month-nav button').forEach(b => b.classList.toggle('active', b.dataset.id === id));
   const el = document.getElementById('m-'+id);
   if (el) el.classList.add('active');
+  // Today card only on current month
+  const curMonthId = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}`;
+  const todayCard = document.getElementById('todayCard');
+  if (todayCard) todayCard.classList.toggle('visible', id === curMonthId);
 }
 
 function toggleMobileInfo() {
@@ -939,7 +1092,20 @@ function buildCal(y,mo) {
     const dot = ev?`<div class="edot" style="background:${dotColors[ev.type]||'#ccc'}"></div>`:'';
     const hasNote = localStorage.getItem('daynote-'+ds);
     const noteDot = (!ev && hasNote) ? `<div class="note-dot"></div>` : '';
-    h+=`<div class="${cls}" ${todayId} id="cell-${ds}" onclick="openDayModal('${ds}')"><div class="num">${d}</div>${dot}${noteDot}</div>`;
+    // Moon phase on every day
+    const cellDate = new Date(ds+'T12:00:00');
+    const moonD = moonDayFor(cellDate);
+    let moonIcon = '';
+    if (moonD < 1.5 || moonD > 28.5)      { cls += ' moon-new';  moonIcon = '🌑'; }
+    else if (moonD < 6.5)                  { moonIcon = '🌒'; }
+    else if (moonD < 8.5)                  { moonIcon = '🌓'; }
+    else if (moonD < 13.5)                 { moonIcon = '🌔'; }
+    else if (moonD < 16.0)                 { cls += ' moon-full'; moonIcon = '🌕'; }
+    else if (moonD < 21.5)                 { moonIcon = '🌖'; }
+    else if (moonD < 23.5)                 { moonIcon = '🌗'; }
+    else                                   { moonIcon = '🌘'; }
+    const moonEl = `<span class="moon-indicator">${moonIcon}</span>`;
+    h+=`<div class="${cls}" ${todayId} id="cell-${ds}" onclick="openDayModal('${ds}')"><div class="num">${d}</div>${dot}${noteDot}${moonEl}</div>`;
   }
   h+='</div>';
   return h;
@@ -1175,15 +1341,61 @@ function openDayModal(ds){
     </div>
     ${guideHtml}`;
 
+  // Moon + cycle + mood for modal
+  const modalDate = new Date(ds+'T12:00:00');
+  const moon = moonInfoFor(modalDate);
+  const MOOD_EMOJIS_M = [{e:'😔',l:'Hard'},{e:'😐',l:'Okay'},{e:'🙂',l:'Good'},{e:'😊',l:'Great'},{e:'🌟',l:'Amazing'}];
+  const savedMoodM = localStorage.getItem('ch-mood-'+ds) || '';
+  const savedSymptomsM = JSON.parse(localStorage.getItem('ch-symptoms-'+ds) || '[]');
+  const SYMPTOMS_M = ['Cramping','Bloating','Fatigue','Headache','Mood swings','Cravings','Tender breasts','Clear energy','Anxious','Calm','Motivated','High energy'];
+
+  // Cycle phase for this specific date
+  let modalCycleHtml = '';
+  const periodStart = localStorage.getItem('ch-period-start');
+  if (periodStart) {
+    const startD = new Date(periodStart + 'T00:00:00');
+    const rawDay = Math.floor((modalDate - startD) / 86400000) + 1;
+    const normDay = rawDay > 0 ? ((rawDay - 1) % 28) + 1 : null;
+    const mPhase = normDay ? getCyclePhase(normDay) : null;
+    if (mPhase) {
+      const mPh = CH_PHASES[mPhase];
+      const mColor = mPhase==='menstrual'?'#8a4060':mPhase==='follicular'?'var(--ch-sage)':mPhase==='ovulatory'?'var(--ch-amber)':'var(--ch-purple)';
+      modalCycleHtml = `<div style="margin:10px 0 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span style="background:${mColor};color:#fff;border-radius:20px;padding:3px 12px;font-size:0.66rem;font-family:'Lato';font-weight:700">Cycle Day ${normDay}</span>
+        <span style="font-size:0.76rem;color:${mColor};font-family:'Cormorant Garamond',serif;font-style:italic">${mPh.name} · ${mPh.season}</span>
+      </div>`;
+    }
+  }
+
+  const moonRow = `<div style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fdf7f0,var(--card));border-radius:10px;padding:10px 12px;margin-top:12px;border:1px solid var(--border-light)">
+    <span style="font-size:1.5rem;flex-shrink:0">${moon.icon}</span>
+    <div>
+      <div style="font-size:0.7rem;font-weight:700;color:var(--gold);font-family:'Lato';letter-spacing:0.04em">${moon.label}</div>
+      <div style="font-size:0.72rem;color:var(--text-dim);line-height:1.55">${moon.desc}</div>
+    </div>
+  </div>${modalCycleHtml}`;
+
+  const moodRow = `<div style="margin-top:14px;background:var(--ch-rose-bg,#fff5f8);border-radius:10px;padding:12px 14px;border:1px solid var(--ch-rose-l,#f0c8d8)">
+    <div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--ch-rose,#b86080);margin-bottom:7px;font-family:'Lato'">How was this day? <span id="modal-mood-label" style="font-style:normal;letter-spacing:0;text-transform:none">${savedMoodM ? '· '+MOOD_EMOJIS_M[parseInt(savedMoodM)-1]?.l : ''}</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
+      ${MOOD_EMOJIS_M.map((m,i)=>`<button class="ch-mood-btn modal-mood-btn${savedMoodM===String(i+1)?' selected':''}" data-mood="${i+1}" onclick="saveModalMood('${ds}',${i+1})" title="${m.l}" style="width:36px;height:36px;font-size:1.15rem">${m.e}</button>`).join('')}
+    </div>
+    <div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--ch-rose,#b86080);margin-bottom:6px;font-family:'Lato'">Symptoms / How you felt</div>
+    <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">${SYMPTOMS_M.map(s=>`<span class="ch-sym-tag modal-sym-tag${savedSymptomsM.includes(s)?' active':''}" onclick="this.classList.toggle('active')">${s}</span>`).join('')}</div>
+    <button id="modal-sym-save" onclick="saveModalSymptoms('${ds}')" style="background:none;border:1px solid var(--ch-rose-l,#f0c8d8);color:var(--ch-rose,#b86080);font-size:0.62rem;padding:3px 10px;border-radius:5px;cursor:pointer;font-family:'Lato'">Save Symptoms</button>
+  </div>`;
+
   document.getElementById('modalContent').innerHTML=`
     ${birthdayTopHtml}
     <h3 style="${isBirthday?'color:var(--pink);text-align:center;font-size:1.5rem':''}${!isBirthday?'':''}">
       ${isBirthday?'✦ Happy Birthday ✦':fmt}
     </h3>
     ${!isBirthday?`<div class="modal-date-str" style="color:${pd.color};margin-bottom:8px">${pd.name}</div><div class="modal-guidance">${pd.msg}</div>`:'<div class="modal-date-str" style="text-align:center;margin-bottom:12px">'+fmt+'</div>'}
+    ${moonRow}
     ${dailySection}
     ${countdownHtml}
     ${eventHtml}
+    ${moodRow}
     <hr class="modal-divider">
     <div class="modal-prompt-label">${isBirthday?'Birthday Reflection Prompt':'Today\'s Journal Prompt'}</div>
     <div class="modal-prompt-text">${isBirthday?'What do you want this year to feel like — not look like, feel like? Write it without editing yourself.':prompt}</div>
@@ -1220,11 +1432,656 @@ function closeModal(e){
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
+function toggleHD(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const open = el.style.display !== 'none';
+  el.style.display = open ? 'none' : 'block';
+  const arrow = document.querySelector(`.hd-arrow-${id}`);
+  if (arrow) arrow.style.transform = open ? '' : 'rotate(180deg)';
+}
+
+function saveModalMood(ds, val) {
+  localStorage.setItem('ch-mood-' + ds, val);
+  document.querySelectorAll('.modal-mood-btn').forEach(b => b.classList.toggle('selected', b.dataset.mood === String(val)));
+  const label = document.getElementById('modal-mood-label');
+  const moods = ['Hard','Okay','Good','Great','Amazing'];
+  if (label) label.textContent = '· ' + (moods[val-1] || '');
+  refreshCHReflection();
+}
+
+function saveModalSymptoms(ds) {
+  const active = [...document.querySelectorAll('.modal-sym-tag.active')].map(el => el.textContent);
+  localStorage.setItem('ch-symptoms-' + ds, JSON.stringify(active));
+  const btn = document.getElementById('modal-sym-save');
+  if (btn) { btn.textContent = 'Saved ✓'; setTimeout(() => btn.textContent = 'Save Symptoms', 1400); }
+}
+
+function refreshCHReflection() {
+  const grid = document.querySelector('.ch-reflect-grid');
+  if (!grid) return;
+  const MOOD_EMOJIS = [{e:'😔'},{e:'😐'},{e:'🙂'},{e:'😊'},{e:'🌟'}];
+  const startStr = localStorage.getItem('ch-period-start') || '';
+  grid.innerHTML = Array.from({length: 28}, (_, i) => {
+    const d = new Date(today); d.setDate(d.getDate() - (27 - i));
+    const ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const mood = localStorage.getItem('ch-mood-' + ds);
+    const hasNote = localStorage.getItem('daynote-' + ds) || localStorage.getItem('ch-journal-' + ds);
+    const isToday = ds === todayStr;
+    const moodEmoji = mood ? (MOOD_EMOJIS[parseInt(mood)-1]?.e || '') : '';
+    let rdPhase = 'rd-none';
+    if (startStr) {
+      const s = new Date(startStr + 'T00:00:00');
+      const dday = Math.floor((d - s) / 86400000) + 1;
+      const normalDay = ((dday - 1) % 28) + 1;
+      const pk = getCyclePhase(normalDay);
+      if (pk) rdPhase = 'rd-' + pk[0];
+    }
+    return `<div class="ch-rd ${rdPhase}${isToday?' today-rd':''}" title="${ds}" onclick="openDayModal('${ds}')"><div class="rd-num">${d.getDate()}</div><div class="rd-mood">${moodEmoji || (hasNote ? '·' : '')}</div></div>`;
+  }).join('');
+}
+
+// ── MOON PHASE CALCULATION ────────────────────────────────────────────────────
+// Reference new moon: Jan 6, 2000 18:14 UTC (astronomically confirmed)
+const MOON_REF = new Date('2000-01-06T18:14:00Z').getTime();
+const LUNAR_CYCLE = 29.530588853 * 24 * 3600 * 1000;
+
+function moonDayFor(date) {
+  const elapsed = date.getTime() - MOON_REF;
+  return ((elapsed % LUNAR_CYCLE) + LUNAR_CYCLE) % LUNAR_CYCLE / (24 * 3600 * 1000);
+}
+
+function moonInfoFor(date) {
+  const d = moonDayFor(date);
+  if (d < 1.5 || d > 28.5) return { icon: '🌑', label: 'New Moon', type: 'new', desc: 'Seed intentions. Rest and reset. The sky mirrors your inner winter.' };
+  if (d < 6.5)  return { icon: '🌒', label: 'Waxing Crescent', type: 'waxing', desc: 'Energy is building. Small steps forward. Trust what you planted.' };
+  if (d < 8.5)  return { icon: '🌓', label: 'First Quarter', type: 'quarter', desc: 'Action and decision. Push through resistance with clarity.' };
+  if (d < 13.5) return { icon: '🌔', label: 'Waxing Gibbous', type: 'waxing', desc: 'Refinement. You\'re close. Keep going with focused energy.' };
+  if (d < 16.0) return { icon: '🌕', label: 'Full Moon', type: 'full', desc: 'Peak illumination. Emotions amplified. Release, celebrate, receive.' };
+  if (d < 21.5) return { icon: '🌖', label: 'Waning Gibbous', type: 'waning', desc: 'Gratitude and sharing. Integrate what the full moon revealed.' };
+  if (d < 23.5) return { icon: '🌗', label: 'Last Quarter', type: 'quarter', desc: 'Release what no longer serves. Let go with grace.' };
+  return { icon: '🌘', label: 'Waning Crescent', type: 'waning', desc: 'Surrender and rest. Prepare for the next new beginning.' };
+}
+
+// ── CYCLE HARMONY DATA ───────────────────────────────────────────────────────
+
+const CH_PHASES = {
+  menstrual: {
+    name: 'Menstrual Phase',
+    season: '✦ Winter · Days 1–5',
+    class: 'menstrual',
+    desc: 'Energy naturally turns inward. The body is renewing. This is not a time to push — it\'s a time to receive. Rest here is productive. Warmth, nourishment, and quiet reflection support what the body is already doing.',
+    foods: ['Iron-rich foods (dark leafy greens, legumes)', 'Warming soups and stews', 'Dark chocolate (magnesium)', 'Beets and red berries', 'Bone broth or mineral-rich broths'],
+    herbs: ['Raspberry Leaf (uterine tonic)', 'Ginger (warming, anti-cramp)', 'Chamomile (calming, anti-inflammatory)', 'Nettle (mineral nourishment)'],
+    movement: ['Gentle walks', 'Restorative yoga', 'Light stretching', 'Rest — this is valid movement', 'Epsom salt baths'],
+    prompts: [
+      'What needs to be released this cycle — emotionally or physically?',
+      'What does your body actually need right now? Not what should it need — what does it?',
+      'What clarity are you arriving at as you slow down?',
+      'What am I letting go of to make room for what\'s coming?'
+    ],
+    checklist: ['Prioritized rest and warmth today', 'Ate iron-rich or mineral-rich food', 'Gentle movement only — no pushing through', 'Drank herbal tea (raspberry leaf, nettle, ginger)', 'Honored a boundary or said no to something draining']
+  },
+  follicular: {
+    name: 'Follicular Phase',
+    season: '✦ Spring · Days 6–13',
+    class: 'follicular',
+    desc: 'Estrogen is rising and energy is returning. A new cycle begins — full of creative potential and clarity. The mind feels sharper, initiative comes more naturally. This is the best time to start things, learn new things, and build physical strength.',
+    foods: ['Fermented foods (kimchi, sauerkraut, kefir)', 'Sprouts and fresh greens', 'Seeds (flaxseed, pumpkin)', 'Eggs and lean proteins', 'Cruciferous vegetables (broccoli, cauliflower)'],
+    herbs: ['Shatavari (female reproductive tonic)', 'Nettle (iron + minerals)', 'Dandelion (liver + estrogen metabolism)', 'Spearmint (hormone balance)'],
+    movement: ['Strength training', 'Higher-intensity cardio', 'New workout classes or activities', 'Dance', 'Hiking and outdoor movement'],
+    prompts: [
+      'What wants to be created or started this cycle?',
+      'What project or vision has been waiting for energy — it\'s here now.',
+      'What would I try if I knew I had enough energy to see it through?',
+      'What new beginning feels most aligned right now?'
+    ],
+    checklist: ['Channeled creative energy into something', 'Ate fresh, light, fiber-rich foods', 'Moved my body with some real effort today', 'Started or advanced a project', 'Spent time learning something new']
+  },
+  ovulatory: {
+    name: 'Ovulatory Phase',
+    season: '✦ Summer · Days 14–17',
+    class: 'ovulatory',
+    desc: 'Natural charisma and communication are at their peak. Energy is highest. This is the time for visibility — important meetings, hard conversations, collaborations, putting yourself out there. Your magnetism is genuinely at its most powerful right now.',
+    foods: ['Raw fruits and vegetables', 'Light, anti-inflammatory foods', 'Almonds and sunflower seeds', 'Quinoa and whole grains', 'Hibiscus tea and rose hip'],
+    herbs: ['Rose (heart-opening, circulation)', 'Hibiscus (antioxidant, ovulatory support)', 'Spearmint (hormone balance)', 'Red clover (phytoestrogens)'],
+    movement: ['Peak intensity workouts', 'Group fitness or team sports', 'High-energy dance', 'Running or interval training', 'Anything social and physical'],
+    prompts: [
+      'Who do I want to connect with or reach out to today?',
+      'What have I been afraid to say — and is now the time to say it?',
+      'Where is my confidence highest right now? How can I use it?',
+      'What collaboration or partnership would move something important forward?'
+    ],
+    checklist: ['Put myself forward in some way (message, post, conversation)', 'Had a meaningful or challenging conversation', 'Moved with high energy today', 'Connected with someone who matters to my work or life', 'Expressed something I\'ve been holding']
+  },
+  luteal: {
+    name: 'Luteal Phase',
+    season: '✦ Autumn · Days 18–28',
+    class: 'luteal',
+    desc: 'Energy begins to draw inward. Attention to detail is heightened — excellent for editing, organizing, and completing. As the phase progresses, the body needs more support. Blood sugar balance, nervous system regulation, and honoring the need to slow down.',
+    foods: ['Complex carbohydrates (sweet potato, squash)', 'Magnesium-rich foods (dark chocolate, almonds, spinach)', 'B6 foods (bananas, chickpeas, turkey)', 'Warm, cooked meals', 'Calcium-rich foods (sesame seeds, leafy greens)'],
+    herbs: ['Vitex / Chaste Tree (progesterone support)', 'Lemon Balm (PMS mood support)', 'Tulsi / Holy Basil (stress adaptogen)', 'Chamomile (nervous system, sleep)'],
+    movement: ['Pilates and yoga', 'Walks in nature', 'Swimming', 'Gentle strength work', 'Rest when needed — honor it'],
+    prompts: [
+      'What needs to be completed or released before this cycle ends?',
+      'Where do I need to set a boundary to protect my energy right now?',
+      'What is my body asking for that I\'ve been ignoring?',
+      'What would feel like true self-care today — not self-improvement, just care?'
+    ],
+    checklist: ['Prioritized blood sugar balance (protein with every meal)', 'Said no to something that would drain me', 'Spent time on completion or organization', 'Used a stress-reduction practice (breathwork, walk, bath)', 'Honored my body\'s slower pace without judgment']
+  }
+};
+
+// ── HORMONE BLURBS (personalized by phase + day) ─────────────────────────────
+
+function getHormoneBlurb(phaseKey, day) {
+  if (phaseKey === 'menstrual') {
+    if (day <= 2) return {
+      headline: 'Progesterone has just crashed.',
+      body: 'The hormonal drop at the end of last cycle triggered your period. Estrogen and progesterone are both at their absolute lowest right now. Prostaglandins — inflammatory compounds — are elevated, causing uterine contractions. Your pain threshold is genuinely lower, your nervous system is more raw. This is not weakness. This is chemistry asking for gentleness.',
+      support: 'Iron, magnesium, warmth, raspberry leaf tea, and real rest.'
+    };
+    return {
+      headline: 'The renewal is underway.',
+      body: 'You\'re past the most intense days. Estrogen is beginning its slow climb, and FSH (follicle-stimulating hormone) is activating — already preparing your next follicle for the cycle ahead. The worst cramps typically ease around day 3. The introspective, sometimes deeply creative or spiritual clarity that arrives in this phase is real — it\'s a direct function of where your hormones are.',
+      support: 'Mineral-rich foods (nettle tea, dark leafy greens, bone broth), warmth, and only gentle movement.'
+    };
+  }
+  if (phaseKey === 'follicular') {
+    if (day <= 9) return {
+      headline: 'Estrogen is rising — and you can feel it.',
+      body: 'FSH is stimulating follicle growth, and as estrogen climbs, so does your energy, mood, and motivation. Serotonin sensitivity is actually higher in this phase — your brain responds more strongly to mood-lifting inputs. This is why follicular often feels like the fog lifting. Your metabolism is speeding up slightly. Your brain is sharpening. Welcome back.',
+      support: 'Cruciferous vegetables (support estrogen metabolism), flaxseed + pumpkin seeds, fermented foods, quality sleep.'
+    };
+    return {
+      headline: 'You\'re in your sharpest window of the month.',
+      body: 'Estrogen is building toward its peak and testosterone is rising — yes, women produce testosterone, and right now it\'s fueling motivation, confidence, and libido. Your verbal fluency and working memory are at their highest point in the entire cycle. If you have something important to communicate, learn, create, or start — this is the window. Everything is online.',
+      support: 'Higher-intensity movement, protein for muscle recovery, flax + pumpkin seeds, cold water, social connection.'
+    };
+  }
+  if (phaseKey === 'ovulatory') {
+    if (day <= 15) return {
+      headline: 'The LH surge happened. You\'re at your peak.',
+      body: 'Luteinizing hormone (LH) peaked and triggered ovulation. Estrogen just hit its cycle high. Testosterone is at its absolute peak for the entire month. This combination is why ovulation brings magnetism, clarity, and natural confidence — these are not random personality fluctuations. They\'re hormone-driven. You\'re not always this "on." That\'s normal. Receive it while it\'s here.',
+      support: 'Hydration (cervical fluid is at its peak), light foods, rose or hibiscus tea, connection and visibility.'
+    };
+    return {
+      headline: 'You\'re in the transition — Summer moving toward Autumn.',
+      body: 'Ovulation has completed. Progesterone is just beginning to rise as the corpus luteum (remnant of the follicle) starts producing it. The LH surge is fading. You may notice your energy starting to shift inward — slightly less peak, slightly more reflective. This is the bridge between ovulatory and luteal. Honor both.',
+      support: 'Begin adding warming foods (soups, cooked vegetables, healthy fats) to support the luteal shift coming.'
+    };
+  }
+  if (day <= 21) return {
+    headline: 'Progesterone is rising. This is your harvesting season.',
+    body: 'The corpus luteum is producing progesterone, which is now dominant. This hormone has a calming, organizing, grounding effect — early luteal often feels unusually focused and completion-oriented. Your basal body temperature has risen slightly (a progesterone signature). This phase is underrated. Lean into finishing things.',
+    support: 'Magnesium (reduces crash symptoms later), vitex, lemon balm, root vegetables, warming nourishing meals.'
+  };
+  if (day <= 25) return {
+    headline: 'Progesterone is leveling off. PMS territory.',
+    body: 'Both progesterone and estrogen are beginning to decline, and your body is sensing it. This is the PMS zone — not because something is wrong with you, but because the hormonal drop affects serotonin, GABA, and dopamine. Mood sensitivity, cravings, bloating, breast tenderness, and fatigue are physiological signals. The most effective interventions are nutritional: blood sugar stability, magnesium, B6.',
+    support: 'Protein + fat at every meal, magnesium glycinate, reduce alcohol + caffeine if PMS is significant, tulsi or lemon balm.'
+  };
+  return {
+    headline: 'The cycle is preparing to close.',
+    body: 'Estrogen and progesterone are dropping rapidly. The drop in estrogen brings serotonin down with it — which is why carb cravings are strong (your body is trying to boost serotonin). This is not a willpower issue. It\'s chemistry. Your body is preparing to shed the lining it spent weeks building. Rest now is preparation, not laziness. Your period is coming — give it somewhere soft to land.',
+    support: 'Complex carbs (sweet potato, oats) for serotonin, aggressive rest, chamomile tea, castor oil pack if cramps are coming.'
+  };
+}
+
+// ── CYCLE HARMONY FUNCTIONS ───────────────────────────────────────────────────
+
+function getCyclePhase(day) {
+  if (day >= 1 && day <= 5) return 'menstrual';
+  if (day >= 6 && day <= 13) return 'follicular';
+  if (day >= 14 && day <= 17) return 'ovulatory';
+  if (day >= 18) return 'luteal';
+  return null;
+}
+
+function chGetCycleDay() {
+  const startStr = localStorage.getItem('ch-period-start');
+  if (!startStr) return null;
+  const start = new Date(startStr + 'T00:00:00');
+  const diff = Math.floor((today - start) / 86400000) + 1;
+  return diff > 0 ? diff : null;
+}
+
+function chPhaseColor(key) {
+  return key === 'menstrual' ? '#8a4060' : key === 'follicular' ? 'var(--ch-sage)' : key === 'ovulatory' ? 'var(--ch-amber)' : 'var(--ch-purple)';
+}
+
+function chSavePeriodStart(dateStr) {
+  localStorage.setItem('ch-period-start', dateStr);
+  buildCycleHarmony();
+}
+
+function chToggleCheck(i, ds) {
+  const key = `ch-ck-${i}-${ds}`;
+  const cur = localStorage.getItem(key) === '1';
+  localStorage.setItem(key, cur ? '0' : '1');
+  const wrap = document.getElementById(`ch-ck-${i}`);
+  if (wrap) { wrap.classList.toggle('done', !cur); const cb = wrap.querySelector('input'); if (cb) cb.checked = !cur; }
+}
+
+function chSaveJournal() {
+  const ta = document.getElementById('ch-journal-ta');
+  if (ta) {
+    localStorage.setItem('ch-journal-' + todayStr, ta.value);
+    const btn = ta.nextElementSibling;
+    if (btn) { btn.textContent = 'Saved ✓'; setTimeout(() => { btn.textContent = 'Save Note'; }, 1500); }
+  }
+}
+
+function chSaveMood(val) {
+  localStorage.setItem('ch-mood-' + todayStr, val);
+  document.querySelectorAll('.ch-mood-btn').forEach(b => b.classList.toggle('selected', b.dataset.mood === String(val)));
+}
+
+function chToggleSym(el) { el.classList.toggle('active'); }
+
+function chCopyPrompt(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+    const btn = el.nextElementSibling;
+    if (btn) { btn.textContent = 'Copied ✓'; setTimeout(() => { btn.textContent = 'Copy for Claude/ChatGPT'; }, 1600); }
+  }).catch(() => {
+    const range = document.createRange(); range.selectNode(el); window.getSelection().removeAllRanges(); window.getSelection().addRange(range);
+  });
+}
+
+function buildCycleHarmonyHTML() {
+  const startStr = localStorage.getItem('ch-period-start') || '';
+  const cycleDay = chGetCycleDay();
+  const phaseKey = cycleDay ? getCyclePhase(Math.min(cycleDay, 28)) : null;
+  const ph = phaseKey ? CH_PHASES[phaseKey] : null;
+  const savedNote = localStorage.getItem('ch-journal-' + todayStr) || '';
+  const savedMood = localStorage.getItem('ch-mood-' + todayStr) || '';
+  const moon = moonInfoFor(today);
+  const MOOD_EMOJIS = [{e:'😔',l:'Hard'},{e:'😐',l:'Okay'},{e:'🙂',l:'Good'},{e:'😊',l:'Great'},{e:'🌟',l:'Amazing'}];
+  const SYMPTOMS = ['Cramping','Bloating','Fatigue','Headache','Mood swings','Cravings','Tender breasts','Clear energy','Anxious','Calm','Motivated','Social','Introspective','Low energy','High energy'];
+
+  // Cycle position bar (5 days M + 8 days F + 4 days O + 11 days L = 28)
+  const barPos = cycleDay ? Math.min(((cycleDay - 1) / 28) * 100, 100) : null;
+  const barHTML = barPos !== null ? `
+    <div class="ch-cycle-bar-wrap">
+      <div class="ch-cycle-bar" style="position:relative;">
+        <div class="ch-bar-m" style="width:17.85%"></div>
+        <div class="ch-bar-f" style="width:28.57%"></div>
+        <div class="ch-bar-o" style="width:14.28%"></div>
+        <div class="ch-bar-l" style="width:39.28%"></div>
+        <div class="ch-bar-marker" style="left:${barPos}%"></div>
+      </div>
+      <div class="ch-bar-labels">
+        <span>Menstrual</span><span>Follicular</span><span>Ovulatory</span><span>Luteal</span>
+      </div>
+    </div>` : '';
+
+  // Estimated next period
+  const nextPeriod = startStr ? (() => {
+    const s = new Date(startStr + 'T00:00:00');
+    s.setDate(s.getDate() + 28);
+    return s.toLocaleDateString('en-US', {month:'long', day:'numeric'});
+  })() : '';
+
+  // AI prompts based on current phase
+  const AI_PROMPTS = ph ? [
+    { title: 'Phase-Aligned Meal Plan', id:'aip1', prompt: `I'm on day ${cycleDay} of my cycle, in my ${ph.name}. Create a 5-day meal plan that supports my hormones right now. Focus on: ${ph.foods.slice(0,3).join(', ')}. My dietary preferences: [add yours]. Budget: [add budget].` },
+    { title: 'Grocery List', id:'aip2', prompt: `Create a hormone-supportive grocery list for my ${ph.name} (day ${cycleDay}). Prioritize whole foods that support: ${ph.foods.slice(0,3).join(', ')}. Keep it simple and affordable.` },
+    { title: 'Cycle-Aligned Workout Plan', id:'aip3', prompt: `Design a workout plan for my ${ph.name} (cycle day ${cycleDay}). My energy is ${phaseKey==='ovulatory'?'high':phaseKey==='follicular'?'building':phaseKey==='menstrual'?'low':'medium'}. Movement types that work for this phase: ${ph.movement.slice(0,3).join(', ')}. Duration: 30–45 min.` },
+    { title: 'Symptom Pattern Reflection', id:'aip4', prompt: `I'm tracking my cycle. Here are my recent symptoms and feelings: [describe what you've noticed]. Help me identify patterns and what questions I should explore about my hormone health this ${ph.name}.` },
+    { title: 'Herbal + Supplement Guide', id:'aip5', prompt: `Educate me about herbal support for my ${ph.name}. I'm interested in: ${ph.herbs.slice(0,2).join(' and ')}. How do I use them, what forms are best, and what should I be aware of?` },
+    { title: 'Cycle + Astrology Integration', id:'aip6', prompt: `I'm in my ${ph.name} (day ${cycleDay}) and also in Jupiter Mahadasha with Jupiter-Saturn Antardasha in my chart. How might these energies interact? I have Libra Rising, Taurus Moon (8th house), and Rahu in Cancer in my 10th house. What themes are most relevant for me right now?` }
+  ] : [
+    { title: 'Set Up Your Cycle Tracker', id:'aip1', prompt: 'Enter your last period start date above to get personalized AI prompts based on your current phase.' },
+    { title: 'Hormone Education', id:'aip2', prompt: 'Ask Claude or ChatGPT: "Explain the four phases of the menstrual cycle and what hormones are dominant in each phase, with practical lifestyle implications for each."' },
+    { title: 'Symptom Reflection', id:'aip3', prompt: 'Ask Claude or ChatGPT: "Help me understand patterns in my cycle symptoms. I typically experience [symptoms]. What might be contributing to each one, and what should I explore nutritionally and hormonally?"' },
+    { title: 'Phase-Based Workout', id:'aip4', prompt: 'Ask Claude or ChatGPT: "Design a 4-week workout plan that rotates with my menstrual cycle phases — high intensity in follicular/ovulatory and gentler movement in menstrual/luteal."' },
+    { title: 'Grocery for Hormones', id:'aip5', prompt: 'Ask Claude or ChatGPT: "Create a hormone-supportive weekly grocery list for someone who wants to support estrogen metabolism, reduce PMS, and balance blood sugar."' },
+    { title: 'Cycle Journal Starter', id:'aip6', prompt: 'Ask Claude or ChatGPT: "Create a 28-day cycle journal template with daily check-in prompts for mood, energy, symptoms, cravings, sleep, and one reflection question per phase."' }
+  ];
+
+  // Reflection: last 28 days
+  const reflectCells = Array.from({length: 28}, (_, i) => {
+    const d = new Date(today); d.setDate(d.getDate() - (27 - i));
+    const ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const mood = localStorage.getItem('ch-mood-' + ds);
+    const hasNote = localStorage.getItem('daynote-' + ds) || localStorage.getItem('ch-journal-' + ds);
+    const isToday = ds === todayStr;
+    const moodEmoji = mood ? MOOD_EMOJIS[parseInt(mood)-1]?.e : '';
+    // Phase color from saved period start
+    let rdPhase = 'rd-none';
+    if (startStr) {
+      const s = new Date(startStr + 'T00:00:00');
+      const dday = Math.floor((d - s) / 86400000) + 1;
+      const normalDay = ((dday - 1) % 28) + 1;
+      const pk = getCyclePhase(normalDay);
+      if (pk) rdPhase = 'rd-' + pk[0];
+    }
+    return `<div class="ch-rd ${rdPhase}${isToday?' today-rd':''}" title="${ds}" onclick="openDayModal('${ds}')">
+      <div class="rd-num">${d.getDate()}</div>
+      <div class="rd-mood">${moodEmoji || (hasNote ? '·' : '')}</div>
+    </div>`;
+  }).join('');
+
+  const checklist = ph ? ph.checklist.map((item, i) => {
+    const key = `ch-ck-${i}-${todayStr}`;
+    const checked = localStorage.getItem(key) === '1';
+    return `<div class="check-item${checked?' done':''}" id="ch-ck-${i}" onclick="chToggleCheck(${i},'${todayStr}')">
+      <input type="checkbox" ${checked?'checked':''} onclick="event.stopPropagation();chToggleCheck(${i},'${todayStr}')">
+      <label>${item}</label>
+    </div>`;
+  }).join('') : '';
+
+  const promptIdx = cycleDay ? ((cycleDay - 1) % (ph ? ph.prompts.length : 1)) : 0;
+
+  return `
+    <div class="ch-header">
+      <div class="ch-eyebrow">✦ Cycle Harmony · Your Body's Intelligence</div>
+      <h2>🌸 Cycle Harmony</h2>
+      <p>Your hormonal rhythm, your moon, your patterns — all in one place. The more you track, the more clearly you'll hear your own body speaking.</p>
+    </div>
+
+    <!-- CYCLE SETUP + TRACKER -->
+    <div class="ch-setup-card">
+      <h4>Your Cycle Tracker</h4>
+      <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:12px;">Enter the date your last period started. Once saved, your cycle day is calculated automatically every time you open this.</p>
+      <div class="ch-date-row">
+        <label style="font-size:0.78rem;color:var(--text-dim);font-family:'Lato'">Last period started</label>
+        <input class="ch-date-input" id="ch-period-input" type="date" value="${startStr}" max="${todayStr}">
+        <button class="ch-day-btn" onclick="chSavePeriodStart(document.getElementById('ch-period-input').value)">Save + Track ✦</button>
+      </div>
+      ${cycleDay ? `
+        <div style="margin-top:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <span class="ch-day-badge">Day ${cycleDay} of your cycle</span>
+          ${ph ? `<span style="font-size:0.78rem;color:${chPhaseColor(phaseKey)};font-style:italic;font-family:'Cormorant Garamond',serif">${ph.name} · ${ph.season}</span>` : ''}
+          ${nextPeriod ? `<span style="font-size:0.72rem;color:var(--text-light)">Next period est. ~ ${nextPeriod}</span>` : ''}
+        </div>
+        ${barHTML}
+        ${ph ? (() => {
+          const blurb = getHormoneBlurb(phaseKey, cycleDay);
+          const phColor = chPhaseColor(phaseKey);
+          return `<div style="margin-top:14px;background:#fff;border-radius:10px;padding:13px 14px;border-left:3px solid ${phColor};border:1px solid var(--border-light);border-left:3px solid ${phColor}">
+            <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:${phColor};margin-bottom:4px;font-family:'Lato'">✦ What\'s happening hormonally · Day ${cycleDay}</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);margin-bottom:5px">${blurb.headline}</div>
+            <p style="font-size:0.76rem;color:var(--text-dim);line-height:1.75;margin-bottom:6px">${blurb.body}</p>
+            <div style="font-size:0.68rem;color:${phColor};font-style:italic">Support right now → ${blurb.support}</div>
+          </div>
+          <button onclick="openDayModal(todayStr)" style="margin-top:12px;width:100%;background:linear-gradient(135deg,var(--ch-rose,#b86080),#9e4e6a);color:#fff;border:none;border-radius:8px;padding:10px;font-family:'Lato',sans-serif;font-size:0.78rem;letter-spacing:0.05em;cursor:pointer">✦ Open Today\'s Card — Log Mood &amp; Notes</button>`;
+        })() : ''}
+      ` : ''}
+      <button class="ch-how-toggle" onclick="document.getElementById('ch-how').classList.toggle('open')">How do I know what day I'm on? ▾</button>
+      <div class="ch-how-body" id="ch-how">
+        <strong>Day 1</strong> = the first day of actual bleeding (not spotting — real flow). Count up from there.<br><br>
+        <strong>If your period just started:</strong> Enter today's date. You're on Day 1 of a new cycle. Fresh beginning.<br><br>
+        <strong>If your period started a few days ago:</strong> Enter the date it actually started. This tracker will calculate where you are now.<br><br>
+        <strong>If you're not sure:</strong> Enter your best estimate. The phases are approximate — your body's signals matter more than the number. Use the phase descriptions to feel your way in.<br><br>
+        <strong>When a new cycle starts:</strong> Come back here and update your period start date. Over time you'll build a clear picture of your own rhythm.<br><br>
+        <strong>If you're working with your therapist's data:</strong> Use the date of your last period from those records. Every entry you add here starts building your own archive.
+      </div>
+    </div>
+
+    <!-- TODAY'S PHASE GUIDE -->
+    ${ph ? `
+    <div class="section-label">Today's Cycle Guide · ${ph.name}</div>
+    <div class="ch-phase-banner ${ph.class}">
+      <div class="ch-eyebrow">${ph.season}</div>
+      <div class="ch-phase-name" style="color:${chPhaseColor(phaseKey)}">${ph.name}</div>
+      <p class="ch-phase-desc" style="margin-top:8px">${ph.desc}</p>
+    </div>
+    <div class="ch-recs">
+      <div class="ch-rec-card">
+        <div class="ch-rec-label">🌿 Foods This Phase</div>
+        ${ph.foods.map(f=>`<div class="ch-rec-item">${f}</div>`).join('')}
+      </div>
+      <div class="ch-rec-card">
+        <div class="ch-rec-label">🌸 Herbal Support</div>
+        ${ph.herbs.map(h=>`<div class="ch-rec-item">${h}</div>`).join('')}
+      </div>
+      <div class="ch-rec-card">
+        <div class="ch-rec-label">💪 Movement</div>
+        ${ph.movement.map(m=>`<div class="ch-rec-item">${m}</div>`).join('')}
+      </div>
+      <div class="ch-rec-card">
+        <div class="ch-rec-label">✦ Today's Practices</div>
+        <div class="ch-checklist">${checklist}</div>
+      </div>
+    </div>
+    <div class="ch-prompt-block" style="margin-top:12px;">
+      <div class="ch-rec-label">Today's Cycle Journal Prompt</div>
+      <div class="ch-prompt-text">${ph.prompts[promptIdx]}</div>
+      <textarea class="ch-journal-ta" id="ch-journal-ta" placeholder="Write here — saved privately in your browser.">${savedNote}</textarea>
+      <button class="save-btn" style="background:linear-gradient(135deg,var(--ch-rose),#9e4e6a)" onclick="chSaveJournal()">Save Note</button>
+    </div>
+    ` : `
+    <div class="section-label">Today's Cycle Guide</div>
+    <div class="ch-phase-banner" style="background:var(--bg);border:1.5px dashed var(--border-light);border-radius:10px;padding:14px;text-align:center;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-light);font-style:italic">Enter your last period start date above to unlock your personalized phase guide ↑</p>
+    </div>
+    `}
+
+    <!-- DAILY CHECK-IN: MOOD + SYMPTOMS -->
+    <div class="ch-checkin-card">
+      <h4>Daily Check-In</h4>
+      <div class="ch-mood-label">How are you feeling today?</div>
+      <div class="ch-mood-row">
+        ${MOOD_EMOJIS.map((m,i)=>`<button class="ch-mood-btn${savedMood===String(i+1)?' selected':''}" data-mood="${i+1}" onclick="chSaveMood(${i+1})" title="${m.l}">${m.e}</button>`).join('')}
+        <span style="font-size:0.72rem;color:var(--text-light);margin-left:4px">${savedMood ? '· '+MOOD_EMOJIS[parseInt(savedMood)-1]?.l : 'tap to log'}</span>
+      </div>
+      <div class="ch-mood-label" style="margin-top:10px">Any symptoms today? (tap all that apply)</div>
+      <div class="ch-symptom-tags">${SYMPTOMS.map(s=>`<span class="ch-sym-tag" onclick="chToggleSym(this)">${s}</span>`).join('')}</div>
+      <div class="ch-mood-label" style="margin-top:10px">Notes (optional)</div>
+      <textarea class="ch-journal-ta" id="ch-checkin-ta" placeholder="Anything else on your body or mind today..." style="min-height:55px">${localStorage.getItem('ch-checkin-'+todayStr)||''}</textarea>
+      <button class="save-btn" style="background:linear-gradient(135deg,var(--ch-rose),#9e4e6a);margin-top:6px" onclick="(function(){const ta=document.getElementById('ch-checkin-ta');if(ta){localStorage.setItem('ch-checkin-${todayStr}',ta.value);const b=ta.nextElementSibling;if(b){b.textContent='Saved ✓';setTimeout(()=>b.textContent='Save',1400);}}})()">Save</button>
+    </div>
+
+    <!-- MOON PHASE TODAY -->
+    <div class="ch-moon-card">
+      <div class="ch-moon-icon">${moon.icon}</div>
+      <div class="ch-moon-info">
+        <h4>${moon.label} ${ph ? '· ' + ph.name : ''}</h4>
+        <p>${moon.desc}</p>
+        ${ph ? `<p style="margin-top:6px;font-family:'Cormorant Garamond',serif;font-size:0.88rem;color:var(--text-dim);font-style:italic">${
+          moon.type === 'new' ? `New Moon energy amplifies your ${ph.name}'s inward pull. This is a powerful seeding moment — even small intentions set now carry weight.` :
+          moon.type === 'full' ? `Full Moon illuminates everything. In your ${ph.name}, this can heighten emotions — especially around cycle symptoms. Let yourself feel it fully.` :
+          moon.type === 'waxing' ? `The moon is growing. Your cycle's energy and the lunar build are aligned — momentum is available to you right now.` :
+          `The moon is releasing. Let your ${ph.name} energy guide you toward what to complete, release, and let go.`
+        }</p>` : ''}
+        <p style="font-size:0.68rem;color:var(--text-light);margin-top:8px">🌑 = New Moon &nbsp;·&nbsp; 🌕 = Full Moon &nbsp;·&nbsp; Both marked on your calendar above</p>
+      </div>
+    </div>
+
+    <!-- AI PROMPT LIBRARY -->
+    <div class="section-label" style="margin-top:20px">AI Prompt Library · Use With Claude or ChatGPT</div>
+    <p style="font-size:0.76rem;color:var(--text-dim);margin-bottom:10px;line-height:1.65">These prompts are written for your current phase. Copy any one into Claude or ChatGPT for instant personalized guidance.</p>
+    <div class="ch-ai-grid">
+      ${AI_PROMPTS.map(p=>`
+        <div class="ch-ai-card">
+          <h5>${p.title}</h5>
+          <div class="ch-ai-prompt" id="${p.id}">${p.prompt}</div>
+          <button class="ch-copy-btn" onclick="chCopyPrompt('${p.id}')">Copy for Claude/ChatGPT</button>
+        </div>`).join('')}
+    </div>
+
+    <!-- PATTERN REFLECTION — 28 DAY LOOKBACK -->
+    <div class="ch-reflection-card">
+      <h4>Your Last 28 Days · Patterns + Reflection</h4>
+      <p style="font-size:0.75rem;color:var(--text-dim);line-height:1.65;margin-bottom:4px">Each cell shows your mood and phase. Tap any day to open your notes from that date. Colors = cycle phase${startStr?'':' (enter your period start date above to see phase colors)'}.</p>
+      <div class="ch-reflect-grid">${reflectCells}</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:0.62rem;color:var(--text-light);">
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:3px;background:#fce8f0;display:inline-block"></span> Menstrual</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:3px;background:#e4f2e8;display:inline-block"></span> Follicular</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:3px;background:#fef0d8;display:inline-block"></span> Ovulatory</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:3px;background:#f0e4f8;display:inline-block"></span> Luteal</span>
+      </div>
+    </div>
+
+    <!-- HUMAN DESIGN -->
+    <div class="section-label" style="margin-top:20px">✦ Human Design · The Third Layer</div>
+
+    <div style="background:linear-gradient(135deg,#f4f0fc,#fdf7f0);border:1px solid #d8c8e8;border-radius:14px;padding:18px;margin-bottom:14px">
+      <div class="ch-eyebrow" style="text-align:center;color:#7a5a80;margin-bottom:12px">Your Blueprint · All Three Layers Working Together</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="text-align:center;background:#fff;border-radius:10px;padding:10px 8px;border:1px solid #e0d0f0">
+          <div style="font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:#9a78b0;font-family:'Lato';margin-bottom:3px">Energy Type</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#5a3a70;font-weight:400">Manifestor</div>
+        </div>
+        <div style="text-align:center;background:#fff;border-radius:10px;padding:10px 8px;border:1px solid #e0d0f0">
+          <div style="font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:#9a78b0;font-family:'Lato';margin-bottom:3px">Authority</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#5a3a70">Emotional</div>
+        </div>
+        <div style="text-align:center;background:#fff;border-radius:10px;padding:10px 8px;border:1px solid #e0d0f0">
+          <div style="font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:#9a78b0;font-family:'Lato';margin-bottom:3px">Profile</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:#5a3a70">4/6 · Regal Authority</div>
+        </div>
+        <div style="text-align:center;background:#fff;border-radius:10px;padding:10px 8px;border:1px solid #e0d0f0">
+          <div style="font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:#9a78b0;font-family:'Lato';margin-bottom:3px">Strategy</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#5a3a70">Inform</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:20px;margin-top:10px;font-size:0.7rem;font-family:'Lato'">
+        <span style="color:#5e8c6a">✓ Peace when aligned</span>
+        <span style="color:#b86080">✗ Anger = off-track</span>
+      </div>
+    </div>
+
+    ${[
+      { id:'hd1', icon:'⚡', title:'Manifestor · Your Energy Type', color:'#7a5a80', body:`
+        <p>Only about 9% of people are Manifestors — and you are one. You are <em>not</em> here to wait, respond, or ask permission. You are here to initiate. To create from nothing. To set things in motion that others then carry forward.</p>
+        <p>Your aura is closed and repelling — not because something is wrong with you, but because that's how Manifestors are designed. It can feel like people sense your impact before you even speak. When you're not informing people of what you're about to do, they feel blindsided and push back. That resistance is the source of your Not-Self anger. <strong>Inform — not to ask permission, just to let people know — and watch the resistance dissolve.</strong></p>
+        <div style="margin-top:10px;padding:10px 12px;background:linear-gradient(135deg,#f4f0fc,#fff);border-radius:8px;border-left:3px solid #7a5a80">
+          <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;color:#7a5a80;font-family:'Lato';margin-bottom:6px">✦ Manifestor + Your Cycle</div>
+          <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.7">
+            <strong style="color:#8a4060">Menstrual:</strong> Rest completely. Manifestors who push through their low-energy window burn out harder than any other type. This is not failure — it's intelligent design.<br>
+            <strong style="color:var(--ch-sage)">Follicular:</strong> Plan what you're going to initiate. Build the vision. Draft the inform.<br>
+            <strong style="color:var(--ch-amber)">Ovulatory:</strong> Your prime initiating window. Inform, then act. Your aura is magnetic AND your energy is high — this is your power week.<br>
+            <strong style="color:var(--ch-purple)">Luteal:</strong> Complete what was started. Do not initiate anything new. Finish, close, organize.
+          </div>
+        </div>` },
+      { id:'hd2', icon:'🌊', title:'Emotional Authority · How You Decide', color:'#b86080', body:`
+        <p>Your Solar Plexus center is defined — you are an Emotional Being. You ride a wave: hope, pain, neutral, clarity. The wave is always moving. <strong>You are never meant to decide in the high or the low of the wave. You decide from neutral.</strong></p>
+        <p>For every significant decision — a yes, a no, a new project, a relationship move — your rule is: sleep on it. Sit with it through at least one full emotional wave. What feels like certainty in the heat of excitement is not yet clarity. What feels like dread in the depths of the wave is also not truth. The neutral ground is where your real knowing lives.</p>
+        <div style="margin-top:10px;padding:10px 12px;background:linear-gradient(135deg,#fff5f8,#fff);border-radius:8px;border-left:3px solid #b86080">
+          <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;color:#b86080;font-family:'Lato';margin-bottom:6px">✦ Emotional Authority + Your Cycle = A Double Wave</div>
+          <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.7">
+            You are riding two waves simultaneously — your hormonal cycle and your emotional wave. They layer and compound. When your luteal PMS territory coincides with an emotional wave low, honor it completely — that is the heaviest possible combination, and it is <em>chemistry</em>, not character. When your ovulatory peak meets an emotional wave high, you are literally unstoppable. Track both. Learn the pattern.
+          </div>
+        </div>
+        <p style="margin-top:8px;font-family:'Cormorant Garamond',serif;font-size:0.9rem;font-style:italic;color:#b86080">The core tension of your design: a Manifestor wants to act NOW. Emotional Authority says wait for clarity first. Master this and everything unlocks.</p>` },
+      { id:'hd3', icon:'👑', title:'4/6 Profile · The Regal Authority Figure', color:'#b87840', body:`
+        <p><strong>Line 4 (Opportunist):</strong> Your opportunities arrive through your close network — people you actually know, trust, and have built real relationships with. You are not here to cold-pitch strangers. You are here to go deep with your people, and from that depth, your impact spreads.</p>
+        <p><strong>Line 6 (Role Model):</strong> You live in three phases. From birth to roughly 30, you are "on the roof" — experimenting, taking risks, making mistakes, learning what works. From 30 to ~50, you "come off the roof" — more selective, more observant, consolidating what you've learned. After 50, you become the Role Model others seek out.</p>
+        <div style="margin-top:10px;padding:10px 12px;background:linear-gradient(135deg,#fff8f0,#fff);border-radius:8px;border-left:3px solid #b87840">
+          <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;color:#b87840;font-family:'Lato';margin-bottom:6px">✦ You Right Now · Age 27 · The Transition</div>
+          <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.7">
+            You are at the end of your "on the roof" years. This is not a mistake — it's the design. Everything you've been through, tried, built, and learned was exactly right. As you approach 30, you'll feel a natural pull toward being more selective, more intentional. Less experimenting for its own sake, more bringing your real gifts forward. Jupiter's exaltation in your 10th house right now is the universe agreeing: <em>the role model years are coming. Start stepping into them.</em>
+          </div>
+        </div>` },
+      { id:'hd4', icon:'✦', title:'Incarnation Cross · Your Life Purpose', color:'#5a3a70', body:`
+        <p><strong>Right Angle Cross of Penetration 2 · Gates 53/54 | 51/57</strong></p>
+        <p>"To be at the forefront of building or creating newer, better things." You are here to penetrate — to go deep, through to the core, past the surface. You do not do things halfway.</p>
+        <div style="margin-top:8px;font-size:0.75rem;color:var(--text-dim);line-height:1.7">
+          <strong style="color:#5a3a70">Gate 53 · Beginnings:</strong> You are literally designed to start new cycles. This is your most important gift — momentum that initiates what others then sustain.<br><br>
+          <strong style="color:#5a3a70">Gate 54 · Ambition:</strong> The drive to rise, transform, and uplift. This is not ego — it's a design imperative. You are meant to want more, and to create pathways for others to move up with you.<br><br>
+          <strong style="color:#5a3a70">Gate 51 · The Awakener:</strong> You shock people awake. Not on purpose — it's just the energy of your presence. You pioneer. You go first so others know it's possible.<br><br>
+          <strong style="color:#5a3a70">Gate 57 · Intuition Now:</strong> Survival-level intelligence. Your body knows things before your mind does. Trust the gut hits, especially in quiet moments — your menstrual and waning lunar phases are when Gate 57 speaks most clearly.
+        </div>` },
+      { id:'hd5', icon:'🌿', title:'Living Design · How Your Body Thrives', color:'#5e8c6a', body:`
+        <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.8">
+          <strong style="color:#5e8c6a">Digestion — Buzzing Atmosphere:</strong> You are designed to eat with energy around you. Music, conversation, a busy café, background life. <em>Not</em> silent meals, not eating alone staring at a screen. When you eat in a buzzing environment, your digestion and assimilation is better — this is biology, not preference. Your cycle's luteal and menstrual phases may want quieter energy but still benefit from some ambient aliveness.<br><br>
+          <strong style="color:#5e8c6a">Environment — Dry Kitchens:</strong> You thrive in organized, well-set, clear spaces. Think: fresh air, good ventilation, no clutter, mountain climate over humid coastal. A clear kitchen = a clear mind. When your environment is chaotic or damp or cluttered, your energy and decision-making suffer more than most.<br><br>
+          <strong style="color:#5e8c6a">Strongest Sense — Inner Vision:</strong> Your imagination is not escapism — it's intelligence. If you can clearly see something in your mind's eye, that is real information. You process the world through visualization before anything else. <em>Trust the pictures your mind shows you.</em> This is your Gate 57 intuition meeting your Inner Vision: you literally see what's coming.
+        </div>` }
+    ].map(c => `
+      <div style="background:var(--card);border-radius:12px;overflow:hidden;margin-bottom:8px;border:1px solid var(--border-light)">
+        <button onclick="toggleHD('${c.id}')" style="width:100%;text-align:left;background:none;border:none;padding:13px 15px;cursor:pointer;display:flex;align-items:center;gap:10px;font-family:inherit">
+          <span style="font-size:1.1rem">${c.icon}</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:var(--text);flex:1">${c.title}</span>
+          <span class="hd-arrow-${c.id}" style="font-size:0.7rem;color:${c.color};transition:transform 0.2s">▾</span>
+        </button>
+        <div id="${c.id}" style="display:none;padding:0 15px 14px;font-size:0.75rem;color:var(--text-dim);line-height:1.75;border-top:1px solid var(--border-light)">${c.body}</div>
+      </div>`).join('')}
+
+    <div style="margin-top:12px;background:linear-gradient(135deg,#f4f0fc,var(--ch-rose-bg,#fff5f8));border-radius:12px;padding:14px 16px;border:1px solid #d8c8e8">
+      <div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:#7a5a80;margin-bottom:8px;font-family:'Lato'">✦ Your Gifts · What You're Here to Offer</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${[
+          {g:'53',l:'Momentum Builder'},
+          {g:'2', l:'Vision → Reality'},
+          {g:'3', l:'Innovation'},
+          {g:'4', l:'Logical Mind'},
+          {g:'8', l:'Tastemaker'}
+        ].map(g=>`<span style="background:#fff;border:1px solid #d8c8e8;border-radius:20px;padding:4px 12px;font-size:0.68rem;color:#5a3a70;font-family:'Lato'">Gate ${g.g} · ${g.l}</span>`).join('')}
+      </div>
+      <p style="font-size:0.72rem;color:var(--text-dim);line-height:1.7;margin-top:10px;font-family:'Cormorant Garamond',serif;font-style:italic">Your manifestation is Specific — vague intentions don't land for you. The more precise and detailed your vision, the more powerfully it moves. This is why your Inner Vision gift matters: see it clearly, then inform, then initiate.</p>
+    </div>
+
+    <div style="margin-top:10px;background:linear-gradient(135deg,#f4f0fc,#fdf7f0);border-radius:10px;padding:14px;border:1px solid #d8c8e8;text-align:center">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#5a3a70;line-height:1.65;font-style:italic;margin-bottom:6px">"You were born to build what doesn't exist yet.<br>To penetrate to the core of things.<br>To initiate, inform, and let your impact move through."</p>
+      <p style="font-size:0.7rem;color:var(--text-light)">Manifestor · Emotional Authority · 4/6 · Gate 53 · Right Angle Cross of Penetration<br>Three lenses. One Chloe. ✦</p>
+    </div>
+
+    <!-- PHASE EDUCATION -->
+    <div class="section-label" style="margin-top:20px">The Four Phases · Seasonal Body Map</div>
+    <div class="ch-edu-grid">
+      <div class="ch-edu-card" style="border-top-color:#8a4060">
+        <span class="ch-edu-icon">❄️</span>
+        <h4 style="color:#8a4060">Menstrual · Winter · Days 1–5</h4>
+        <p>Rest, renewal, deep inward reflection. The body sheds and regenerates. What needs releasing? Warmth, minerals, and gentle care are your support. Your nervous system is most sensitive here.</p>
+      </div>
+      <div class="ch-edu-card" style="border-top-color:var(--ch-sage)">
+        <span class="ch-edu-icon">🌱</span>
+        <h4 style="color:var(--ch-sage)">Follicular · Spring · Days 6–13</h4>
+        <p>Energy returns, estrogen rises. Creative, curious, and clear. Best time to start new projects, learn new things, and build physical strength. Your mind and body are ready to go.</p>
+      </div>
+      <div class="ch-edu-card" style="border-top-color:var(--ch-amber)">
+        <span class="ch-edu-icon">☀️</span>
+        <h4 style="color:var(--ch-amber)">Ovulatory · Summer · Days 14–17</h4>
+        <p>Peak energy and natural magnetism. Communication and connection are at their highest. The time to put yourself forward — hard conversations, visibility, collaboration, love.</p>
+      </div>
+      <div class="ch-edu-card" style="border-top-color:var(--ch-purple)">
+        <span class="ch-edu-icon">🍂</span>
+        <h4 style="color:var(--ch-purple)">Luteal · Autumn · Days 18–28</h4>
+        <p>Grounding, organizing, completing. Progesterone rises. Attention to detail is heightened. Honor the need to slow down. PMS lives here and almost always has a nutritional root — not a character flaw.</p>
+      </div>
+    </div>
+
+    <!-- HORMONE FOUNDATIONS -->
+    <div class="section-label" style="margin-top:20px">Hormone Foundations · Start Here Before Adding More</div>
+    <div class="ch-edu-grid">
+      <div class="ch-edu-card" style="border-top-color:var(--ch-sage)"><span class="ch-edu-icon">🌿</span><h4>Environment</h4><p>Plastics, synthetic fragrance, conventional cleaners, pesticides, non-stick cookware. Small swaps, not fear. One thing at a time.</p></div>
+      <div class="ch-edu-card" style="border-top-color:var(--ch-amber)"><span class="ch-edu-icon">☀️</span><h4>Circadian Rhythm</h4><p>Morning sunlight, consistent sleep, less screen light at night. Light is information. Your hormones live and die by your body clock.</p></div>
+      <div class="ch-edu-card" style="border-top-color:var(--ch-purple)"><span class="ch-edu-icon">🫁</span><h4>Stress + Nervous System</h4><p>Cortisol competes directly with progesterone. Chronic stress is a hormonal disruptor. Safety, breathwork, rest — these are medicine.</p></div>
+      <div class="ch-edu-card" style="border-top-color:var(--ch-rose)"><span class="ch-edu-icon">🩸</span><h4>Blood Sugar</h4><p>One of the biggest unspoken drivers of PMS and imbalance. Protein first. Healthy fats. Balanced meals. Cravings are always information.</p></div>
+    </div>
+
+    <!-- CORE TEACHING -->
+    <div style="margin-top:20px;background:linear-gradient(135deg,var(--ch-rose-bg),var(--ch-amber-bg,#fff8f0));border-radius:12px;padding:20px;border:1px solid var(--ch-rose-l);text-align:center;">
+      <div class="ch-eyebrow" style="text-align:center">✦ From Maddie · 3,000 Miles Away</div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);line-height:1.65;margin-bottom:10px">You are not broken.<br>Your body is communicating.<br>You can learn to speak its language.</p>
+      <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.8;max-width:480px;margin:0 auto 14px">Your hormones respond to your emotions. Your emotions respond to the moon. The moon responds to the sun. You are connected to literally everything — and this planner exists so you can feel that, not just know it. Rest is productive. Slowing down is not weakness. You are in a cycle. You are always right on time.</p>
+      <a href="cycle-harmony.html" class="ch-link-btn" target="_blank">Full Cycle Harmony Guide →</a>
+    </div>
+  `;
+}
+
+function buildCycleHarmony() {
+  const container = document.getElementById('monthSections');
+  let existing = document.getElementById('m-cycle');
+  if (existing) existing.remove();
+  const div = document.createElement('div');
+  div.className = 'month-section';
+  div.id = 'm-cycle';
+  div.innerHTML = buildCycleHarmonyHTML();
+  container.appendChild(div);
+}
+
 // ── INIT ──────────────────────────────────────────────────────────────────────
 function init(){
   buildNav();
   buildMonths();
   buildIndex();
+  buildCycleHarmony();
   buildTodayCard();
 
   // Show current month or first
