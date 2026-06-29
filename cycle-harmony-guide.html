@@ -247,7 +247,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
   <div class="cover-subtitle">A Complete Guide to Understanding, Nourishing<br>&amp; Living Within Your Cycle</div>
   <div class="cover-divider"></div>
   <p class="cover-desc">Everything you need to understand your hormone cycle, track your phases, eat and move in alignment, support yourself with herbs and traditional wisdom, and build a relationship with your own body that changes everything.</p>
-  <div class="cover-by">Created by <strong>Maddie Galloway &amp; Chloe</strong> · EAUCO · ElevateAlign.com</div>
+  <div class="cover-by">Created by <strong>Maddie Galloway</strong> · EAUCO · ElevateAlign.com</div>
   <p class="cover-note">Educational content only. Not medical advice. Always consult a healthcare provider for your specific situation. For personal use — please share the link, not the file.</p>
 </div>
 
@@ -797,64 +797,40 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
     <h2 class="s-title">Monthly<br><em>Cycle Tracker</em></h2>
   </div>
 
+  <!-- Phase calculator -->
+  <div style="background:#fff;border-radius:12px;padding:16px 18px;border:1px solid var(--border);margin-bottom:20px;" class="no-print-hide">
+    <div style="font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--rose);margin-bottom:10px;">✦ Phase Calculator — Auto-fill your tracker</div>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+      <div>
+        <label style="font-size:0.68rem;color:var(--dim);display:block;margin-bottom:4px;">Day 1 of your last period:</label>
+        <input type="date" id="day1-input" style="padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:0.78rem;color:var(--text);background:var(--bg);outline:none;">
+      </div>
+      <div>
+        <label style="font-size:0.68rem;color:var(--dim);display:block;margin-bottom:4px;">Cycle length (days):</label>
+        <input type="number" id="cycle-length" value="28" min="21" max="42" style="padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:0.78rem;color:var(--text);background:var(--bg);outline:none;width:80px;">
+      </div>
+      <button onclick="calculatePhases()" style="background:var(--rose);color:#fff;border:none;border-radius:20px;padding:9px 20px;font-size:0.76rem;font-weight:500;cursor:pointer;margin-top:16px;">Auto-Fill Phases →</button>
+      <button onclick="resetTracker()" style="background:transparent;color:var(--dim);border:1px solid var(--border);border-radius:20px;padding:9px 16px;font-size:0.74rem;cursor:pointer;margin-top:16px;">Reset</button>
+    </div>
+    <p style="font-size:0.65rem;color:var(--light);margin-top:10px;line-height:1.6;">Click "Auto-Fill" to color-code your grid based on typical phase lengths. Then click any cell to manually adjust the phase. Changes are saved automatically. <strong style="color:var(--rose);">Click any day cell to cycle through phases manually.</strong></p>
+  </div>
+
   <div class="tracker-key">
-    <div class="key-item"><div class="key-dot kd-m"></div>Menstrual</div>
+    <div class="key-item"><div class="key-dot kd-m"></div>Menstrual · Click to mark</div>
     <div class="key-item"><div class="key-dot kd-f"></div>Follicular</div>
     <div class="key-item"><div class="key-dot kd-o"></div>Ovulatory</div>
     <div class="key-item"><div class="key-dot kd-l"></div>Luteal</div>
   </div>
 
   <div style="display:flex;gap:20px;margin-bottom:16px;flex-wrap:wrap;font-size:0.72rem;color:var(--dim);">
-    <div class="tracker-month-line">Month: ___________________</div>
-    <div class="tracker-month-line">Cycle Day 1 Date: _________</div>
+    <div class="tracker-month-line" id="month-display">Month: ___________________</div>
     <div class="tracker-month-line">Cycle Length: _____________</div>
   </div>
 
-  <!-- 35-cell grid for up to 35-day cycles -->
-  <div class="cycle-grid">
-    <!-- Row 1: Days 1-7 -->
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">1</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">2</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">3</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">4</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">5</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">6</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">7</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <!-- Row 2: Days 8-14 -->
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">8</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">9</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">10</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">11</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">12</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">13</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">14</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <!-- Row 3: Days 15-21 -->
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">15</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">16</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">17</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">18</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">19</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">20</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">21</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <!-- Row 4: Days 22-28 -->
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">22</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">23</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">24</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">25</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">26</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">27</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">28</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <!-- Row 5: Days 29-35 -->
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">29</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">30</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">31</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">32</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">33</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">34</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-    <div class="cycle-cell"><div class="cycle-cell-day">Day</div><div class="cycle-cell-num">35</div><div class="cycle-cell-lines"><span></span><span></span><span></span></div></div>
-  </div>
+  <!-- 35-cell grid — JS builds and makes interactive -->
+  <div class="cycle-grid" id="cycle-grid"></div>
 
-  <p style="font-size:0.65rem;color:var(--light);text-align:center;margin-top:6px;">Track in each cell: Energy (1–10) · Mood · Symptoms · Phase color-code the border</p>
+  <p style="font-size:0.65rem;color:var(--light);text-align:center;margin-top:6px;">Click any cell to mark its phase · Use the calculator above to auto-fill · Changes save automatically in your browser</p>
 
   <!-- Daily log -->
   <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);margin:28px 0 12px;">Daily Symptom Log</h3>
@@ -1076,12 +1052,128 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 </div><!-- end .guide -->
 
 <script>
-// Print button already in nav. Also allow keyboard shortcut.
-document.addEventListener('keydown', function(e) {
-  if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
-    // Let the browser's default print handle it — our CSS does the rest
+// ── PHASE CONFIG ──
+const PHASES = ['', 'menstrual', 'follicular', 'ovulatory', 'luteal'];
+const PHASE_BG = {
+  menstrual:  '#fce8f0',
+  follicular: '#e4f2e8',
+  ovulatory:  '#fef0d8',
+  luteal:     '#f0e4f8'
+};
+const PHASE_BORDER = {
+  menstrual:  '#8a4060',
+  follicular: '#5e8c6a',
+  ovulatory:  '#b87840',
+  luteal:     '#7a5a80'
+};
+const PHASE_LABEL = {
+  menstrual:  '🩸',
+  follicular: '🌱',
+  ovulatory:  '☀️',
+  luteal:     '🍂'
+};
+
+// ── BUILD GRID ──
+function buildGrid() {
+  const grid = document.getElementById('cycle-grid');
+  grid.innerHTML = '';
+  for (let d = 1; d <= 35; d++) {
+    const cell = document.createElement('div');
+    cell.className = 'cycle-cell';
+    cell.dataset.day = d;
+    cell.style.cursor = 'pointer';
+    cell.title = 'Click to mark phase';
+    cell.innerHTML = `
+      <div class="cycle-cell-day" style="font-size:0.55rem;opacity:0.5;" id="cell-date-${d}"></div>
+      <div class="cycle-cell-num">${d}</div>
+      <div class="cell-phase-icon" style="font-size:0.75rem;min-height:16px;margin:3px 0;"></div>
+      <div style="margin-top:4px;">
+        <div style="border-bottom:1px solid #f0e8ec;height:8px;margin-bottom:3px;"></div>
+        <div style="border-bottom:1px solid #f0e8ec;height:8px;"></div>
+      </div>`;
+    cell.addEventListener('click', () => cyclePhase(cell, d));
+    grid.appendChild(cell);
+    loadCellState(cell, d);
   }
-});
+}
+
+function cyclePhase(cell, day) {
+  const current = cell.dataset.phase || '';
+  const idx = PHASES.indexOf(current);
+  const next = PHASES[(idx + 1) % PHASES.length];
+  applyPhase(cell, next);
+  localStorage.setItem(`ch-tracker-day-${day}`, next);
+}
+
+function applyPhase(cell, phase) {
+  cell.dataset.phase = phase;
+  const icon = cell.querySelector('.cell-phase-icon');
+  if (phase) {
+    cell.style.background = PHASE_BG[phase];
+    cell.style.borderColor = PHASE_BORDER[phase];
+    icon.textContent = PHASE_LABEL[phase];
+  } else {
+    cell.style.background = '';
+    cell.style.borderColor = '';
+    icon.textContent = '';
+  }
+}
+
+function loadCellState(cell, day) {
+  const saved = localStorage.getItem(`ch-tracker-day-${day}`);
+  if (saved && PHASES.includes(saved)) applyPhase(cell, saved);
+}
+
+// ── PHASE CALCULATOR ──
+function calculatePhases() {
+  const input = document.getElementById('day1-input').value;
+  const cycleLen = parseInt(document.getElementById('cycle-length').value) || 28;
+  if (!input) { alert('Please enter your Day 1 date first.'); return; }
+
+  const day1 = new Date(input + 'T00:00:00');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  document.getElementById('month-display').textContent =
+    `Month: ${months[day1.getMonth()]} ${day1.getFullYear()}`;
+
+  document.querySelectorAll('.cycle-cell').forEach(cell => {
+    const d = parseInt(cell.dataset.day);
+
+    // Calculate date for this cell
+    const cellDate = new Date(day1);
+    cellDate.setDate(day1.getDate() + d - 1);
+    const dateLabel = cell.querySelector(`#cell-date-${d}`) || cell.querySelector('.cycle-cell-day');
+    dateLabel.textContent = `${cellDate.getMonth()+1}/${cellDate.getDate()}`;
+
+    // Assign phase based on typical window
+    let phase = '';
+    const m = Math.round(cycleLen * 0.18);  // menstrual ~5 days
+    const f = Math.round(cycleLen * 0.27);  // follicular end ~day 13
+    const o = Math.round(cycleLen * 0.14);  // ovulatory ~4 days
+
+    if (d <= m) phase = 'menstrual';
+    else if (d <= m + f) phase = 'follicular';
+    else if (d <= m + f + o) phase = 'ovulatory';
+    else if (d <= cycleLen) phase = 'luteal';
+
+    applyPhase(cell, phase);
+    localStorage.setItem(`ch-tracker-day-${d}`, phase);
+  });
+}
+
+function resetTracker() {
+  if (!confirm('Reset all phase markings?')) return;
+  for (let d = 1; d <= 35; d++) localStorage.removeItem(`ch-tracker-day-${d}`);
+  document.getElementById('month-display').textContent = 'Month: ___________________';
+  document.querySelectorAll('.cycle-cell').forEach(cell => {
+    applyPhase(cell, '');
+    const dateLabel = cell.querySelector('.cycle-cell-day');
+    if (dateLabel) dateLabel.textContent = '';
+  });
+}
+
+// ── INIT ──
+buildGrid();
 </script>
 </body>
 </html>
